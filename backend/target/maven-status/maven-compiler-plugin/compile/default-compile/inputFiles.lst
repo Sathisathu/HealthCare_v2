@@ -1,16 +1,6 @@
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\common\controller\UserController.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\common\entity\User.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\common\repository\UserRepository.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\controller\AppointmentController.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\controller\DoctorController.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\entity\Appointment.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\entity\Doctor.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\entity\DoctorAvailability.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\repository\AppointmentRepository.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\repository\DoctorAvailabilityRepository.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\repository\DoctorRepository.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\service\AppointmentService.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\consultation\service\DoctorService.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\pharmacy\controller\OrderController.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\pharmacy\controller\ProductController.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\pharmacy\entity\Order.java

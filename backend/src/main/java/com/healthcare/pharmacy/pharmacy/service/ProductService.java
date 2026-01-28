@@ -20,7 +20,26 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
-    public void addProduct(Product product) {
-        productRepository.save(product);
+    public Product addProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    public Product updateProduct(Long id, Product product) {
+        Product existing = getProductById(id);
+        existing.setName(product.getName());
+        existing.setDescription(product.getDescription());
+        existing.setPrice(product.getPrice());
+        existing.setStockQuantity(product.getStockQuantity());
+        existing.setCategory(product.getCategory());
+        existing.setImageUrl(product.getImageUrl());
+        existing.setDosageForm(product.getDosageForm());
+        existing.setStrength(product.getStrength());
+        existing.setPackSize(product.getPackSize());
+        existing.setPrescriptionRequired(product.isPrescriptionRequired());
+        return productRepository.save(existing);
+    }
+
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 }
