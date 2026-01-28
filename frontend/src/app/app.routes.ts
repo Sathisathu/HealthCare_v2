@@ -9,9 +9,6 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
-import { BookingFlowComponent } from './components/consultancy/booking-flow/booking-flow.component';
-import { DoctorDashboardComponent } from './components/consultancy/doctor-dashboard/doctor-dashboard.component';
-
 export const routes: Routes = [
     {
         path: '',
@@ -21,7 +18,6 @@ export const routes: Routes = [
             { path: 'cart', component: CartComponent },
             { path: 'checkout', component: CheckoutComponent },
             { path: 'orders', component: OrdersComponent },
-            { path: 'book-consultation', component: BookingFlowComponent },
         ]
     },
     {
@@ -29,7 +25,6 @@ export const routes: Routes = [
         component: AdminLayoutComponent,
         children: [
             { path: '', component: AdminDashboardComponent },
-            { path: 'doctor-panel', component: DoctorDashboardComponent }
         ]
     },
     { path: '**', redirectTo: '' }

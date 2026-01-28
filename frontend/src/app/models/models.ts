@@ -36,36 +36,4 @@ export interface Order {
     orderItems: OrderItem[];
 }
 
-export interface Doctor {
-    id?: number;
-    name: string;
-    specialization: string;
-    consultationFee: number;
-    businessContactNumber: string;
-    profileImageUrl: string;
-    address: string;
-}
 
-export interface DoctorAvailability {
-    id?: number;
-    doctorId: number;
-    date: string;
-    slotTime: string;
-    consultationType: 'ONLINE' | 'OFFLINE';
-    isAvailable: boolean;
-}
-
-export interface Appointment {
-    id?: number;
-    doctorId: number;
-    patientId: number;
-    appointmentDate: string;
-    slotTime: string;
-    consultationType: string;
-    paymentStatus: string;
-    totalAmount: number;
-    receiptUrl: string;
-    doctor?: Doctor;
-    patient?: User; // Fixed for Doctor Dashboard
-    createdAt?: string;
-}

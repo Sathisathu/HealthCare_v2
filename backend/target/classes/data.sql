@@ -1,36 +1,12 @@
 -- Clear existing data to avoid duplicates on restart
 SET FOREIGN_KEY_CHECKS = 0;
 DELETE FROM order_items;
-DELETE FROM appointments;
-DELETE FROM doctor_availability;
 DELETE FROM orders;
 DELETE FROM products;
 DELETE FROM users;
-DELETE FROM doctors;
 SET FOREIGN_KEY_CHECKS = 1;
 
--- Doctors
-INSERT INTO doctors (id, name, specialization, consultation_fee, business_contact_number, profile_image_url, address) VALUES 
-(1, 'Dr. Sarah Smith', 'Cardiologist', 500.0, '+1234567890', 'https://randomuser.me/api/portraits/women/1.jpg', 'Heart Clinic, 123 Main St'),
-(2, 'Dr. James Wilson', 'Dermatologist', 400.0, '+1234567891', 'https://randomuser.me/api/portraits/men/2.jpg', 'Skin Care Center, 456 Elm St'),
-(3, 'Dr. Maria Garcia', 'Pediatrician', 350.0, '+1234567892', 'https://randomuser.me/api/portraits/women/3.jpg', 'Children Hospital, 789 Oak St');
-
--- Availability (Next 3 days for Dr. Sarah Smith - ONLINE & OFFLINE)
-INSERT INTO doctor_availability (doctor_id, date, slot_time, consultation_type, is_available) VALUES 
-(1, CURDATE(), '09:00 AM', 'ONLINE', true),
-(1, CURDATE(), '10:00 AM', 'ONLINE', true),
-(1, CURDATE(), '11:00 AM', 'ONLINE', false),
-(1, CURDATE(), '02:00 PM', 'OFFLINE', true),
-(1, CURDATE(), '03:00 PM', 'OFFLINE', true),
-(1, DATE_ADD(CURDATE(), INTERVAL 1 DAY), '09:00 AM', 'ONLINE', true),
-(1, DATE_ADD(CURDATE(), INTERVAL 1 DAY), '02:00 PM', 'OFFLINE', true);
-
--- Availability (Next 2 days for Dr. James Wilson)
-INSERT INTO doctor_availability (doctor_id, date, slot_time, consultation_type, is_available) VALUES 
-(2, CURDATE(), '11:00 AM', 'ONLINE', true),
-(2, CURDATE(), '12:00 PM', 'ONLINE', true),
-(2, DATE_ADD(CURDATE(), INTERVAL 1 DAY), '10:00 AM', 'OFFLINE', true);
-
+-- Products
 INSERT INTO products (id, name, description, price, stock_quantity, category, image_url, dosage_form, strength, pack_size, is_prescription_required) VALUES 
 (1, 'Paracetamol', 'Pain reliever and fever reducer', 10.0, 100, 'Analgesics', 'https://via.placeholder.com/150', 'Tablet', '500mg', '10 tablets', false),
 (2, 'Amoxicillin', 'Antibiotic for bacterial infections', 50.0, 50, 'Antibiotics', 'https://via.placeholder.com/150', 'Capsule', '250mg', '15 capsules', true),
