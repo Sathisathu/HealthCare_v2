@@ -1,0 +1,115 @@
+.checkout-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.section {
+    margin-bottom: 2.5rem;
+}
+
+.section h3 {
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 0.5rem;
+}
+
+.payment-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.payment-option {
+    border: 2px solid #eee;
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.payment-option input {
+    margin-right: 10px;
+    display: none;
+}
+
+.payment-option.selected {
+    border-color: var(--primary-color);
+    background: #f0f7f7;
+}
+
+.option-content {
+    display: flex;
+    align-items: center;
+}
+
+.option-content .icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.label-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-group .sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.place-order-btn {
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.checkout-sidebar h3 {
+    margin-bottom: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    color: var(--text-muted);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #eee;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.free {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.wallet-conversion {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #fff9db;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.error-msg {
+    color: var(--danger);
+    background: #fff5f5;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    border: 1px solid #ffe3e3;
+}

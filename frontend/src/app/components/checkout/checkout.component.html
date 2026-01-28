@@ -1,0 +1,61 @@
+<div class="checkout-wrapper">
+    <div class="checkout-main card">
+        <h2>Secure Checkout</h2>
+
+        <div class="section">
+            <h3>1. Delivery Information</h3>
+            <div *ngIf="user" class="user-info">
+                <p><strong>Name:</strong> {{user.name}}</p>
+                <p><strong>Email:</strong> {{user.email}}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>2. Payment Method</h3>
+            <div class="payment-options">
+                <label class="payment-option" [class.selected]="paymentType === 'COD'">
+                    <input type="radio" [(ngModel)]="paymentType" value="COD">
+                    <div class="option-content">
+                        <span class="icon">🏠</span>
+                        <span class="label">Cash on Delivery</span>
+                    </div>
+                </label>
+                <label class="payment-option" [class.selected]="paymentType === 'WALLET'">
+                    <input type="radio" [(ngModel)]="paymentType" value="WALLET">
+                    <div class="option-content">
+                        <span class="icon">💰</span>
+                        <div class="label-group">
+                            <span class="label">Pay with Wallet</span>
+                            <span class="sub" *ngIf="user">Balance: {{user.walletBalance}} coins</span>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <button (click)="placeOrder()" [disabled]="isProcessing" class="btn-primary place-order-btn">
+            {{ isProcessing ? 'Processing Transaction...' : 'Place Order Now' }}
+        </button>
+        <p *ngIf="errorMessage" class="error-msg">{{errorMessage}}</p>
+    </div>
+
+    <div class="checkout-sidebar card">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span>Rs. {{totalPrice}}</span>
+        </div>
+        <div class="summary-row">
+            <span>Shipping</span>
+            <span class="free">FREE</span>
+        </div>
+        <div class="summary-total">
+            <span>Total</span>
+            <span>Rs. {{totalPrice}}</span>
+        </div>
+        <div class="wallet-conversion" *ngIf="paymentType === 'WALLET'">
+            <p>This will deduct <strong>{{totalPrice * 2}} coins</strong> from your wallet.</p>
+            <small>(Rate: 10 coins = Rs. 5)</small>
+        </div>
+    </div>
+</div>

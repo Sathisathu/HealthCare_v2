@@ -1,0 +1,27 @@
+<div class="store-hero">
+  <h2>Premium Pharmacy Store</h2>
+  <p>Your health, delivered with care.</p>
+</div>
+
+<div class="product-grid">
+  <div *ngFor="let product of products" class="product-card card">
+    <div class="product-image">
+      <img [src]="product.imageUrl" alt="{{product.name}}">
+      <span *ngIf="product.isPrescriptionRequired" class="badge badge-danger">Rx Required</span>
+    </div>
+    <div class="product-info">
+      <h3>{{product.name}}</h3>
+      <p class="description">{{product.description}}</p>
+      <div class="product-meta">
+        <span>{{product.dosageForm}} • {{product.strength}}</span>
+        <span class="pack-size">{{product.packSize}}</span>
+      </div>
+      <div class="product-footer">
+        <span class="price">Rs. {{product.price}}</span>
+        <button class="btn-primary" (click)="addToCart(product)" [disabled]="product.stockQuantity <= 0">
+          {{ product.stockQuantity > 0 ? 'Add to Cart' : 'Out of Stock' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

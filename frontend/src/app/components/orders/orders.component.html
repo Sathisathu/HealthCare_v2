@@ -1,0 +1,41 @@
+<div class="orders-container card">
+    <div class="orders-header">
+        <h2>Your Order History</h2>
+        <p>Track and view all your pharmacy orders.</p>
+    </div>
+
+    <div *ngIf="orders.length === 0" class="empty-orders">
+        <p>You haven't placed any orders yet.</p>
+        <button class="btn-primary" routerLink="/">Start Shopping</button>
+    </div>
+
+    <div *ngIf="orders.length > 0" class="orders-list">
+        <div *ngFor="let order of orders" class="order-card">
+            <div class="order-id-section">
+                <span class="order-label">Order #{{order.id}}</span>
+                <span class="order-date">{{order.orderDate | date:'mediumDate'}}</span>
+                <span class="status-badge" [class]="'status-' + (order.status || 'pending').toLowerCase()">
+                    {{order.status}}
+                </span>
+            </div>
+
+            <div class="order-items">
+                <div *ngFor="let item of order.orderItems" class="order-item">
+                    <span class="item-name">{{item.product?.name}}</span>
+                    <span class="item-qty">x{{item.quantity}}</span>
+                    <span class="item-price">Rs. {{item.priceAtPurchase * item.quantity}}</span>
+                </div>
+            </div>
+
+            <div class="order-footer">
+                <div class="payment-info">
+                    <span>Payment: <strong>{{order.paymentType}}</strong></span>
+                </div>
+                <div class="order-total">
+                    <span>Grand Total:</span>
+                    <span class="total-amount">Rs. {{order.totalAmount}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

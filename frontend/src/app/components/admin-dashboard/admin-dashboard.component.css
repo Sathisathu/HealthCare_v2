@@ -1,0 +1,131 @@
+.admin-wrapper {
+    padding: 2rem;
+    margin-top: 1rem;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 1rem;
+}
+
+.admin-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.full-width {
+    grid-column: span 2;
+    margin-top: 1rem;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 1.5rem 0;
+    cursor: pointer;
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-actions button {
+    flex: 1;
+}
+
+.table-container {
+    background: #fafafa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #eef2f3;
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.item-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-cell small {
+    color: var(--text-muted);
+}
+
+.low-stock {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.table-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: var(--white);
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.action-btn.edit:hover {
+    border-color: var(--primary-color);
+    background: #f0f7f7;
+}
+
+.action-btn.delete:hover {
+    border-color: var(--danger);
+    background: #fff5f5;
+}
+
+@media (max-width: 900px) {
+    .admin-content {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,28 @@
+<div class="admin-layout">
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <h1 class="logo">Admin Panel</h1>
+        </div>
+        <nav class="sidebar-nav">
+            <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <span class="icon">📊</span> Inventory
+            </a>
+            <!-- Add more admin links here as we build them -->
+            <a routerLink="/" class="exit-link">
+                <span class="icon">🚪</span> Exit Admin
+            </a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <header class="admin-topbar">
+            <h2>MedConnect Pharmacy Management</h2>
+            <div class="admin-user">
+                <span>Administrator</span>
+            </div>
+        </header>
+        <div class="admin-container">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,21 @@
+<header class="main-header">
+    <div class="container header-content">
+        <h1 class="logo" routerLink="/">MedConnect</h1>
+        <nav class="main-nav">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Pharmacy Store</a>
+            <a routerLink="/cart" routerLinkActive="active">Cart</a>
+            <a routerLink="/orders" routerLinkActive="active">My Orders</a>
+            <a routerLink="/admin" class="admin-link">Switch to Admin</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <router-outlet></router-outlet>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <p>&copy; 2026 HealthCare Services - Premium Pharmacy Experience</p>
+    </div>
+</footer>
