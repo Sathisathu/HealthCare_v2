@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../../services/api.service';
-import { Product } from '../../../models/models';
+import { PharmacyService } from '../../services/pharmacy.service';
+import { Product } from '../../models/pharmacy.models';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -16,7 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   currentProduct: Product = this.resetProduct();
   editingProduct = false;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: PharmacyService) { }
 
   ngOnInit() {
     this.loadProducts();

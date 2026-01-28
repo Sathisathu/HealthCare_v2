@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../../services/api.service';
-import { CartService } from '../../../services/cart.service';
-import { User, OrderItem } from '../../../models/models';
+import { PharmacyService } from '../../services/pharmacy.service';
+import { UserService } from '../../../services/user.service';
+import { CartService } from '../../services/cart.service';
+import { OrderItem } from '../../models/pharmacy.models';
+import { User } from '../../../models/user.model';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -21,7 +23,7 @@ export class CheckoutComponent implements OnInit {
   isProcessing = false;
   errorMessage = '';
 
-  constructor(private api: ApiService, private cart: CartService, private router: Router) { }
+  constructor(private pharmacy: PharmacyService, private userService: UserService, private cart: CartService, private router: Router) { }
 
   async ngOnInit() {
     this.totalPrice = this.cart.getTotalPrice();
@@ -30,7 +32,7 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     // Hardcoded for demo: User ID 1 is the test customer
-    this.user = await firstValueFrom(this.api.getUser(1));
+    this.user = await firstValueFrom(this.userService.getUser(1));
   }
 
   async placeOrder() {
@@ -50,7 +52,7 @@ export class CheckoutComponent implements OnInit {
       items: items
     };
 
-    this.api.placeOrder(orderData as any).subscribe({
+    this.pharmacy.placeOrder(orderData as any).subscribe({
       next: (res) => {
         alert('Order Placed Successfully!');
         this.cart.clearCart();

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../../services/api.service';
-import { Order } from '../../../models/models';
+import { PharmacyService } from '../../services/pharmacy.service';
+import { Order } from '../../models/pharmacy.models';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 export class OrdersComponent implements OnInit {
     orders: any[] = [];
 
-    constructor(private api: ApiService) { }
+    constructor(private api: PharmacyService) { }
 
     ngOnInit() {
         this.loadOrders();

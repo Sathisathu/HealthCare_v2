@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { CartService } from '../../../services/cart.service';
-import { OrderItem } from '../../../models/models';
+import { CartService } from '../../services/cart.service';
+import { OrderItem } from '../../models/pharmacy.models';
 
 @Component({
   selector: 'app-cart',

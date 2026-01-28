@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../../services/api.service';
-import { CartService } from '../../../services/cart.service';
-import { Product } from '../../../models/models';
+import { PharmacyService } from '../../services/pharmacy.service';
+import { CartService } from '../../services/cart.service';
+import { Product } from '../../models/pharmacy.models';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +14,7 @@ import { Product } from '../../../models/models';
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private api: ApiService, private cart: CartService) { }
+  constructor(private api: PharmacyService, private cart: CartService) { }
 
   ngOnInit() {
     this.api.getProducts().subscribe(data => this.products = data);

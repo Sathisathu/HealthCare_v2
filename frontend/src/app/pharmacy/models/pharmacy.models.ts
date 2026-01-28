@@ -12,14 +12,6 @@ export interface Product {
     isPrescriptionRequired: boolean;
 }
 
-export interface User {
-    id?: number;
-    name: string;
-    email: string;
-    role: string;
-    walletBalance: number;
-}
-
 export interface OrderItem {
     productId: number;
     quantity: number;
@@ -35,5 +27,3 @@ export interface Order {
     orderDate: string;
     orderItems: OrderItem[];
 }
-
-

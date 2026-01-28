@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product, Order, User } from '../models/models';
+import { Product, Order } from '../models/pharmacy.models';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ApiService {
+export class PharmacyService {
     private baseUrl = 'http://localhost:8080/api';
 
     constructor(private http: HttpClient) { }
@@ -39,14 +39,5 @@ export class ApiService {
 
     getOrders(): Observable<any[]> {
         return this.http.get<any[]>(`${this.baseUrl}/orders`);
-    }
-
-    // Users
-    getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(`${this.baseUrl}/users`);
-    }
-
-    getUser(id: number): Observable<User> {
-        return this.http.get<User>(`${this.baseUrl}/users/${id}`);
     }
 }
