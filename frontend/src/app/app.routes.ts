@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { CartComponent } from './components/cart/cart.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { ProductListComponent } from './components/pharmacy/product-list/product-list.component';
+import { CartComponent } from './components/pharmacy/cart/cart.component';
+import { CheckoutComponent } from './components/pharmacy/checkout/checkout.component';
+import { AdminDashboardComponent } from './components/pharmacy/admin-dashboard/admin-dashboard.component';
 
-import { OrdersComponent } from './components/orders/orders.component';
+import { OrdersComponent } from './components/pharmacy/orders/orders.component';
 
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
