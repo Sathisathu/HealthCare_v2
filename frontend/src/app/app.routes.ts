@@ -13,6 +13,12 @@ import { DoctorDetailsComponent } from './consultation/components/doctor-details
 import { DoctorDashboardComponent } from './consultation/components/doctor-dashboard/doctor-dashboard.component';
 import { MyAppointmentsComponent } from './consultation/components/my-appointments/my-appointments.component';
 import { DoctorLayoutComponent } from './consultation/layouts/doctor-layout/doctor-layout.component';
+import { LabTestListComponent } from './lab-test/components/lab-test-list/lab-test-list.component';
+import { LabBookingWizardComponent } from './lab-test/components/lab-booking-wizard/lab-booking-wizard.component';
+import { MyLabBookingsComponent } from './lab-test/components/my-lab-bookings/my-lab-bookings.component';
+import { LabResultViewComponent } from './lab-test/components/lab-result-view/lab-result-view.component';
+import { LabAdminDashboardComponent } from './lab-test/components/lab-admin-dashboard/lab-admin-dashboard.component';
+import { LabAdminLayoutComponent } from './lab-test/layouts/lab-admin-layout/lab-admin-layout.component';
 
 export const routes: Routes = [
     // 1. Main Dashboard (Exact Root Match)
@@ -39,6 +45,12 @@ export const routes: Routes = [
             { path: 'consultation', component: DoctorListComponent },
             { path: 'consultation/doctor/:id', component: DoctorDetailsComponent },
             { path: 'consultation/my-appointments', component: MyAppointmentsComponent },
+
+            // Lab Test
+            { path: 'lab-test', component: LabTestListComponent },
+            { path: 'lab-test/book/:testName', component: LabBookingWizardComponent },
+            { path: 'lab-test/my-bookings', component: MyLabBookingsComponent },
+            { path: 'lab-test/result/:bookingId', component: LabResultViewComponent },
         ]
     },
     // 3. Doctor Portal
@@ -55,6 +67,13 @@ export const routes: Routes = [
         component: AdminLayoutComponent,
         children: [
             { path: '', component: AdminDashboardComponent },
+        ]
+    },
+    {
+        path: 'lab-admin',
+        component: LabAdminLayoutComponent,
+        children: [
+            { path: 'dashboard', component: LabAdminDashboardComponent },
         ]
     },
     { path: '**', redirectTo: '' }

@@ -22,4 +22,8 @@ export class UserLayoutComponent {
     isConsultation(): boolean {
         return this.router.url.includes('/consultation');
     }
+
+    isLabTest(): boolean {
+        return this.router.url.includes('/lab-test');
+    }
 }

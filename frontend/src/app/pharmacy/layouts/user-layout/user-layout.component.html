@@ -25,6 +25,17 @@
                 </a>
             </ng-container>
 
+            <!-- Lab Test Specific Links -->
+            <ng-container *ngIf="isLabTest()">
+                <a routerLink="/lab-test" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                    title="Test List">
+                    <span class="nav-icon">🔬</span> Tests
+                </a>
+                <a routerLink="/lab-test/my-bookings" routerLinkActive="active" title="My Lab Tests">
+                    <span class="nav-icon">📋</span> My Bookings
+                </a>
+            </ng-container>
+
         </nav>
     </div>
 </header>

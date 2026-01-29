@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="header">
+        <h1>My Lab Tests 🧪</h1>
+        <p>Track your health metrics and diagnostic reports.</p>
+    </div>
+
+    <div class="booking-list" *ngIf="bookings.length > 0; else emptyState">
+        <div *ngFor="let booking of bookings" class="booking-card">
+            <div class="main-info">
+                <div class="icon-box">🔬</div>
+                <div class="details">
+                    <h3>{{booking.slot.testName}}</h3>
+                    <p>{{booking.slot.date | date:'EEE, MMM d, y'}} at {{booking.slot.time}}</p>
+                </div>
+            </div>
+
+            <div class="status-box">
+                <span class="status-badge" [class]="booking.status">{{booking.status}}</span>
+                <button *ngIf="booking.status === 'COMPLETED'" class="view-btn" (click)="viewResult(booking.id)">
+                    View Result 📊
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #emptyState>
+        <div class="empty">
+            <div class="icon">🔍</div>
+            <p>You haven't booked any lab tests yet.</p>
+            <button routerLink="/lab-test" class="primary-btn">Explore Available Tests</button>
+        </div>
+    </ng-template>
+</div>

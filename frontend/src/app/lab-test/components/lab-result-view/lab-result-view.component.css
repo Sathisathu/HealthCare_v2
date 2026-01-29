@@ -1,0 +1,161 @@
+.container {
+    padding: 3rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.result-card {
+    background: white;
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.1);
+    border: 1px solid #f1f5f9;
+}
+
+.result-header {
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.brand h1 {
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin: 0;
+}
+
+.brand p {
+    color: #3b82f6;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.meta {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.meta-item strong {
+    color: #64748b;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+
+.meta-item span {
+    color: #1e293b;
+    font-weight: bold;
+}
+
+.table-container {
+    margin-bottom: 3rem;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 1.2rem;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+td {
+    padding: 1.2rem;
+    border-bottom: 1px solid #f8fafc;
+    color: #334155;
+}
+
+.param-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.param-value {
+    font-weight: 800;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+}
+
+.param-value.abnormal {
+    color: #ef4444;
+}
+
+.remarks-section {
+    background: #fffbeb;
+    border-left: 5px solid #f59e0b;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+}
+
+.remarks-section h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+    color: #92400e;
+    text-transform: uppercase;
+}
+
+.remarks-section p {
+    margin: 0;
+    color: #b45309;
+}
+
+.result-footer {
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.result-footer p {
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.print-btn {
+    background: #1e293b;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.print-btn:hover {
+    background: #0f172a;
+}
+
+@media print {
+    .print-btn {
+        display: none;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .result-card {
+        box-shadow: none;
+        border: none;
+    }
+}

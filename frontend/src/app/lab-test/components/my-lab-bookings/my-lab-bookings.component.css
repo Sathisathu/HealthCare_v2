@@ -1,0 +1,126 @@
+.container {
+    padding: 3rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.header {
+    margin-bottom: 3rem;
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    color: #000;
+}
+
+.header p {
+    color: #64748b;
+}
+
+.booking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.booking-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.main-info {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.icon-box {
+    font-size: 2rem;
+    background: #f0f9ff;
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.details h3 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin: 0;
+}
+
+.details p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.status-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-end;
+}
+
+.status-badge {
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.status-badge.BOOKED {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.status-badge.COMPLETED {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.view-btn {
+    background: #0f172a;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.85rem;
+}
+
+.view-btn:hover {
+    background: #334155;
+    transform: scale(1.05);
+}
+
+.empty {
+    text-align: center;
+    padding: 5rem;
+    background: #f8fafc;
+    border-radius: 30px;
+    border: 2px dashed #e2e8f0;
+}
+
+.empty .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.primary-btn {
+    margin-top: 1.5rem;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}

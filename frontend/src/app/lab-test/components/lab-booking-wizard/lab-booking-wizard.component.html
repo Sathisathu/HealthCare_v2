@@ -1,0 +1,43 @@
+<div class="container" *ngIf="testName">
+    <div class="wizard-header">
+        <button (click)="goBack()" class="back-btn">← Back</button>
+        <h1>Booking: {{testName}}</h1>
+    </div>
+
+    <div class="grid">
+        <!-- Step 1: Date Selection -->
+        <div class="card date-card">
+            <h3>1. Select Date 📅</h3>
+            <div class="date-list">
+                <div *ngFor="let date of dates" class="date-item" [class.active]="selectedDate === date"
+                    (click)="onDateSelect(date)">
+                    <span class="day">{{date | date:'EEE'}}</span>
+                    <span class="num">{{date | date:'d'}}</span>
+                    <span class="month">{{date | date:'MMM'}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Slot Selection -->
+        <div class="card slot-card" [class.disabled]="!selectedDate">
+            <h3>2. Choose Time Slot ⏰</h3>
+            <div class="slots-grid" *ngIf="selectedDate; else dateHint">
+                <div *ngFor="let slot of slots" class="slot-item" [class.booked]="slot.booked"
+                    [class.selected]="selectedSlot?.id === slot.id" (click)="!slot.booked && selectSlot(slot)">
+                    {{slot.time}}
+                    <span class="status-tag">{{slot.booked ? 'Booked' : 'Available'}}</span>
+                </div>
+            </div>
+            <ng-template #dateHint>
+                <p class="hint">Please select a date first to view available slots.</p>
+            </ng-template>
+        </div>
+    </div>
+
+    <div class="confirm-bar" *ngIf="selectedSlot">
+        <div class="summary">
+            <strong>Confirmed Selection:</strong> {{selectedDate | date:'fullDate'}} at {{selectedSlot.time}}
+        </div>
+        <button (click)="confirmBooking()" class="confirm-btn">Confirm & Book Now</button>
+    </div>
+</div>

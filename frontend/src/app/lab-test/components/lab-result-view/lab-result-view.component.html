@@ -1,0 +1,53 @@
+<div class="container" *ngIf="parsedResult">
+    <div class="result-card">
+        <header class="result-header">
+            <div class="brand">
+                <h1>Lab Diagnostic Report</h1>
+                <p>MedConnect HealthCare Labs</p>
+            </div>
+            <div class="meta">
+                <div class="meta-item">
+                    <strong>Test Name:</strong>
+                    <span>{{parsedResult.testName}}</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Report Date:</strong>
+                    <span>{{parsedResult.date | date:'mediumDate'}}</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter Item</th>
+                        <th>Observed Value</th>
+                        <th>Biological Reference Range</th>
+                        <th>Unit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let param of parsedResult.parameters">
+                        <td class="param-name">{{param.name}}</td>
+                        <td class="param-value" [class.abnormal]="isAbnormal(param.value, param.range)">
+                            {{param.value}}
+                        </td>
+                        <td>{{param.range}}</td>
+                        <td>{{getUnit(param.name)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="remarks-section">
+            <h3>Technician Remarks:</h3>
+            <p>{{parsedResult.remarks}}</p>
+        </div>
+
+        <footer class="result-footer">
+            <p>*** End of Report ***</p>
+            <button class="print-btn" (click)="printReport()">Print Report</button>
+        </footer>
+    </div>
+</div>

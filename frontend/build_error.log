@@ -1,0 +1,34 @@
+
+> healthcare-frontend@0.0.0 build
+> ng build
+
+[33mΓ¥»[39m Building...
+[32mΓ£ö[39m Building...
+Application bundle generation failed. [3.321 seconds]
+
+X [ERROR] NG5002: Unexpected closing tag "header". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags [plugin angular-compiler]
+
+    src/app/lab-test/components/lab-result-view/lab-result-view.component.html:51:12:
+      51 Γöé             </header>
+         Γò╡             ~~~~~~~~~
+
+  Error occurs in the template of component LabResultViewComponent.
+
+    src/app/lab-test/components/lab-result-view/lab-result-view.component.ts:11:17:
+      11 Γöé     templateUrl: './lab-result-view.component.html',
+         Γò╡                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected closing tag "div". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags [plugin angular-compiler]
+
+    src/app/lab-test/components/lab-result-view/lab-result-view.component.html:52:4:
+      52 Γöé     </div>
+         Γò╡     ~~~~~~
+
+  Error occurs in the template of component LabResultViewComponent.
+
+    src/app/lab-test/components/lab-result-view/lab-result-view.component.ts:11:17:
+      11 Γöé     templateUrl: './lab-result-view.component.html',
+         Γò╡                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

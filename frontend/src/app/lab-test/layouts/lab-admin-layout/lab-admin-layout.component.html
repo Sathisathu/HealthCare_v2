@@ -1,0 +1,23 @@
+<header class="lab-header">
+    <div class="container header-content">
+        <h1 class="logo" routerLink="/">MedConnect <span class="portal-badge">Lab Portal</span></h1>
+        <nav class="lab-nav">
+            <a routerLink="/lab-admin/dashboard" routerLinkActive="active">
+                <span class="icon">🔬</span> Lab Management
+            </a>
+            <a routerLink="/" class="switch-link">
+                <span class="icon">🔙</span> Exit Portal
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <router-outlet></router-outlet>
+</main>
+
+<footer class="lab-footer">
+    <div class="container">
+        <p>&copy; 2026 MedConnect HealthCare - Diagnostic Lab Services</p>
+    </div>
+</footer>
