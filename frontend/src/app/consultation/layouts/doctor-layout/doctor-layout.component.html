@@ -1,0 +1,23 @@
+<header class="doctor-header">
+    <div class="container header-content">
+        <h1 class="logo" routerLink="/">MedConnect <span class="portal-badge">Doctor Portal</span></h1>
+        <nav class="doctor-nav">
+            <a routerLink="/doctor/dashboard" routerLinkActive="active">
+                <span class="icon">📊</span> Overview
+            </a>
+            <a routerLink="/consultation" class="switch-link">
+                <span class="icon">🔙</span> Switch to Patient View
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <router-outlet></router-outlet>
+</main>
+
+<footer class="doctor-footer">
+    <div class="container">
+        <p>&copy; 2026 MedConnect HealthCare - Professional Resource Hub</p>
+    </div>
+</footer>

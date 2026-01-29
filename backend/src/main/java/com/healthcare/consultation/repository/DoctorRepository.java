@@ -1,0 +1,14 @@
+package com.healthcare.consultation.repository;
+
+import com.healthcare.consultation.entity.Doctor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+    @Query("SELECT d FROM Doctor d WHERE LOWER(d.name) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(d.specialization) LIKE LOWER(CONCAT('%', :query, '%'))")
+    List<Doctor> searchDoctors(String query);
+}

@@ -7,7 +7,7 @@
     <div *ngIf="(cartItems$ | async) as items">
         <div *ngIf="items.length === 0" class="empty-cart">
             <p>Your cart is empty.</p>
-            <button class="btn-outline" routerLink="/">Go to Store</button>
+            <button class="btn-outline" routerLink="/pharmacy">Go to Store</button>
         </div>
 
         <div class="cart-items-list">

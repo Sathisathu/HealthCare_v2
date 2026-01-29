@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="header">
+        <h1>My Consultations 🩺</h1>
+        <p>Keep track of your medical appointments and prescriptions.</p>
+    </div>
+
+    <div class="list" *ngIf="appointments.length > 0">
+        <div *ngFor="let appt of appointments" class="appt-card">
+            <div class="doctor-side">
+                <img [src]="appt.doctor.imageUrl" alt="Doctor" class="avatar">
+                <div>
+                    <h3>{{appt.doctor.name}}</h3>
+                    <p>{{appt.doctor.specialization}}</p>
+                </div>
+            </div>
+            <div class="time-side">
+                <div class="date-badge">{{appt.date | date:'fullDate'}}</div>
+                <div class="time-badge">{{appt.slotTime}}</div>
+            </div>
+            <div class="type-side">
+                <span class="tag" [class]="appt.consultationType">{{appt.consultationType}}</span>
+                <div class="contact-info" *ngIf="appt.consultationType === 'ONLINE'">
+                    📞 Call: {{appt.doctor.businessPhoneNumber}}
+                </div>
+                <div class="contact-info" *ngIf="appt.consultationType === 'OFFLINE'">
+                    📍 Location: {{appt.doctor.clinicAddress}}
+                </div>
+            </div>
+            <div class="status-side">
+                <span class="status-btn">{{appt.status}}</span>
+                <a *ngIf="appt.receiptUrl" href="#" class="receipt-link">View Receipt</a>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="appointments.length === 0" class="empty">
+        <p>No appointments found. Start your first consultation today!</p>
+        <button routerLink="/consultation" class="start-btn">Find Doctors</button>
+    </div>
+</div>

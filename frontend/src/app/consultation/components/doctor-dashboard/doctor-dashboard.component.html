@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="dash-header">
+        <h1>Doctor Workspace 🏥</h1>
+        <p>Manage clinic availability and consult with patients.</p>
+    </div>
+
+    <div class="grid">
+        <!-- Availability Management -->
+        <div class="card availability-card" [class.loading]="!doctor">
+            <div class="card-header">
+                <h2>Availability & Slots 📅</h2>
+                <div class="controls">
+                    <select [(ngModel)]="doctorId" (change)="loadDoctorData()" class="doc-select">
+                        <option [value]="0">-- Select Doctor Profile --</option>
+                        <option *ngFor="let doc of allDoctors" [value]="doc.id">{{doc.name}}</option>
+                    </select>
+                    <select [(ngModel)]="selectedDate" (change)="onDateChange()" class="date-select">
+                        <option *ngFor="let date of dates" [value]="date">{{date | date:'EEE, MMM d'}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="slots-area" *ngIf="doctor">
+                <div class="slots-grid">
+                    <div *ngFor="let slot of slots" class="slot-item" [class.available]="slot.available"
+                        [class.booked]="slot.booked" (click)="!slot.booked && toggleAvailability(slot)">
+                        <span class="time">{{slot.slotTime}}</span>
+                        <span class="status">{{slot.booked ? 'BOOKED' : (slot.available ? 'OPEN' : 'CLOSED')}}</span>
+                    </div>
+                </div>
+                <div *ngIf="slots.length === 0" class="empty-notif">No slots configured for this date.</div>
+            </div>
+
+            <div class="placeholder-msg" *ngIf="!doctor">
+                Please select your profile to manage slots.
+            </div>
+        </div>
+
+        <!-- Appointment List -->
+        <div class="card appointments-card">
+            <h2>Upcoming Consultations 🤝</h2>
+            <div class="appointment-list">
+                <div *ngFor="let appt of appointments" class="appt-item">
+                    <div class="appt-info">
+                        <strong>Patient: User #{{appt.patient?.id || 1}}</strong>
+                        <p>{{appt.date}} at {{appt.slotTime}}</p>
+                        <div class="tags">
+                            <span class="type-tag" [class]="appt.consultationType">{{appt.consultationType}}</span>
+                            <span class="status-badge">{{appt.status}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="appointments.length === 0" class="empty">No appointments scheduled today.</div>
+            </div>
+        </div>
+    </div>
+</div>

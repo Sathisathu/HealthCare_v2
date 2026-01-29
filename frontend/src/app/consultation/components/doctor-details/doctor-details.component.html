@@ -1,0 +1,54 @@
+<div class="container" *ngIf="doctor">
+    <div class="profile-card">
+        <div class="header">
+            <img [src]="doctor.imageUrl" alt="Doctor" class="profile-avatar">
+            <div class="header-text">
+                <h1>{{doctor.name}}</h1>
+                <p class="specialty">{{doctor.specialization}}</p>
+                <div class="badges">
+                    <span class="badge">{{doctor.experience}} Exp</span>
+                    <span class="badge">${{doctor.consultationFee}} Fee</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-section">
+            <h3>Choose Consultation Type</h3>
+            <div class="type-toggle">
+                <button [class.active]="selectedType === 'ONLINE'" (click)="selectedType = 'ONLINE'">Online 📱</button>
+                <button [class.active]="selectedType === 'OFFLINE'" (click)="selectedType = 'OFFLINE'">Offline
+                    🏠</button>
+            </div>
+
+            <div class="info-box" *ngIf="selectedType === 'ONLINE'">
+                <p><strong>Online Consultation:</strong> A link and contact number will be provided in your "My
+                    Consultations" page after successful booking.</p>
+            </div>
+            <div class="info-box" *ngIf="selectedType === 'OFFLINE'">
+                <p><strong>Visit the Clinic:</strong> The exact clinic address will be shared in your "My Consultations"
+                    page once the booking is confirmed.</p>
+            </div>
+
+            <h3>Select Date</h3>
+            <div class="date-tabs">
+                <div *ngFor="let date of dates" class="date-tab" [class.active]="selectedDate === date"
+                    (click)="onDateSelect(date)">
+                    {{date | date:'EEE, MMM d'}}
+                </div>
+            </div>
+
+            <h3>Available Slots</h3>
+            <div class="slots-grid">
+                <div *ngFor="let slot of slots" class="slot-card" [class.booked]="!slot.available"
+                    [class.selected]="selectedSlot === slot" (click)="selectSlot(slot)">
+                    {{slot.slotTime}}
+                </div>
+                <div *ngIf="slots.length === 0" class="no-slots">No slots configured for this date.</div>
+            </div>
+
+            <button class="book-btn" [disabled]="!selectedSlot" (click)="bookNow()">
+                Confirm Booking
+            </button>
+        </div>
+    </div>
+</div>

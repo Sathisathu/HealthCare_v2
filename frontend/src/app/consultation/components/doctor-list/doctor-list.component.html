@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="search-section">
+        <h1>Find Your Specialist 👨‍⚕️</h1>
+        <div class="search-bar">
+            <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()"
+                placeholder="Search by name or specialty...">
+        </div>
+    </div>
+
+    <div class="doctor-grid">
+        <div *ngFor="let doctor of doctors" class="doctor-card">
+            <img [src]="doctor.imageUrl" alt="Doctor" class="avatar">
+            <div class="info">
+                <h3>{{doctor.name}}</h3>
+                <p class="spec">{{doctor.specialization}}</p>
+                <p class="exp">{{doctor.experience}} Experience</p>
+                <p class="fee">Fee: <strong>${{doctor.consultationFee}}</strong></p>
+                <a [routerLink]="['/consultation/doctor', doctor.id]" class="view-btn">View Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="doctors.length === 0" class="no-results">
+        No doctors found matching your search.
+    </div>
+</div>

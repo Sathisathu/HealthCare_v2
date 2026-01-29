@@ -1,0 +1,83 @@
+.doctor-header {
+    background: #0f172a;
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: #38bdf8;
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.portal-badge {
+    font-size: 0.7rem;
+    background: #0ea5e9;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.doctor-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.doctor-nav a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.doctor-nav a:hover,
+.doctor-nav a.active {
+    color: white;
+}
+
+.switch-link {
+    border: 1px solid #334155;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.switch-link:hover {
+    background: #1e293b;
+}
+
+main {
+    min-height: 80vh;
+    padding: 2rem 0;
+}
+
+.doctor-footer {
+    background: #1e293b;
+    color: #64748b;
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}

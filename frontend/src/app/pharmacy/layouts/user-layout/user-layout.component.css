@@ -26,12 +26,29 @@
     text-decoration: none;
     margin-left: 1.5rem;
     font-weight: 600;
-    transition: color 0.3s;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+}
+
+.nav-divider {
+    display: inline-block;
+    width: 1px;
+    height: 20px;
+    background: #e2e8f0;
+    margin: 0 1rem;
+    vertical-align: middle;
 }
 
 .main-nav a:hover,
 .main-nav a.active {
     color: var(--primary-color);
+    transform: translateY(-1px);
 }
 
 .admin-link {
@@ -39,6 +56,12 @@
     border: 1px solid var(--secondary-color);
     padding: 5px 15px;
     border-radius: 20px;
+    background: transparent;
+}
+
+.admin-link:hover {
+    background: var(--secondary-color);
+    color: white !important;
 }
 
 main {
