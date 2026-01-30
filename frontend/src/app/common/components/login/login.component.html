@@ -1,0 +1,38 @@
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="logo" routerLink="/">MedConnect</h1>
+            <p>Sign in to your account</p>
+        </div>
+
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+            <div class="input-group">
+                <label>Email Address</label>
+                <div class="input-field">
+                    <span class="icon">📧</span>
+                    <input type="email" [(ngModel)]="credentials.email" name="email" required
+                        placeholder="Enter your email">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-field">
+                    <span class="icon">🔒</span>
+                    <input type="password" [(ngModel)]="credentials.password" name="password" required
+                        placeholder="••••••••">
+                </div>
+            </div>
+
+            <div class="error-msg" *ngIf="error">{{error}}</div>
+
+            <button type="submit" class="auth-btn" [disabled]="loginForm.invalid">
+                Sign In &rarr;
+            </button>
+
+            <div class="auth-footer">
+                Don't have an account? <a routerLink="/register">Create one</a>
+            </div>
+        </form>
+    </div>
+</div>

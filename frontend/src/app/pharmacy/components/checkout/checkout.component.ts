@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PharmacyService } from '../../services/pharmacy.service';
-import { UserService } from '../../../services/user.service';
 import { CartService } from '../../services/cart.service';
 import { OrderItem } from '../../models/pharmacy.models';
 import { User } from '../../../models/user.model';
+import { AuthService } from '../../../common/services/auth.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -23,7 +23,12 @@ export class CheckoutComponent implements OnInit {
   isProcessing = false;
   errorMessage = '';
 
-  constructor(private pharmacy: PharmacyService, private userService: UserService, private cart: CartService, private router: Router) { }
+  constructor(
+    private pharmacy: PharmacyService,
+    private authService: AuthService,
+    private cart: CartService,
+    private router: Router
+  ) { }
 
   async ngOnInit() {
     this.totalPrice = this.cart.getTotalPrice();
@@ -31,8 +36,8 @@ export class CheckoutComponent implements OnInit {
       this.router.navigate(['/']);
       return;
     }
-    // Hardcoded for demo: User ID 1 is the test customer
-    this.user = await firstValueFrom(this.userService.getUser(1));
+
+    this.user = await firstValueFrom(this.authService.currentUser$);
   }
 
   async placeOrder() {
@@ -56,6 +61,7 @@ export class CheckoutComponent implements OnInit {
       next: (res) => {
         alert('Order Placed Successfully!');
         this.cart.clearCart();
+        this.authService.checkSession();
         this.router.navigate(['/']);
       },
       error: (err) => {

@@ -3,7 +3,6 @@ SET FOREIGN_KEY_CHECKS = 0;
 DELETE FROM order_items;
 DELETE FROM orders;
 DELETE FROM products;
-DELETE FROM users;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- Products
@@ -18,7 +17,3 @@ INSERT INTO products (id, name, description, price, stock_quantity, category, im
 (8, 'Omeprazole', 'Relief from acid reflux and heartburn', 25.0, 120, 'Antacids', 'https://via.placeholder.com/150', 'Capsule', '20mg', '14 capsules', false),
 (9, 'Vitamin C', 'Immune system support booster', 30.0, 300, 'Supplements', 'https://via.placeholder.com/150', 'Tablet', '1000mg', '60 tablets', false),
 (10, 'Multivitamin Syrup', 'Daily nutritional support for kids', 120.0, 40, 'Supplements', 'https://via.placeholder.com/150', 'Syrup', '200ml', '1 bottle', false);
-
-INSERT INTO users (id, name, email, role, wallet_balance) VALUES 
-(1, 'Test Customer', 'customer@example.com', 'CUSTOMER', 1000.0),
-(2, 'Admin User', 'admin@example.com', 'ADMIN', 0.0);

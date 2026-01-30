@@ -1,7 +1,7 @@
 package com.healthcare.consultation.service;
 
-import com.healthcare.common.entity.User;
-import com.healthcare.common.repository.UserRepository;
+import com.healthcare.common.entity.Patient;
+import com.healthcare.common.repository.PatientRepository;
 import com.healthcare.consultation.entity.*;
 import com.healthcare.consultation.repository.AppointmentRepository;
 import com.healthcare.consultation.repository.DoctorAvailabilityRepository;
@@ -26,13 +26,13 @@ public class AppointmentService {
     private DoctorAvailabilityRepository availabilityRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private PatientRepository patientRepository;
 
     @Transactional
     public Appointment bookAppointment(Long userId, Long doctorId, LocalDate date, String slotTime,
             ConsultationType type) {
-        User patient = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        Patient patient = patientRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new RuntimeException("Doctor not found"));
 

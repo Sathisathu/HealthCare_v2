@@ -1,6 +1,6 @@
 package com.healthcare.consultation.entity;
 
-import com.healthcare.common.entity.User;
+import com.healthcare.common.entity.Patient;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -13,7 +13,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    private User patient;
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
@@ -42,11 +42,11 @@ public class Appointment {
         this.id = id;
     }
 
-    public User getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 
-    public void setPatient(User patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 

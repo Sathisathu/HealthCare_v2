@@ -3,8 +3,11 @@
         <h1 class="logo" routerLink="/">MedConnect</h1>
         <nav class="main-nav">
             <!-- Pure Dashboard Layout - No Module specific links here -->
-            <span class="user-greeting">Welcome, User</span>
         </nav>
+        <div class="user-profile" *ngIf="currentUser$ | async as user">
+            <span class="user-name">👤 {{user.name}}</span>
+            <button class="logout-btn" (click)="logout()">Logout</button>
+        </div>
     </div>
 </header>
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LabTestService } from '../../services/lab-test.service';
 import { LabTestSlot } from '../../models/lab-test.models';
+import { AuthService } from '../../../common/services/auth.service';
 
 @Component({
     selector: 'app-lab-booking-wizard',
@@ -22,7 +23,8 @@ export class LabBookingWizardComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private labService: LabTestService
+        private labService: LabTestService,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
@@ -59,7 +61,13 @@ export class LabBookingWizardComponent implements OnInit {
 
     confirmBooking() {
         if (this.selectedSlot) {
-            this.labService.bookTest(1, this.selectedSlot.id).subscribe({
+            const user = this.authService.currentUserValue;
+            if (!user) {
+                alert('Please login to book a lab test');
+                this.router.navigate(['/login']);
+                return;
+            }
+            this.labService.bookTestWithDetails(user.id, this.selectedSlot).subscribe({
                 next: () => {
                     alert('Lab Test Booked Successfully!');
                     this.router.navigate(['/lab-test/my-bookings']);

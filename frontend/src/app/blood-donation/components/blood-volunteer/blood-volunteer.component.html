@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Be a Hero, Save a Life 🩸</h1>
+            <p>Your single donation can save up to 3 lives. Join our community of life-savers today.</p>
+
+            <div class="reward-badge">
+                <span class="icon">✨</span>
+                <span class="text">Earn 3000 MedConnect Coins on successful donation!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="booking-grid">
+        <div class="card calendar-card">
+            <h3>1. Choose a Donation Date</h3>
+            <div class="date-picker-wrapper">
+                <input type="date" [(ngModel)]="selectedDate" [min]="minDate" class="custom-date-input">
+            </div>
+            <p class="hint">Please select a future date for your visit.</p>
+        </div>
+
+        <div class="card info-card">
+            <h3>Why Donate?</h3>
+            <ul class="benefits">
+                <li>Free basic health check-up</li>
+                <li>Helps maintain healthy iron levels</li>
+                <li>Instant 3000 Coins reward</li>
+                <li>The greatest gift is the gift of life.</li>
+            </ul>
+
+            <button class="volunteer-btn" [disabled]="!selectedDate" (click)="volunteer()">
+                Confirm Participation &rarr;
+            </button>
+        </div>
+    </div>
+
+    <div class="history-section" *ngIf="myDonations.length > 0">
+        <h2>My Volunteering History</h2>
+        <div class="history-list">
+            <div *ngFor="let d of myDonations" class="history-item">
+                <div class="date-box">
+                    <span class="day">{{d.donationDate | date:'d'}}</span>
+                    <span class="month">{{d.donationDate | date:'MMM'}}</span>
+                </div>
+                <div class="status-info">
+                    <strong>Status: {{d.status}}</strong>
+                    <p *ngIf="d.remarks">{{d.remarks}}</p>
+                    <span *ngIf="d.pointsAwarded" class="coins-msg">💰 +3000 Coins Added</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

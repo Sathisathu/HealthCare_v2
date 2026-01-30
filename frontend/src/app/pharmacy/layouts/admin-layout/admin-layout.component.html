@@ -1,7 +1,7 @@
 <div class="admin-layout">
     <aside class="admin-sidebar">
         <div class="sidebar-header">
-            <h1 class="logo">Admin Panel</h1>
+            <h1 class="logo" routerLink="/admin">Admin Panel</h1>
         </div>
         <nav class="sidebar-nav">
             <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -9,8 +9,8 @@
             </a>
 
             <!-- Add more admin links here as we build them -->
-            <a routerLink="/" class="exit-link">
-                <span class="icon">🚪</span> Exit Admin
+            <a (click)="onLogout()" class="exit-link" style="cursor: pointer;">
+                <span class="icon">🚪</span> Logout
             </a>
         </nav>
     </aside>

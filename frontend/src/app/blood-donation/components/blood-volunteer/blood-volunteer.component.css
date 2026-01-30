@@ -1,0 +1,203 @@
+.container {
+    padding: 3rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero {
+    background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+    color: white;
+    border-radius: 30px;
+    padding: 4rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.reward-badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.reward-badge .icon {
+    font-size: 1.2rem;
+}
+
+.reward-badge .text {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.card h3 {
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.custom-date-input {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 2px solid #f1f5f9;
+    font-size: 1.1rem;
+    font-family: inherit;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.custom-date-input:focus {
+    border-color: #ef4444;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.benefits {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2.5rem;
+}
+
+.benefits li {
+    padding: 8px 0;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.benefits li::before {
+    content: 'Γ£ô';
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.volunteer-btn {
+    width: 100%;
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 1.2rem;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.volunteer-btn:hover:not(:disabled) {
+    background: #dc2626;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);
+}
+
+.volunteer-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.history-section h2 {
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin-bottom: 2rem;
+}
+
+.history-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.history-item {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid #f1f5f9;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.date-box {
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    border-radius: 12px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.date-box .day {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ef4444;
+}
+
+.date-box .month {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ef4444;
+}
+
+.status-info strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #1e293b;
+    text-transform: uppercase;
+}
+
+.status-info p {
+    margin: 4px 0;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.coins-msg {
+    color: #10b981;
+    font-weight: 800;
+    font-size: 0.75rem;
+}

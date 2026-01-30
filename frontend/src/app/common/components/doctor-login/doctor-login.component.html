@@ -1,0 +1,33 @@
+<div class="login-container">
+    <div class="login-card">
+        <div class="doctor-icon">🩺</div>
+        <h1>Doctor Portal</h1>
+        <p class="subtitle">Secure login for medical professionals</p>
+
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+            <div class="input-group">
+                <label>Medical Email</label>
+                <input type="email" name="email" [(ngModel)]="credentials.email" required
+                    placeholder="name@hospital.com">
+            </div>
+
+            <div class="input-group">
+                <label>Access Password</label>
+                <input type="password" name="password" [(ngModel)]="credentials.password" required
+                    placeholder="••••••••">
+            </div>
+
+            <p *ngIf="error" class="error-msg">{{error}}</p>
+
+            <button type="submit" [disabled]="!loginForm.form.valid || isProcessing" class="login-btn">
+                {{ isProcessing ? 'Verifying Identity...' : 'Access My Dashboard' }}
+            </button>
+        </form>
+
+        <div class="footer-links">
+            <a routerLink="/login">Patient Login</a>
+            <span class="divider">|</span>
+            <a href="#">Technical Support</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,267 @@
+<div class="result-entry-modal">
+    <div class="modal-content">
+        <h2>Enter Lab Result</h2>
+        <div class="test-info">
+            <p><strong>Patient:</strong> {{ booking.patient.name }}</p>
+            <p><strong>Test:</strong> {{ booking.slot.testName }}</p>
+        </div>
+
+        <div class="template-selector">
+            <label>Select Result Template:</label>
+            <select [(ngModel)]="selectedTemplate" (change)="initForm()">
+                <option value="CBC">Complete Blood Count (CBC)</option>
+                <option value="LIPID">Lipid Profile</option>
+                <option value="THYROID">Thyroid Profile</option>
+                <option value="GLUCOSE_FBS">Glucose (FBS)</option>
+                <option value="GLUCOSE_PPBS">Glucose (PPBS)</option>
+                <option value="HBA1C">HbA1c</option>
+                <option value="LFT">Liver Function Test (LFT)</option>
+                <option value="KFT">Kidney Function Test (KFT)</option>
+                <option value="URINE">Urine Routine</option>
+                <option value="COVID">COVID-19</option>
+                <option value="VITAMIN_D">Vitamin D</option>
+                <option value="VITAMIN_B12">Vitamin B12</option>
+                <option value="GENERIC">Generic / Other</option>
+            </select>
+        </div>
+
+        <div class="form-container" *ngIf="resultData">
+            <!-- CBC FORM -->
+            <div *ngIf="selectedTemplate === 'CBC'" class="test-form">
+                <h3>CBC Parameters</h3>
+                <div class="grid-2">
+                    <label>Hemoglobin (g/dL) <input [(ngModel)]="resultData.hemoglobin.value"></label>
+                    <label>RBC Count (mill/mm³) <input [(ngModel)]="resultData.rbc.value"></label>
+                    <label>WBC Count (10³/uL) <input [(ngModel)]="resultData.wbc.value"></label>
+                    <label>Platelet Count (10³/uL) <input [(ngModel)]="resultData.platelet.value"></label>
+                    <label>Hematocrit (%) <input [(ngModel)]="resultData.hematocrit.value"></label>
+                </div>
+                <h4>Differential Count (%)</h4>
+                <div class="grid-3">
+                    <label>Neutrophils <input [(ngModel)]="resultData.differential.neutrophils.value"></label>
+                    <label>Lymphocytes <input [(ngModel)]="resultData.differential.lymphocytes.value"></label>
+                    <label>Monocytes <input [(ngModel)]="resultData.differential.monocytes.value"></label>
+                    <label>Eosinophils <input [(ngModel)]="resultData.differential.eosinophils.value"></label>
+                    <label>Basophils <input [(ngModel)]="resultData.differential.basophils.value"></label>
+                </div>
+            </div>
+
+            <!-- LIPID FORM -->
+            <div *ngIf="selectedTemplate === 'LIPID'" class="test-form">
+                <h3>Lipid Profile</h3>
+                <div class="grid-2">
+                    <label>Total Cholesterol (mg/dL) <input [(ngModel)]="resultData.totalCholesterol.value"></label>
+                    <label>LDL Cholesterol (mg/dL) <input [(ngModel)]="resultData.ldl.value"></label>
+                    <label>HDL Cholesterol (mg/dL) <input [(ngModel)]="resultData.hdl.value"></label>
+                    <label>Triglycerides (mg/dL) <input [(ngModel)]="resultData.triglycerides.value"></label>
+                    <label>VLDL (mg/dL) <input [(ngModel)]="resultData.vldl.value"></label>
+                    <label>Risk Category
+                        <select [(ngModel)]="resultData.riskCategory">
+                            <option value="Low">Low</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="High">High</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <!-- THYROID FORM -->
+            <div *ngIf="selectedTemplate === 'THYROID'" class="test-form">
+                <h3>Thyroid Profile</h3>
+                <div class="grid-2">
+                    <label>T3 (ng/dL) <input [(ngModel)]="resultData.t3.value"></label>
+                    <label>T4 (ug/dL) <input [(ngModel)]="resultData.t4.value"></label>
+                    <label>TSH (uIU/mL) <input [(ngModel)]="resultData.tsh.value"></label>
+                    <label>Status
+                        <select [(ngModel)]="resultData.thyroidStatus">
+                            <option value="Normal">Normal</option>
+                            <option value="Hypothyroid">Hypothyroid</option>
+                            <option value="Hyperthyroid">Hyperthyroid</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <!-- GLUCOSE FORM -->
+            <div *ngIf="selectedTemplate.includes('GLUCOSE') || selectedTemplate === 'HBA1C'" class="test-form">
+                <h3>Glucose / HbA1c</h3>
+                <div class="grid-2">
+                    <label>Value (mg/dL or %) <input [(ngModel)]="resultData.glucoseLevelOrHba1c.value"></label>
+                    <label>Interpretation
+                        <select [(ngModel)]="resultData.interpretation">
+                            <option value="Normal">Normal</option>
+                            <option value="Prediabetic">Prediabetic</option>
+                            <option value="Diabetic">Diabetic</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <!-- LFT FORM -->
+            <div *ngIf="selectedTemplate === 'LFT'" class="test-form">
+                <h3>Liver Function Test</h3>
+                <div class="grid-2">
+                    <label>SGOT (AST) <input [(ngModel)]="resultData.sgot.value"></label>
+                    <label>SGPT (ALT) <input [(ngModel)]="resultData.sgpt.value"></label>
+                    <label>Alkaline Phosphatase <input [(ngModel)]="resultData.alkalinePhosphatase.value"></label>
+                    <label>Total Bilirubin <input [(ngModel)]="resultData.bilirubinTotal.value"></label>
+                    <label>Direct Bilirubin <input [(ngModel)]="resultData.bilirubinDirect.value"></label>
+                    <label>Albumin <input [(ngModel)]="resultData.albumin.value"></label>
+                </div>
+            </div>
+
+            <!-- KFT FORM -->
+            <div *ngIf="selectedTemplate === 'KFT'" class="test-form">
+                <h3>Kidney Function Test</h3>
+                <div class="grid-2">
+                    <label>Blood Urea <input [(ngModel)]="resultData.bloodUrea.value"></label>
+                    <label>Serum Creatinine <input [(ngModel)]="resultData.serumCreatinine.value"></label>
+                    <label>Uric Acid <input [(ngModel)]="resultData.uricAcid.value"></label>
+                    <label>Sodium <input [(ngModel)]="resultData.sodium.value"></label>
+                    <label>Potassium <input [(ngModel)]="resultData.potassium.value"></label>
+                    <label>eGFR <input [(ngModel)]="resultData.eGFR.value"></label>
+                </div>
+            </div>
+
+            <!-- URINE FORM -->
+            <div *ngIf="selectedTemplate === 'URINE'" class="test-form">
+                <h3>Urine Routine</h3>
+                <div class="grid-2">
+                    <label>Color <input [(ngModel)]="resultData.color"></label>
+                    <label>Appearance <input [(ngModel)]="resultData.appearance"></label>
+                    <label>pH <input [(ngModel)]="resultData.ph.value"></label>
+                    <label>Protein <select [(ngModel)]="resultData.protein">
+                            <option>Absent</option>
+                            <option>Trace</option>
+                            <option>Present</option>
+                        </select></label>
+                    <label>Sugar <select [(ngModel)]="resultData.sugar">
+                            <option>Absent</option>
+                            <option>Present</option>
+                        </select></label>
+                    <label>Ketones <select [(ngModel)]="resultData.ketones">
+                            <option>Absent</option>
+                            <option>Present</option>
+                        </select></label>
+                    <label>Pus Cells <input [(ngModel)]="resultData.pusCells"></label>
+                    <label>RBCs <input [(ngModel)]="resultData.rbc"></label>
+                </div>
+            </div>
+
+            <!-- COVID FORM -->
+            <div *ngIf="selectedTemplate === 'COVID'" class="test-form">
+                <h3>COVID-19 Result</h3>
+                <div class="grid-2">
+                    <label>Test Method
+                        <select [(ngModel)]="resultData.testMethod">
+                            <option>RT-PCR</option>
+                            <option>Antigen</option>
+                        </select>
+                    </label>
+                    <label>Result
+                        <select [(ngModel)]="resultData.result">
+                            <option value="Negative">Negative</option>
+                            <option value="Positive">Positive</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <!-- VITAMIN FORM -->
+            <div *ngIf="selectedTemplate.includes('VITAMIN')" class="test-form">
+                <h3>Vitamin Analysis</h3>
+                <div class="grid-2">
+                    <label>Level (ng/mL) <input [(ngModel)]="resultData.level.value"></label>
+                    <label>Status
+                        <select [(ngModel)]="resultData.deficiencyStatus">
+                            <option>Normal</option>
+                            <option>Insufficient</option>
+                            <option>Deficient</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <!-- RADIOLOGY FORM -->
+            <div *ngIf="selectedTemplate === 'RADIOLOGY'" class="test-form">
+                <h3>Radiology / Imaging</h3>
+                <div class="grid-2">
+                    <label>Modality <select [(ngModel)]="resultData.modality">
+                            <option>X-Ray</option>
+                            <option>MRI</option>
+                            <option>CT Scan</option>
+                            <option>Ultrasound</option>
+                            <option>PET Scan</option>
+                        </select></label>
+                    <label>Body Part / Region <input [(ngModel)]="resultData.bodyPart"
+                            placeholder="e.g. Chest PA View"></label>
+                </div>
+                <div class="full-width-field">
+                    <label>Clinical History</label>
+                    <textarea [(ngModel)]="resultData.clinicalHistory" rows="2"></textarea>
+                </div>
+                <div class="full-width-field">
+                    <label>Impression / Findings</label>
+                    <textarea [(ngModel)]="resultData.impression" rows="4"></textarea>
+                </div>
+                <!-- Image URL placeholder -->
+                <div class="full-width-field">
+                    <label>Image URL (Optional)</label>
+                    <input [(ngModel)]="resultData.imageUrl" placeholder="http://...">
+                </div>
+            </div>
+
+            <!-- PREGNANCY FORM -->
+            <div *ngIf="selectedTemplate === 'PREGNANCY'" class="test-form">
+                <h3>Pregnancy Test (Beta hCG)</h3>
+                <div class="grid-2">
+                    <label>Result
+                        <select [(ngModel)]="resultData.result">
+                            <option value="Positive">Positive</option>
+                            <option value="Negative">Negative</option>
+                            <option value="Indeterminate">Indeterminate</option>
+                        </select>
+                    </label>
+                    <label>Est. Gestational Age <input [(ngModel)]="resultData.weekEstimation"
+                            placeholder="e.g. 4-5 Weeks"></label>
+                    <label>Beta hCG Value (mIU/mL) <input [(ngModel)]="resultData.betaHCG.value"></label>
+                    <label>Ref. Range <input [(ngModel)]="resultData.betaHCG.range"></label>
+                </div>
+            </div>
+
+            <!-- WIDAL FORM -->
+            <div *ngIf="selectedTemplate === 'WIDAL'" class="test-form">
+                <h3>Widal Test (Typhoid)</h3>
+                <div class="grid-2">
+                    <label>S. Typhi 'O' <input [(ngModel)]="resultData.salmonellaTyphiO"></label>
+                    <label>S. Typhi 'H' <input [(ngModel)]="resultData.salmonellaTyphiH"></label>
+                    <label>S. Paratyphi 'AH' <input [(ngModel)]="resultData.salmonellaParatyphiAH"></label>
+                    <label>S. Paratyphi 'BH' <input [(ngModel)]="resultData.salmonellaParatyphiBH"></label>
+                    <label>Impression
+                        <select [(ngModel)]="resultData.impression">
+                            <option value="Non-Reactive">Non-Reactive</option>
+                            <option value="Reactive">Reactive</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <!-- GENERIC FORM -->
+            <div *ngIf="selectedTemplate === 'GENERIC'" class="test-form">
+                <h3>Generic Results</h3>
+                <button (click)="addParameter()" class="add-btn">+ Add Parameter</button>
+                <div *ngFor="let param of resultData.parameters" class="row">
+                    <input [(ngModel)]="param.name" placeholder="Name">
+                    <input [(ngModel)]="param.value" placeholder="Value">
+                    <input [(ngModel)]="param.range" placeholder="Range">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="actions">
+            <button (click)="onSubmit()">Save & Publish</button>
+            <button (click)="onCancel()" class="cancel-btn">Cancel</button>
+        </div>
+    </div>
+</div>

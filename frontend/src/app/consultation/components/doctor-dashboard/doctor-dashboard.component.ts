@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConsultationService } from '../../services/consultation.service';
 import { DoctorAvailability, Appointment, Doctor } from '../../models/consultation.models';
+import { AuthService } from '../../../common/services/auth.service';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -13,36 +14,24 @@ import { DoctorAvailability, Appointment, Doctor } from '../../models/consultati
 })
 export class DoctorDashboardComponent implements OnInit {
   doctor: Doctor | null = null;
-  allDoctors: Doctor[] = [];
   dates: string[] = [];
   selectedDate: string = '';
   slots: DoctorAvailability[] = [];
   appointments: Appointment[] = [];
-  doctorId: number = 0;
 
-  constructor(private consultationService: ConsultationService) { }
+  constructor(private consultationService: ConsultationService, private authService: AuthService) { }
 
   ngOnInit() {
     this.generateDates();
-    this.fetchDoctors();
-  }
-
-  fetchDoctors() {
-    this.consultationService.getDoctors().subscribe(res => {
-      this.allDoctors = res;
+    this.authService.currentUser$.subscribe(user => {
+      if (user && user.role === 'DOCTOR') {
+        this.consultationService.getDoctorById(user.id).subscribe(res => {
+          this.doctor = res;
+          this.onDateChange();
+          this.fetchAppointments();
+        });
+      }
     });
-  }
-
-  loadDoctorData() {
-    if (this.doctorId > 0) {
-      this.consultationService.getDoctorById(this.doctorId).subscribe(res => {
-        this.doctor = res;
-        this.onDateChange();
-        this.fetchAppointments();
-      });
-    } else {
-      this.doctor = null;
-    }
   }
 
   generateDates() {

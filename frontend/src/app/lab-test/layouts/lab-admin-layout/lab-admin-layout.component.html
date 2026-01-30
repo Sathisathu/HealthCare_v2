@@ -1,12 +1,12 @@
 <header class="lab-header">
     <div class="container header-content">
-        <h1 class="logo" routerLink="/">MedConnect <span class="portal-badge">Lab Portal</span></h1>
+        <h1 class="logo" routerLink="/lab-admin/dashboard">MedConnect <span class="portal-badge">Lab Portal</span></h1>
         <nav class="lab-nav">
             <a routerLink="/lab-admin/dashboard" routerLinkActive="active">
                 <span class="icon">🔬</span> Lab Management
             </a>
-            <a routerLink="/" class="switch-link">
-                <span class="icon">🔙</span> Exit Portal
+            <a (click)="onLogout()" class="switch-link" style="cursor: pointer;">
+                <span class="icon">🚪</span> Logout
             </a>
         </nav>
     </div>

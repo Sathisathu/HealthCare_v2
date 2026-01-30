@@ -7,8 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import java.util.Optional;
+
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+    Optional<Doctor> findByEmail(String email);
+
     @Query("SELECT d FROM Doctor d WHERE LOWER(d.name) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(d.specialization) LIKE LOWER(CONCAT('%', :query, '%'))")
     List<Doctor> searchDoctors(String query);
 }

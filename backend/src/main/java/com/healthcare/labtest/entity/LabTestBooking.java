@@ -1,6 +1,6 @@
 package com.healthcare.labtest.entity;
 
-import com.healthcare.common.entity.User;
+import com.healthcare.common.entity.Patient;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,7 +12,7 @@ public class LabTestBooking {
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    private User patient;
+    private Patient patient;
 
     @OneToOne
     @JoinColumn(name = "slot_id")
@@ -34,11 +34,11 @@ public class LabTestBooking {
         this.id = id;
     }
 
-    public User getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 
-    public void setPatient(User patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 

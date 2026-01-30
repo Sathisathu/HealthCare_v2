@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { LabTestService } from '../../services/lab-test.service';
 import { LabTestBooking } from '../../models/lab-test.models';
+import { AuthService } from '../../../common/services/auth.service';
 
 @Component({
     selector: 'app-my-lab-bookings',
@@ -13,13 +14,18 @@ import { LabTestBooking } from '../../models/lab-test.models';
 })
 export class MyLabBookingsComponent implements OnInit {
     bookings: LabTestBooking[] = [];
-    userId = 1;
+    userId: number | null = null;
 
-    constructor(private labService: LabTestService, private router: Router) { }
+    constructor(private labService: LabTestService, private router: Router, private authService: AuthService) { }
 
     ngOnInit() {
-        this.labService.getPatientBookings(this.userId).subscribe(res => {
-            this.bookings = res;
+        this.authService.currentUser$.subscribe(user => {
+            if (user) {
+                this.userId = user.id;
+                this.labService.getPatientBookings(user.id).subscribe(res => {
+                    this.bookings = res;
+                });
+            }
         });
     }
 

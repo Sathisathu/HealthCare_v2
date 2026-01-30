@@ -3,10 +3,10 @@ package com.healthcare.pharmacy.service;
 import com.healthcare.pharmacy.entity.Order;
 import com.healthcare.pharmacy.entity.OrderItem;
 import com.healthcare.pharmacy.entity.Product;
-import com.healthcare.common.entity.User;
+import com.healthcare.common.entity.Patient;
 import com.healthcare.pharmacy.repository.OrderRepository;
 import com.healthcare.pharmacy.repository.ProductRepository;
-import com.healthcare.common.repository.UserRepository;
+import com.healthcare.common.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +24,12 @@ public class OrderService {
     private ProductRepository productRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private PatientRepository patientRepository;
 
     @Transactional
     public Order placeOrder(Long userId, List<OrderItem> items, String paymentType) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        Patient user = patientRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
 
         double totalAmount = 0;
         for (OrderItem item : items) {
@@ -56,7 +56,7 @@ public class OrderService {
                 throw new RuntimeException("Insufficient wallet balance. Needed: " + coinsNeeded + " coins");
             }
             user.setWalletBalance(user.getWalletBalance() - coinsNeeded);
-            userRepository.save(user);
+            patientRepository.save(user);
         }
 
         Order order = new Order();

@@ -12,7 +12,7 @@
                     </div>
                     <div class="actions">
                         <span class="status-badge" [class]="booking.status">{{booking.status}}</span>
-                        <button *ngIf="booking.status === 'BOOKED'" (click)="selectBooking(booking)"
+                        <button *ngIf="booking.status === 'BOOKED'" (click)="openResultEntry(booking)"
                             class="action-btn">Enter Results</button>
                     </div>
                 </div>
@@ -20,28 +20,9 @@
             </div>
         </div>
 
-        <!-- Section 2: Result Entry Form -->
-        <div class="section card result-form-card" *ngIf="selectedBooking">
-            <div class="form-header">
-                <h2>Enter Results for {{selectedBooking.slot.testName}}</h2>
-                <button (click)="selectedBooking = null" class="close">✕</button>
-            </div>
-
-            <div class="form-body">
-                <div class="form-row" *ngFor="let param of resultForm.parameters; let i = index">
-                    <input type="text" [(ngModel)]="param.name" placeholder="Parameter Name">
-                    <input type="text" [(ngModel)]="param.value" placeholder="Result Value">
-                    <input type="text" [(ngModel)]="param.range" placeholder="Normal Range">
-                </div>
-                <button (click)="addParameter()" class="add-btn">+ Add Field</button>
-
-                <div class="remarks">
-                    <label>Lab Remarks:</label>
-                    <textarea [(ngModel)]="resultForm.remarks" placeholder="Type summary or remarks..."></textarea>
-                </div>
-
-                <button (click)="submitResult()" class="submit-btn">Submit & Complete Booking</button>
-            </div>
-        </div>
+        <!-- Result Entry Modal -->
+        <app-lab-result-entry *ngIf="showEntryModal && selectedBooking" [booking]="selectedBooking"
+            (save)="handleSave($event)" (cancel)="handleCancel()">
+        </app-lab-result-entry>
     </div>
 </div>

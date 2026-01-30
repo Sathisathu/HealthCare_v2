@@ -36,7 +36,19 @@
                 </a>
             </ng-container>
 
+            <!-- Blood Donation Specific Links -->
+            <ng-container *ngIf="isBloodDonation()">
+                <a routerLink="/blood-donation" routerLinkActive="active" title="Volunteer">
+                    <span class="nav-icon">❤️</span> Donate
+                </a>
+            </ng-container>
+
         </nav>
+
+        <div class="user-profile" *ngIf="currentUser$ | async as user">
+            <span class="user-name">👤 {{user.name}}</span>
+            <button class="logout-btn" (click)="logout()">Logout</button>
+        </div>
     </div>
 </header>
 

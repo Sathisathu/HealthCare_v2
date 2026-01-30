@@ -17,27 +17,378 @@
             </div>
         </header>
 
-        <div class="table-container">
-            <table>
-                <thead>
+        <div class="report-content" [ngSwitch]="parsedResult.testType">
+
+            <!-- CBC VIEW -->
+            <div *ngSwitchCase="'CBC'" class="test-view cbc-view">
+                <h3>Complete Blood Count (CBC)</h3>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Reference Range</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hemoglobin</td>
+                            <td class="value">{{parsedResult.hemoglobin.value}} g/dL</td>
+                            <td>{{parsedResult.hemoglobin.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.hemoglobin.status">{{parsedResult.hemoglobin.status}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RBC Count</td>
+                            <td class="value">{{parsedResult.rbc.value}} mill/mm³</td>
+                            <td>{{parsedResult.rbc.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.rbc.status">{{parsedResult.rbc.status}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>WBC Count</td>
+                            <td class="value">{{parsedResult.wbc.value}} 10³/uL</td>
+                            <td>{{parsedResult.wbc.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.wbc.status">{{parsedResult.wbc.status}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Platelet Count</td>
+                            <td class="value">{{parsedResult.platelet.value}} 10³/uL</td>
+                            <td>{{parsedResult.platelet.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.platelet.status">{{parsedResult.platelet.status}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Differential Count (%)</h4>
+                <table class="result-table mini">
+                    <tbody>
+                        <tr>
+                            <td>Neutrophils</td>
+                            <td>{{parsedResult.differential.neutrophils.value}}%</td>
+                            <td>Lymphocytes</td>
+                            <td>{{parsedResult.differential.lymphocytes.value}}%</td>
+                        </tr>
+                        <tr>
+                            <td>Monocytes</td>
+                            <td>{{parsedResult.differential.monocytes.value}}%</td>
+                            <td>Eosinophils</td>
+                            <td>{{parsedResult.differential.eosinophils.value}}%</td>
+                        </tr>
+                        <tr>
+                            <td>Basophils</td>
+                            <td>{{parsedResult.differential.basophils.value}}%</td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- LIPID VIEW -->
+            <div *ngSwitchCase="'LIPID'" class="test-view lipid-view">
+                <h3>Lipid Profile</h3>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Lipid</th>
+                            <th>Value</th>
+                            <th>Optimal Range</th>
+                            <th>Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Cholesterol</td>
+                            <td class="value">{{parsedResult.totalCholesterol.value}} mg/dL</td>
+                            <td>{{parsedResult.totalCholesterol.range}}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>LDL (Bad)</td>
+                            <td class="value">{{parsedResult.ldl.value}} mg/dL</td>
+                            <td>{{parsedResult.ldl.range}}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>HDL (Good)</td>
+                            <td class="value">{{parsedResult.hdl.value}} mg/dL</td>
+                            <td>{{parsedResult.hdl.range}}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Triglycerides</td>
+                            <td class="value">{{parsedResult.triglycerides.value}} mg/dL</td>
+                            <td>{{parsedResult.triglycerides.range}}</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="risk-badge" [class]="parsedResult.riskCategory">
+                    Overall Risk Category: <strong>{{parsedResult.riskCategory}}</strong>
+                </div>
+            </div>
+
+            <!-- RADIOLOGY VIEW -->
+            <div *ngSwitchCase="'RADIOLOGY'" class="test-view radiology-view">
+                <h3>{{parsedResult.modality}} Report - {{parsedResult.bodyPart}}</h3>
+                <div class="report-section">
+                    <h4>Clinical History:</h4>
+                    <p>{{parsedResult.clinicalHistory || 'N/A'}}</p>
+                </div>
+                <div class="report-section impression-box">
+                    <h4>IMPRESSION / FINDINGS:</h4>
+                    <pre>{{parsedResult.impression}}</pre>
+                </div>
+                <div *ngIf="parsedResult.imageUrl" class="scan-image">
+                    <img [src]="parsedResult.imageUrl" alt="Scan Image">
+                </div>
+            </div>
+
+            <!-- LFT VIEW -->
+            <div *ngSwitchCase="'LFT'" class="test-view lft-view">
+                <h3>Liver Function Test (LFT)</h3>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Reference Range</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Bilirubin</td>
+                            <td class="value">{{parsedResult.bilirubinTotal.value}} mg/dL</td>
+                            <td>{{parsedResult.bilirubinTotal.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>Direct Bilirubin</td>
+                            <td class="value">{{parsedResult.bilirubinDirect.value}} mg/dL</td>
+                            <td>{{parsedResult.bilirubinDirect.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>SGOT (AST)</td>
+                            <td class="value">{{parsedResult.sgot.value}} U/L</td>
+                            <td>{{parsedResult.sgot.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>SGPT (ALT)</td>
+                            <td class="value">{{parsedResult.sgpt.value}} U/L</td>
+                            <td>{{parsedResult.sgpt.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>Alkaline Phosphatase</td>
+                            <td class="value">{{parsedResult.alkalinePhosphatase.value}} U/L</td>
+                            <td>{{parsedResult.alkalinePhosphatase.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Protein</td>
+                            <td class="value">{{parsedResult.totalProtein.value}} g/dL</td>
+                            <td>{{parsedResult.totalProtein.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>Albumin</td>
+                            <td class="value">{{parsedResult.albumin.value}} g/dL</td>
+                            <td>{{parsedResult.albumin.range}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- KFT VIEW -->
+            <div *ngSwitchCase="'KFT'" class="test-view kft-view">
+                <h3>Kidney Function Test (KFT)</h3>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Reference Range</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Blood Urea</td>
+                            <td class="value">{{parsedResult.bloodUrea.value}} mg/dL</td>
+                            <td>{{parsedResult.bloodUrea.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>Serum Creatinine</td>
+                            <td class="value">{{parsedResult.serumCreatinine.value}} mg/dL</td>
+                            <td>{{parsedResult.serumCreatinine.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>Uric Acid</td>
+                            <td class="value">{{parsedResult.uricAcid.value}} mg/dL</td>
+                            <td>{{parsedResult.uricAcid.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sodium</td>
+                            <td class="value">{{parsedResult.sodium.value}} mEq/L</td>
+                            <td>{{parsedResult.sodium.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>Potassium</td>
+                            <td class="value">{{parsedResult.potassium.value}} mEq/L</td>
+                            <td>{{parsedResult.potassium.range}}</td>
+                        </tr>
+                        <tr>
+                            <td>eGFR</td>
+                            <td class="value">{{parsedResult.eGFR.value}}</td>
+                            <td>{{parsedResult.eGFR.range}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- URINE VIEW -->
+            <div *ngSwitchCase="'URINE'" class="test-view urine-view">
+                <h3>Urine Routine Analysis</h3>
+                <div class="grid-2">
+                    <div class="report-section">
+                        <h4>Physical Examination</h4>
+                        <p><strong>Color:</strong> {{parsedResult.color}}</p>
+                        <p><strong>Appearance:</strong> {{parsedResult.appearance}}</p>
+                        <p><strong>pH:</strong> {{parsedResult.ph.value}} ({{parsedResult.ph.range}})</p>
+                    </div>
+                    <div class="report-section">
+                        <h4>Chemical Examination</h4>
+                        <p><strong>Protein:</strong> {{parsedResult.protein}}</p>
+                        <p><strong>Sugar:</strong> {{parsedResult.sugar}}</p>
+                        <p><strong>Ketones:</strong> {{parsedResult.ketones}}</p>
+                    </div>
+                </div>
+                <div class="report-section">
+                    <h4>Microscopic Examination</h4>
+                    <p><strong>Pus Cells:</strong> {{parsedResult.pusCells}}</p>
+                    <p><strong>RBCs:</strong> {{parsedResult.rbc}}</p>
+                </div>
+            </div>
+
+            <!-- GLUCOSE / HBA1C VIEW -->
+            <div *ngIf="parsedResult.testType === 'GLUCOSE' || parsedResult.testType === 'HBA1C'"
+                class="test-view glucose-view">
+                <h3>{{parsedResult.label || 'Diabetes Profile'}}</h3>
+                <div class="result-banner" [class]="parsedResult.interpretation">
+                    {{parsedResult.glucoseLevelOrHba1c.name}}:
+                    <strong>{{parsedResult.glucoseLevelOrHba1c.value}}</strong> {{parsedResult.testType === 'HBA1C' ?
+                    '%' : 'mg/dL'}}
+                </div>
+                <p><strong>Reference Range:</strong> {{parsedResult.glucoseLevelOrHba1c.range}}</p>
+                <div class="risk-badge" [class]="parsedResult.interpretation">
+                    Status: <strong>{{parsedResult.interpretation}}</strong>
+                </div>
+            </div>
+
+            <!-- VITAMIN VIEW -->
+            <div *ngSwitchCase="'VITAMIN'" class="test-view vitamin-view">
+                <h3>{{parsedResult.level.name}} Report</h3>
+                <div class="result-banner" [class]="parsedResult.deficiencyStatus">
+                    VALUE: <strong>{{parsedResult.level.value}}</strong> {{parsedResult.level.range.includes('ng/mL') ?
+                    'ng/mL' : 'pg/mL'}}
+                </div>
+                <p><strong>Reference Range:</strong> {{parsedResult.level.range}}</p>
+                <div class="risk-badge" [class]="parsedResult.deficiencyStatus">
+                    Status: <strong>{{parsedResult.deficiencyStatus}}</strong>
+                </div>
+            </div>
+
+            <!-- COVID VIEW -->
+            <div *ngSwitchCase="'COVID'" class="test-view covid-view">
+                <h3>COVID-19 Laboratory Report</h3>
+                <div class="result-banner" [class]="parsedResult.result">
+                    RESULT: <strong>{{parsedResult.result | uppercase}}</strong>
+                </div>
+                <p><strong>Test Method:</strong> {{parsedResult.testMethod}}</p>
+                <p><strong>Specimen Type:</strong> Nasopharyngeal/Oropharyngeal Swab</p>
+            </div>
+
+            <!-- PREGNANCY VIEW -->
+            <div *ngSwitchCase="'PREGNANCY'" class="test-view pregnancy-view">
+                <h3>Pregnancy Test (Beta hCG)</h3>
+                <div class="result-banner" [class]="parsedResult.result">
+                    RESULT: {{parsedResult.result | uppercase}}
+                </div>
+                <table class="result-table">
                     <tr>
-                        <th>Parameter Item</th>
-                        <th>Observed Value</th>
-                        <th>Biological Reference Range</th>
-                        <th>Unit</th>
+                        <td>Beta hCG Value</td>
+                        <td class="value">{{parsedResult.betaHCG.value}} mIU/mL</td>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let param of parsedResult.parameters">
-                        <td class="param-name">{{param.name}}</td>
-                        <td class="param-value" [class.abnormal]="isAbnormal(param.value, param.range)">
-                            {{param.value}}
-                        </td>
-                        <td>{{param.range}}</td>
-                        <td>{{getUnit(param.name)}}</td>
+                    <tr>
+                        <td>Reference Range</td>
+                        <td>{{parsedResult.betaHCG.range}}</td>
                     </tr>
-                </tbody>
-            </table>
+                    <tr *ngIf="parsedResult.weekEstimation">
+                        <td>Est. Gestational Age</td>
+                        <td class="value">{{parsedResult.weekEstimation}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- WIDAL VIEW -->
+            <div *ngSwitchCase="'WIDAL'" class="test-view widal-view">
+                <h3>Widal Test (Typhoid Serology)</h3>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Antigen</th>
+                            <th>Titer Value</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S. Typhi 'O'</td>
+                            <td class="value">{{parsedResult.salmonellaTyphiO}}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>S. Typhi 'H'</td>
+                            <td class="value">{{parsedResult.salmonellaTyphiH}}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>S. Paratyphi 'AH'</td>
+                            <td class="value">{{parsedResult.salmonellaParatyphiAH}}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>S. Paratyphi 'BH'</td>
+                            <td class="value">{{parsedResult.salmonellaParatyphiBH}}</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="risk-badge" [class.High]="parsedResult.impression === 'Reactive'"
+                    [class.Low]="parsedResult.impression === 'Non-Reactive'">
+                    Overall Impression: <strong>{{parsedResult.impression}}</strong>
+                </div>
+            </div>
+
+            <!-- GENERIC FALLBACK -->
+            <div *ngSwitchDefault class="test-view generic-view">
+                <h3>Test Parameters</h3>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let param of parsedResult.parameters">
+                            <td>{{param.name}}</td>
+                            <td class="value">{{param.value}}</td>
+                            <td>{{param.range}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
         <div class="remarks-section">

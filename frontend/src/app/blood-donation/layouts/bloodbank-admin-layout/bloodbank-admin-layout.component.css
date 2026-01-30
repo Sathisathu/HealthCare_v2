@@ -1,0 +1,72 @@
+.bb-header {
+    background: #991b1b;
+    color: white;
+    padding: 1.2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0;
+    color: white;
+}
+
+.portal-badge {
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-left: 10px;
+}
+
+.bb-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.bb-nav a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.bb-nav a.active {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.exit-link {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+main {
+    min-height: 80vh;
+    padding: 2rem 0;
+    background: #fef2f2;
+}
+
+.bb-footer {
+    background: #7f1d1d;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}

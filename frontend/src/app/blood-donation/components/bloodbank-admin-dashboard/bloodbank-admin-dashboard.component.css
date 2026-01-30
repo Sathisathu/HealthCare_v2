@@ -1,0 +1,175 @@
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dash-header {
+    margin-bottom: 3rem;
+}
+
+.dash-header h1 {
+    font-size: 2.2rem;
+    color: #1e293b;
+}
+
+.dash-header p {
+    color: #64748b;
+}
+
+.dash-grid {
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.volunteer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.vol-item {
+    padding: 1.2rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid transparent;
+}
+
+.vol-item.active {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.vol-info strong {
+    display: block;
+    font-size: 1rem;
+    color: #1e293b;
+}
+
+.vol-info span {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.vol-status {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.badge.VOLUNTEERED {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge.DONATED {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge.NOT_ELIGIBLE {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.edit-btn {
+    background: #1e293b;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    font-family: inherit;
+}
+
+.input-group textarea {
+    height: 120px;
+    resize: none;
+}
+
+.reward-hint {
+    background: #fff7ed;
+    color: #9a3412;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid #f97316;
+}
+
+.save-btn {
+    width: 100%;
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 1.2rem;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.save-btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}

@@ -1,0 +1,24 @@
+<header class="bb-header">
+    <div class="container header-content">
+        <h1 class="logo" routerLink="/bloodbank-admin/dashboard">MedConnect <span class="portal-badge">Blood Bank
+                Portal</span></h1>
+        <nav class="bb-nav">
+            <a routerLink="/bloodbank-admin/dashboard" routerLinkActive="active">
+                <span class="icon">🩸</span> Volunteer Records
+            </a>
+            <a (click)="onLogout()" class="exit-link" style="cursor: pointer;">
+                <span class="icon">🚪</span> Logout
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <router-outlet></router-outlet>
+</main>
+
+<footer class="bb-footer">
+    <div class="container">
+        <p>&copy; 2026 MedConnect Blood Bank Services - Saving Lives Daily</p>
+    </div>
+</footer>

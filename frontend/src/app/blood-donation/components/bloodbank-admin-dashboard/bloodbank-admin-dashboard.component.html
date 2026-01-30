@@ -1,0 +1,55 @@
+<div class="container">
+    <header class="dash-header">
+        <h1>Blood Bank Admin Dashboard 🩸</h1>
+        <p>Manage donors, verify health metrics, and award life-saving rewards.</p>
+    </header>
+
+    <div class="dash-grid">
+        <div class="list-section card">
+            <h2>Volunteer List</h2>
+            <div class="volunteer-list">
+                <div *ngFor="let vol of volunteers" class="vol-item" [class.active]="selectedVol?.id === vol.id">
+                    <div class="vol-info">
+                        <strong>{{vol.patient?.name || 'User #' + vol.patient?.id}}</strong>
+                        <span>Date: {{vol.donationDate | date}}</span>
+                    </div>
+                    <div class="vol-status">
+                        <span class="badge" [class]="vol.status">{{vol.status}}</span>
+                        <button (click)="selectVolunteer(vol)" class="edit-btn">Action</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-section card" *ngIf="selectedVol">
+            <div class="action-header">
+                <h3>Process Donation: {{selectedVol.patient?.name || 'User ' + selectedVol.patient?.id}}</h3>
+                <button (click)="selectedVol = null" class="close">✕</button>
+            </div>
+
+            <div class="form-body">
+                <div class="input-group">
+                    <label>Update Status:</label>
+                    <select [(ngModel)]="statusForm.status">
+                        <option value="VOLUNTEERED">Volunteer Only</option>
+                        <option value="DONATED">Mark as DONATED Γ£à</option>
+                        <option value="NOT_ELIGIBLE">Mark as NOT ELIGIBLE Γ¥î</option>
+                        <option value="NOT_VISITED">Mark as NOT VISITED Γ¥î</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Lab Remarks (e.g. Hemoglobin 10.5 g/dL):</label>
+                    <textarea [(ngModel)]="statusForm.remarks"
+                        placeholder="Add specific reasons for eligibility or donation details..."></textarea>
+                </div>
+
+                <div class="reward-hint" *ngIf="statusForm.status === 'DONATED'">
+                    ΓÜá∩╕Å Marking as DONATED will automatically award <strong>3000 Coins</strong> to the user.
+                </div>
+
+                <button class="save-btn" (click)="saveStatus()">Update Record</button>
+            </div>
+        </div>
+    </div>
+</div>

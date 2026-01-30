@@ -17,16 +17,21 @@ public class ConsultationDataInitializer {
 
     @Bean
     CommandLineRunner initConsultationData(DoctorRepository doctorRepository,
-            DoctorAvailabilityRepository availabilityRepository) {
+            DoctorAvailabilityRepository availabilityRepository,
+            org.springframework.security.crypto.password.PasswordEncoder passwordEncoder) {
         return args -> {
             if (doctorRepository.count() == 0) {
+                String defaultPassword = passwordEncoder.encode("password");
                 // Seed Doctors
                 Doctor d1 = new Doctor("Dr. John Smith", "Cardiologist", "12 Years", 500.0,
-                        "https://via.placeholder.com/150", "+1 123 456 7890", "123 Heart St, NY");
+                        "https://via.placeholder.com/150", "+1 123 456 7890", "123 Heart St, NY",
+                        "doctor1@hc.com", defaultPassword);
                 Doctor d2 = new Doctor("Dr. Sarah Doe", "Dermatologist", "8 Years", 400.0,
-                        "https://via.placeholder.com/150", "+1 987 654 3210", "456 Skin Ave, LA");
+                        "https://via.placeholder.com/150", "+1 987 654 3210", "456 Skin Ave, LA",
+                        "doctor2@hc.com", defaultPassword);
                 Doctor d3 = new Doctor("Dr. Emily White", "Pediatrician", "5 Years", 300.0,
-                        "https://via.placeholder.com/150", "+1 555 123 4444", "789 Kids Rd, TX");
+                        "https://via.placeholder.com/150", "+1 555 123 4444", "789 Kids Rd, TX",
+                        "doctor3@hc.com", defaultPassword);
 
                 List<Doctor> savedDoctors = doctorRepository.saveAll(Arrays.asList(d1, d2, d3));
                 System.out.println("Doctors Seeded Successfully!");

@@ -1,7 +1,7 @@
 package com.healthcare.labtest.service;
 
-import com.healthcare.common.entity.User;
-import com.healthcare.common.repository.UserRepository;
+import com.healthcare.common.entity.Patient;
+import com.healthcare.common.repository.PatientRepository;
 import com.healthcare.labtest.entity.LabTestBooking;
 import com.healthcare.labtest.entity.LabTestSlot;
 import com.healthcare.labtest.repository.LabTestBookingRepository;
@@ -20,11 +20,11 @@ public class LabBookingService {
     private LabTestSlotRepository slotRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private PatientRepository patientRepository;
 
     @Transactional
     public LabTestBooking bookTest(Long patientId, Long slotId) {
-        User patient = userRepository.findById(patientId)
+        Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
 
         LabTestSlot slot = slotRepository.findById(slotId)
@@ -60,6 +60,13 @@ public class LabBookingService {
 
         booking.setTestResultData(resultData);
         booking.setStatus("COMPLETED");
+
+        // Release the slot so others can book this time again if needed
+        if (booking.getSlot() != null) {
+            LabTestSlot slot = booking.getSlot();
+            slot.setBooked(false);
+            slotRepository.save(slot);
+        }
 
         return bookingRepository.save(booking);
     }

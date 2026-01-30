@@ -1,19 +1,15 @@
 <div class="container">
-    <div class="dash-header">
-        <h1>Doctor Workspace 🏥</h1>
-        <p>Manage clinic availability and consult with patients.</p>
+    <div class="dash-header" *ngIf="doctor">
+        <h1>Welcome, Dr. {{doctor.name}} 🏥</h1>
+        <p>Manage your clinic availability and view upcoming appointments.</p>
     </div>
 
     <div class="grid">
         <!-- Availability Management -->
         <div class="card availability-card" [class.loading]="!doctor">
             <div class="card-header">
-                <h2>Availability & Slots 📅</h2>
+                <h2>My Slots 📅</h2>
                 <div class="controls">
-                    <select [(ngModel)]="doctorId" (change)="loadDoctorData()" class="doc-select">
-                        <option [value]="0">-- Select Doctor Profile --</option>
-                        <option *ngFor="let doc of allDoctors" [value]="doc.id">{{doc.name}}</option>
-                    </select>
                     <select [(ngModel)]="selectedDate" (change)="onDateChange()" class="date-select">
                         <option *ngFor="let date of dates" [value]="date">{{date | date:'EEE, MMM d'}}</option>
                     </select>
@@ -42,7 +38,7 @@
             <div class="appointment-list">
                 <div *ngFor="let appt of appointments" class="appt-item">
                     <div class="appt-info">
-                        <strong>Patient: User #{{appt.patient?.id || 1}}</strong>
+                        <strong>Patient: {{appt.patient?.name || 'User #' + appt.patient?.id}}</strong>
                         <p>{{appt.date}} at {{appt.slotTime}}</p>
                         <div class="tags">
                             <span class="type-tag" [class]="appt.consultationType">{{appt.consultationType}}</span>

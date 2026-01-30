@@ -1,6 +1,6 @@
 package com.healthcare.pharmacy.entity;
 
-import com.healthcare.common.entity.User;
+import com.healthcare.common.entity.Patient;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -16,7 +16,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User customer;
+    private Patient customer;
 
     private LocalDateTime orderDate;
 
@@ -40,11 +40,11 @@ public class Order {
         this.id = id;
     }
 
-    public User getCustomer() {
+    public Patient getCustomer() {
         return customer;
     }
 
-    public void setCustomer(User customer) {
+    public void setCustomer(Patient customer) {
         this.customer = customer;
     }
 

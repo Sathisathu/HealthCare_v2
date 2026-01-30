@@ -94,12 +94,108 @@ td {
     color: #ef4444;
 }
 
+.report-section {
+    margin-bottom: 1.5rem;
+}
+
+.impression-box {
+    background: #f8fafc;
+    padding: 1rem;
+    border-left: 4px solid #0ea5e9;
+    border-radius: 4px;
+}
+
+pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    margin: 0;
+}
+
+.scan-image img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.result-banner {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.result-banner.Positive, .result-banner.Diabetic, .result-banner.Deficient, .result-banner.Reactive {
+    background: #fce7f3;
+    color: #be185d;
+    border: 2px solid #fbcfe8;
+}
+
+.result-banner.Negative, .result-banner.Normal, .result-banner.Sufficient, .result-banner.Non-Reactive {
+    background: #ecfdf5;
+    color: #047857;
+    border: 2px solid #a7f3d0;
+}
+
+.result-banner.Prediabetic, .result-banner.Insufficient, .result-banner.Moderate {
+    background: #fffbeb;
+    color: #92400e;
+    border: 2px solid #fef3c7;
+}
+
+.risk-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.risk-badge.Low, .risk-badge.Normal, .risk-badge.Sufficient {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.risk-badge.Moderate, .risk-badge.Prediabetic, .risk-badge.Insufficient {
+    background: #fef9c3;
+    color: #a16207;
+}
+
+.risk-badge.High, .risk-badge.Diabetic, .risk-badge.Deficient, .risk-badge.Reactive {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status.Normal { background: #dcfce7; color: #15803d; }
+.status.Abnormal { background: #fee2e2; color: #b91c1c; }
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
 .remarks-section {
     background: #fffbeb;
     border-left: 5px solid #f59e0b;
     padding: 1.5rem;
     border-radius: 12px;
     margin-bottom: 3rem;
+    margin-top: 2rem;
+    border-top: 2px dashed #cbd5e1;
+    padding-top: 1rem;
 }
 
 .remarks-section h3 {

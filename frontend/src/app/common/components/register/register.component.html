@@ -1,0 +1,46 @@
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="logo" routerLink="/">MedConnect</h1>
+            <p>Create your health account</p>
+        </div>
+
+        <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+            <div class="input-group">
+                <label>Full Name</label>
+                <div class="input-field">
+                    <span class="icon">👤</span>
+                    <input type="text" [(ngModel)]="user.name" name="name" required placeholder="John Doe">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Email Address</label>
+                <div class="input-field">
+                    <span class="icon">📧</span>
+                    <input type="email" [(ngModel)]="user.email" name="email" required placeholder="john@example.com">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-field">
+                    <span class="icon">🔒</span>
+                    <input type="password" [(ngModel)]="user.password" name="password" required placeholder="••••••••">
+                </div>
+            </div>
+
+            <!-- Registration restricted to Patients only -->
+
+            <div class="error-msg" *ngIf="error">{{error}}</div>
+
+            <button type="submit" class="auth-btn" [disabled]="registerForm.invalid">
+                Create Account &rarr;
+            </button>
+
+            <div class="auth-footer">
+                Already have an account? <a routerLink="/login">Sign In</a>
+            </div>
+        </form>
+    </div>
+</div>

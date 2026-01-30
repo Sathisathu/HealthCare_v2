@@ -13,7 +13,8 @@ import { LabResult } from '../../models/lab-test.models';
 })
 export class LabResultViewComponent implements OnInit {
     bookingId: number | null = null;
-    parsedResult: LabResult | null = null;
+
+    parsedResult: any | null = null; // Can be SpecificLabResult
 
     constructor(
         private route: ActivatedRoute,
@@ -36,26 +37,6 @@ export class LabResultViewComponent implements OnInit {
                 }
             });
         }
-    }
-
-    getUnit(paramName: string): string {
-        const name = paramName.toLowerCase();
-        if (name.includes('count')) return 'cells/mcL';
-        if (name.includes('hemoglobin')) return 'g/dL';
-        if (name.includes('glucose') || name.includes('cholesterol')) return 'mg/dL';
-        return '-';
-    }
-
-    isAbnormal(value: string, range: string): boolean {
-        // Simple numeric comparison if applicable
-        const val = parseFloat(value);
-        if (isNaN(val)) return false;
-
-        const parts = range.split('-').map(p => parseFloat(p.trim()));
-        if (parts.length === 2) {
-            return val < parts[0] || val > parts[1];
-        }
-        return false;
     }
 
     printReport() {

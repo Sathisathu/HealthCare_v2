@@ -20,7 +20,20 @@ export class LabTestService {
     }
 
     bookTest(patientId: number, slotId: number): Observable<LabTestBooking> {
-        return this.http.post<LabTestBooking>(`${this.apiUrl}/bookings/book`, { patientId, slotId });
+        // This legacy method might not work with new backend which requires testName/date/time.
+        // We should use bookTestWithDetails primarily.
+        // Or finding slot by ID if we persisted them first? But we use virtual slots.
+        throw new Error("Use bookTestWithDetails");
+    }
+
+    bookTestWithDetails(patientId: number, slot: LabTestSlot): Observable<LabTestBooking> {
+        const payload = {
+            patientId: patientId,
+            testName: slot.testName,
+            date: slot.date,
+            time: slot.time
+        };
+        return this.http.post<LabTestBooking>(`${this.apiUrl}/bookings/book`, payload);
     }
 
     getPatientBookings(patientId: number): Observable<LabTestBooking[]> {

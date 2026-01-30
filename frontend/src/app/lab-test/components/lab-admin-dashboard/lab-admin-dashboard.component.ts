@@ -3,26 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LabTestService } from '../../services/lab-test.service';
 import { LabTestBooking } from '../../models/lab-test.models';
+import { LabResultEntryComponent } from '../lab-result-entry/lab-result-entry.component';
 
 @Component({
     selector: 'app-lab-admin-dashboard',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, LabResultEntryComponent],
     templateUrl: './lab-admin-dashboard.component.html',
     styleUrl: './lab-admin-dashboard.component.css'
 })
 export class LabAdminDashboardComponent implements OnInit {
     bookings: LabTestBooking[] = [];
     selectedBooking: LabTestBooking | null = null;
-
-    resultForm = {
-        testName: '',
-        date: new Date().toISOString(),
-        remarks: '',
-        parameters: [
-            { name: '', value: '', range: '' }
-        ]
-    };
+    showEntryModal = false;
 
     constructor(private labService: LabTestService) { }
 
@@ -36,31 +29,27 @@ export class LabAdminDashboardComponent implements OnInit {
         });
     }
 
-    selectBooking(booking: LabTestBooking) {
+    openResultEntry(booking: LabTestBooking) {
         this.selectedBooking = booking;
-        this.resultForm.testName = booking.slot.testName;
-        this.resultForm.parameters = [
-            { name: 'Hemoglobin', value: '', range: '12-16' },
-            { name: 'White Blood Cell Count', value: '', range: '4.5-11.0' },
-            { name: 'Platelet Count', value: '', range: '150-450' }
-        ];
+        this.showEntryModal = true;
     }
 
-    addParameter() {
-        this.resultForm.parameters.push({ name: '', value: '', range: '' });
-    }
-
-    submitResult() {
+    handleSave(resultJson: string) {
         if (this.selectedBooking) {
-            const resultString = JSON.stringify(this.resultForm);
-            this.labService.uploadResult(this.selectedBooking.id, resultString).subscribe({
+            this.labService.uploadResult(this.selectedBooking.id, resultJson).subscribe({
                 next: () => {
                     alert('Result Uploaded Successfully!');
+                    this.showEntryModal = false;
                     this.selectedBooking = null;
                     this.fetchBookings();
                 },
                 error: (err) => alert('Upload Failed: ' + err.message)
             });
         }
+    }
+
+    handleCancel() {
+        this.showEntryModal = false;
+        this.selectedBooking = null;
     }
 }

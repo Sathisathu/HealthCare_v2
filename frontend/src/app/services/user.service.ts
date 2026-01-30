@@ -11,12 +11,12 @@ export class UserService {
 
     constructor(private http: HttpClient) { }
 
-    // Users
+    // Patients
     getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(`${this.baseUrl}/users`);
+        return this.http.get<User[]>(`${this.baseUrl}/patients`);
     }
 
     getUser(id: number): Observable<User> {
-        return this.http.get<User>(`${this.baseUrl}/users/${id}`);
+        return this.http.get<User>(`${this.baseUrl}/patients/${id}`);
     }
 }

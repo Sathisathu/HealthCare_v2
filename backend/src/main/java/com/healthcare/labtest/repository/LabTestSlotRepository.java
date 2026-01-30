@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface LabTestSlotRepository extends JpaRepository<LabTestSlot, Long> {
     List<LabTestSlot> findByTestNameAndDate(String testName, LocalDate date);
+
+    boolean existsByTestNameAndDateAndTime(String testName, LocalDate date, String time);
 }

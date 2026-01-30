@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConsultationService } from '../../services/consultation.service';
 import { Doctor, DoctorAvailability } from '../../models/consultation.models';
+import { AuthService } from '../../../common/services/auth.service';
 
 @Component({
   selector: 'app-doctor-details',
@@ -23,7 +24,8 @@ export class DoctorDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private consultationService: ConsultationService
+    private consultationService: ConsultationService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -64,8 +66,19 @@ export class DoctorDetailsComponent implements OnInit {
 
   bookNow() {
     if (this.selectedSlot && this.doctor) {
+      const user = this.authService.currentUserValue;
+      if (!user) {
+        alert('Please login to book an appointment');
+        this.router.navigate(['/login']);
+        return;
+      }
+      if (user.role !== 'PATIENT') {
+        alert('Only patients can book appointments.');
+        return;
+      }
+
       const payload = {
-        userId: 1, // Mock user ID
+        userId: user.id,
         doctorId: this.doctor.id,
         date: this.selectedDate,
         slotTime: this.selectedSlot.slotTime,

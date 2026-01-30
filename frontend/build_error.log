@@ -4,31 +4,39 @@
 
 [33mΓ¥»[39m Building...
 [32mΓ£ö[39m Building...
-Application bundle generation failed. [3.321 seconds]
+Application bundle generation failed. [3.726 seconds]
 
-X [ERROR] NG5002: Unexpected closing tag "header". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags [plugin angular-compiler]
+Γû▓ [WARNING] TS-998113: RouterOutlet is not used within the template of MainLayoutComponent [plugin angular-compiler]
 
-    src/app/lab-test/components/lab-result-view/lab-result-view.component.html:51:12:
-      51 Γöé             </header>
-         Γò╡             ~~~~~~~~~
-
-  Error occurs in the template of component LabResultViewComponent.
-
-    src/app/lab-test/components/lab-result-view/lab-result-view.component.ts:11:17:
-      11 Γöé     templateUrl: './lab-result-view.component.html',
-         Γò╡                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    src/app/common/layouts/main-layout/main-layout.component.ts:10:14:
+      10 Γöé     imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonMo...
+         Γò╡               ~~~~~~~~~~~~
 
 
-X [ERROR] NG5002: Unexpected closing tag "div". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags [plugin angular-compiler]
+Γû▓ [WARNING] TS-998113: RouterLink is not used within the template of MainLayoutComponent [plugin angular-compiler]
 
-    src/app/lab-test/components/lab-result-view/lab-result-view.component.html:52:4:
-      52 Γöé     </div>
-         Γò╡     ~~~~~~
+    src/app/common/layouts/main-layout/main-layout.component.ts:10:28:
+      10 Γöé     imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonMo...
+         Γò╡                             ~~~~~~~~~~
 
-  Error occurs in the template of component LabResultViewComponent.
 
-    src/app/lab-test/components/lab-result-view/lab-result-view.component.ts:11:17:
-      11 Γöé     templateUrl: './lab-result-view.component.html',
-         Γò╡                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Γû▓ [WARNING] TS-998113: RouterLinkActive is not used within the template of MainLayoutComponent [plugin angular-compiler]
+
+    src/app/common/layouts/main-layout/main-layout.component.ts:10:40:
+      10 Γöé ...ports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
+         Γò╡                                      ~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected closing tag "nav". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags [plugin angular-compiler]
+
+    src/app/common/layouts/main-layout/main-layout.component.html:4:8:
+      4 Γöé         </nav>
+        Γò╡         ~~~~~~
+
+  Error occurs in the template of component MainLayoutComponent.
+
+    src/app/common/layouts/main-layout/main-layout.component.ts:11:17:
+      11 Γöé     templateUrl: './main-layout.component.html',
+         Γò╡                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

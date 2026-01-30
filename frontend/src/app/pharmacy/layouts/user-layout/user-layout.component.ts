@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../common/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-user-layout',
@@ -10,7 +12,15 @@ import { CommonModule } from '@angular/common';
     styleUrl: './user-layout.component.css'
 })
 export class UserLayoutComponent {
-    constructor(private router: Router) { }
+    currentUser$: Observable<any>;
+
+    constructor(private router: Router, private authService: AuthService) {
+        this.currentUser$ = this.authService.currentUser$;
+    }
+
+    logout() {
+        this.authService.logout();
+    }
 
     isPharmacy(): boolean {
         return this.router.url.includes('/pharmacy') ||
@@ -25,5 +35,9 @@ export class UserLayoutComponent {
 
     isLabTest(): boolean {
         return this.router.url.includes('/lab-test');
+    }
+
+    isBloodDonation(): boolean {
+        return this.router.url.includes('/blood-donation');
     }
 }
