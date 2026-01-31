@@ -58,15 +58,14 @@
             <span class="action-text">Volunteer Now &rarr;</span>
         </a>
         <!-- Subscription Module -->
-        <a [routerLink]="hasSubscription ? '/subscriptions/dashboard' : '/subscriptions/plans'"
-            class="service-card subscription-card">
+        <!-- Subscription Module -->
+        <a routerLink="/subscriptions/plans" class="service-card subscription-card">
             <div class="icon-wrapper">
                 ✨
             </div>
-            <h2>{{ hasSubscription ? 'My Subscription' : 'Explore Plans' }}</h2>
-            <p *ngIf="hasSubscription">Manage your active plan and view benefits.</p>
-            <p *ngIf="!hasSubscription">Unlock exclusive benefits with premium plans.</p>
-            <span class="action-text">{{ hasSubscription ? 'Manage Subscription' : 'View Plans' }} &rarr;</span>
+            <h2>Explore Plans</h2>
+            <p>Unlock exclusive benefits with premium plans.</p>
+            <span class="action-text">View Plans &rarr;</span>
         </a>
 
     </div>

@@ -41,6 +41,10 @@
                     <label>Phone Number</label>
                     <input type="text" formControlName="phoneNumber" class="form-control">
                 </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea formControlName="address" class="form-control" rows="3"></textarea>
+                </div>
             </div>
 
             <div class="profile-card status-card">
@@ -57,10 +61,6 @@
                 <div class="form-group">
                     <label>Date of Birth</label>
                     <input type="date" formControlName="dateOfBirth" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Address</label>
-                    <textarea formControlName="address" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Blood Group</label>
@@ -101,6 +101,10 @@
                     <label>Phone Number</label>
                     <p>{{ patient.phoneNumber || 'Not provided' }}</p>
                 </div>
+                <div class="info-group">
+                    <label>Address</label>
+                    <p>{{ patient.address || 'Not provided' }}</p>
+                </div>
             </div>
 
             <!-- Health & Status Card -->
@@ -111,17 +115,38 @@
                     <p>{{ patient.gender || 'Not provided' }}</p>
                 </div>
                 <div class="info-group">
-                    <label>Blood Group</label>
-                    <p class="blood-group-badge" *ngIf="patient.bloodGroup">{{ patient.bloodGroup }}</p>
-                    <p *ngIf="!patient.bloodGroup">Not provided</p>
-                </div>
-                <div class="info-group">
                     <label>Date of Birth</label>
                     <p>{{ (patient.dateOfBirth | date) || 'Not provided' }}</p>
                 </div>
                 <div class="info-group">
-                    <label>Address</label>
-                    <p>{{ patient.address || 'Not provided' }}</p>
+                    <label>Blood Group</label>
+                    <p class="blood-group-badge" *ngIf="patient.bloodGroup">{{ patient.bloodGroup }}</p>
+                    <p *ngIf="!patient.bloodGroup">Not provided</p>
+                </div>
+            </div>
+
+            <!-- Subscription Card -->
+            <div class="profile-card subscription-card"
+                *ngIf="patient.subscriptionType && patient.subscriptionType !== 'NONE'">
+                <h3>Subscription Plan</h3>
+                <div class="info-group">
+                    <label>Current Plan</label>
+                    <p class="role-badge" [class.gold]="patient.subscriptionType === 'GOLDEN'"
+                        style="display:inline-block; margin-top:5px;">
+                        {{ patient.subscriptionType }}
+                    </p>
+                </div>
+                <div class="info-group">
+                    <label>Expires On</label>
+                    <p>{{ (patient.subscriptionExpiryDate | date) || 'N/A' }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Pharmacy Credit</label>
+                    <p>₹{{ patient.pharmacyCreditBalance || 0 }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Free Consultations Remaining</label>
+                    <p>{{ patient.remainingConsultations || 0 }}</p>
                 </div>
             </div>
 

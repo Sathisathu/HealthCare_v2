@@ -9,4 +9,8 @@ export interface User {
     dateOfBirth?: string;
     gender?: string;
     bloodGroup?: string;
+    subscriptionType?: string;
+    subscriptionExpiryDate?: string;
+    pharmacyCreditBalance?: number;
+    remainingConsultations?: number;
 }
