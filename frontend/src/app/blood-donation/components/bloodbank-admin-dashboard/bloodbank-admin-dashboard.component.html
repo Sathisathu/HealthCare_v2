@@ -15,7 +15,8 @@
                     </div>
                     <div class="vol-status">
                         <span class="badge" [class]="vol.status">{{vol.status}}</span>
-                        <button (click)="selectVolunteer(vol)" class="edit-btn">Action</button>
+                        <button *ngIf="vol.status === 'VOLUNTEERED'" (click)="selectVolunteer(vol)"
+                            class="edit-btn">Action</button>
                     </div>
                 </div>
             </div>

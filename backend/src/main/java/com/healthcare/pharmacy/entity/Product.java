@@ -15,7 +15,7 @@ public class Product {
     private Double price;
     private Integer stockQuantity;
     private String category;
-    private String imageUrl;
+
     private String dosageForm;
     private String strength;
     private String packSize;
@@ -73,12 +73,25 @@ public class Product {
         this.category = category;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
+    private String imageType;
+
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 
     public String getDosageForm() {

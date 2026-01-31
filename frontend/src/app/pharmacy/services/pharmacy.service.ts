@@ -20,12 +20,12 @@ export class PharmacyService {
         return this.http.get<Product>(`${this.baseUrl}/products/${id}`);
     }
 
-    addProduct(product: Product): Observable<Product> {
-        return this.http.post<Product>(`${this.baseUrl}/products`, product);
+    addProduct(formData: FormData): Observable<Product> {
+        return this.http.post<Product>(`${this.baseUrl}/products`, formData);
     }
 
-    updateProduct(id: number, product: Product): Observable<Product> {
-        return this.http.put<Product>(`${this.baseUrl}/products/${id}`, product);
+    updateProduct(id: number, formData: FormData): Observable<Product> {
+        return this.http.put<Product>(`${this.baseUrl}/products/${id}`, formData);
     }
 
     deleteProduct(id: number): Observable<void> {

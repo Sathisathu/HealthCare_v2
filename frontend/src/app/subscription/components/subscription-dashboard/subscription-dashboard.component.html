@@ -1,0 +1,37 @@
+<div class="subs-dashboard card" *ngIf="userSubs">
+    <div class="header">
+        <h2>My Subscription</h2>
+        <span class="status-badge" [class.active]="!isExpired()" [class.expired]="isExpired()">
+            {{ isExpired() ? 'EXPIRED' : 'ACTIVE' }}
+        </span>
+    </div>
+
+    <div class="plan-details" *ngIf="userSubs.subscriptionType !== 'NONE'">
+        <div class="plan-card gold-border">
+            <h3>{{userSubs.subscriptionType}} PLAN</h3>
+            <p>Expires on: {{userSubs.subscriptionExpiryDate}}</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="icon">💊</span>
+                <div class="info">
+                    <label>Pharmacy Credits</label>
+                    <strong>₹{{userSubs.pharmacyCreditBalance}}</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="icon">👨‍⚕️</span>
+                <div class="info">
+                    <label>Consultations Left</label>
+                    <strong>{{userSubs.remainingConsultations}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="no-plan" *ngIf="userSubs.subscriptionType === 'NONE' || isExpired()">
+        <p>You do not have an active subscription.</p>
+        <button class="btn-primary" routerLink="/subscriptions/plans">View Plans</button>
+    </div>
+</div>

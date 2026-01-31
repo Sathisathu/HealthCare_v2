@@ -26,6 +26,7 @@ C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\co
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\consultation\repository\DoctorRepository.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\consultation\service\AppointmentService.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\consultation\service\ConsultationService.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\HealthCare.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\labtest\config\LabTestInitializer.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\labtest\controller\LabBookingController.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\labtest\controller\LabTestController.java
@@ -46,4 +47,10 @@ C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\co
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\repository\ProductRepository.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\service\OrderService.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\pharmacy\service\ProductService.java
-C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\PharmacyApplication.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\subscription\config\SubscriptionDataInitializer.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\subscription\controller\SubscriptionController.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\subscription\entity\SubscriptionPlan.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\subscription\entity\SubscriptionTransaction.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\subscription\repository\SubscriptionPlanRepository.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\subscription\repository\SubscriptionTransactionRepository.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\subscription\service\SubscriptionService.java

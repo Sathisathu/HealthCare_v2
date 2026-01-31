@@ -41,8 +41,8 @@
                         placeholder="10 tablets, 100ml bottle">
                 </div>
                 <div class="form-group">
-                    <label>Image URL</label>
-                    <input class="input-field" [(ngModel)]="currentProduct.imageUrl" placeholder="HTTPS link">
+                    <label>Medicine Image</label>
+                    <input class="input-field" type="file" (change)="onFileChange($event)" accept="image/*">
                 </div>
             </div>
             <div class="form-group full-width">

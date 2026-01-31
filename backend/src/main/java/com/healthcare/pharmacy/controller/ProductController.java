@@ -4,6 +4,8 @@ import com.healthcare.pharmacy.entity.Product;
 import com.healthcare.pharmacy.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,8 +21,13 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @PostMapping
-    public Product create(@RequestBody Product product) {
+    @PostMapping(consumes = { "multipart/form-data" })
+    public Product create(@RequestPart("product") Product product,
+            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
+        if (image != null && !image.isEmpty()) {
+            product.setImage(image.getBytes());
+            product.setImageType(image.getContentType());
+        }
         return productService.addProduct(product);
     }
 
@@ -29,8 +36,14 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-    @PutMapping("/{id}")
-    public Product update(@PathVariable Long id, @RequestBody Product product) {
+    @PutMapping(value = "/{id}", consumes = { "multipart/form-data" })
+    public Product update(@PathVariable Long id,
+            @RequestPart("product") Product product,
+            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
+        if (image != null && !image.isEmpty()) {
+            product.setImage(image.getBytes());
+            product.setImageType(image.getContentType());
+        }
         return productService.updateProduct(id, product);
     }
 

@@ -27,19 +27,35 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   resetProduct(): Product {
-    return { name: '', description: '', price: 0, stockQuantity: 0, category: '', imageUrl: 'https://via.placeholder.com/150', dosageForm: '', strength: '', packSize: '', isPrescriptionRequired: false };
+    return { name: '', description: '', price: 0, stockQuantity: 0, category: '', dosageForm: '', strength: '', packSize: '', isPrescriptionRequired: false };
+  }
+
+  selectedFile: File | null = null;
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
   }
 
   saveProduct() {
+    const formData = new FormData();
+    formData.append('product', new Blob([JSON.stringify(this.currentProduct)], { type: 'application/json' }));
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
     if (this.editingProduct) {
-      this.api.updateProduct(this.currentProduct.id!, this.currentProduct).subscribe(() => {
+      this.api.updateProduct(this.currentProduct.id!, formData).subscribe(() => {
         this.loadProducts();
         this.cancelEdit();
       });
     } else {
-      this.api.addProduct(this.currentProduct).subscribe(() => {
+      this.api.addProduct(formData).subscribe(() => {
         this.loadProducts();
         this.currentProduct = this.resetProduct();
+        this.selectedFile = null;
       });
     }
   }

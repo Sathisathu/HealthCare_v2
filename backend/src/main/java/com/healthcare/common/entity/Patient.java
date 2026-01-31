@@ -20,6 +20,12 @@ public class Patient {
     private String gender;
     private String bloodGroup;
 
+    // Subscription Fields
+    private String subscriptionType = "NONE"; // NONE, SILVER, GOLDEN
+    private Double pharmacyCreditBalance = 0.0;
+    private Integer remainingConsultations = 0;
+    private java.time.LocalDate subscriptionExpiryDate;
+
     public Patient() {
     }
 
@@ -101,5 +107,37 @@ public class Patient {
 
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
+    }
+
+    public String getSubscriptionType() {
+        return subscriptionType;
+    }
+
+    public void setSubscriptionType(String subscriptionType) {
+        this.subscriptionType = subscriptionType;
+    }
+
+    public Double getPharmacyCreditBalance() {
+        return pharmacyCreditBalance;
+    }
+
+    public void setPharmacyCreditBalance(Double pharmacyCreditBalance) {
+        this.pharmacyCreditBalance = pharmacyCreditBalance;
+    }
+
+    public Integer getRemainingConsultations() {
+        return remainingConsultations;
+    }
+
+    public void setRemainingConsultations(Integer remainingConsultations) {
+        this.remainingConsultations = remainingConsultations;
+    }
+
+    public java.time.LocalDate getSubscriptionExpiryDate() {
+        return subscriptionExpiryDate;
+    }
+
+    public void setSubscriptionExpiryDate(java.time.LocalDate subscriptionExpiryDate) {
+        this.subscriptionExpiryDate = subscriptionExpiryDate;
     }
 }

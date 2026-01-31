@@ -88,7 +88,18 @@ public class LabTestService {
         booking.setStatus("BOOKED");
 
         // Handle Payment Type
-        if ("WALLET".equalsIgnoreCase(paymentType)) {
+        // Handle Payment Type
+        if ("SUBSCRIPTION".equalsIgnoreCase(paymentType)) {
+            if (!"NONE".equalsIgnoreCase(patient.getSubscriptionType()) &&
+                    patient.getSubscriptionExpiryDate() != null &&
+                    patient.getSubscriptionExpiryDate().isAfter(java.time.LocalDate.now())) {
+
+                // Subscription covers Lab Tests (Unlimited as per req)
+                booking.setPaymentStatus("PAID");
+            } else {
+                throw new RuntimeException("No active subscription for free lab tests.");
+            }
+        } else if ("WALLET".equalsIgnoreCase(paymentType)) {
             double amount = price;
             double coinsNeeded = amount;
 

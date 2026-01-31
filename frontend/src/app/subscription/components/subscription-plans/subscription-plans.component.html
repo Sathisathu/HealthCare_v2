@@ -1,0 +1,17 @@
+<div class="plans-container card">
+    <h2>Choose Your Health Plan</h2>
+    <div class="plans-grid">
+        <div *ngFor="let plan of plans" class="plan-card" [class.gold]="plan.name === 'Golden'">
+            <div class="plan-header">
+                <h3>{{plan.name}}</h3>
+                <div class="price">₹{{plan.price}}<span>/year</span></div>
+            </div>
+            <ul class="benefits">
+                <li>💊 Pharmacy Credit: ₹{{plan.pharmacyCreditLimit}}</li>
+                <li>👨‍⚕️ Free Consultations: {{plan.consultationLimit}} / year</li>
+                <li>🧪 Free Lab Tests: Unlimited</li>
+            </ul>
+            <button class="btn-primary" (click)="buySubscription(plan)">Buy Subscription</button>
+        </div>
+    </div>
+</div>

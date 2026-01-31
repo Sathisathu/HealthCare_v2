@@ -40,9 +40,9 @@ com\healthcare\labtest\repository\LabTestRepository.class
 com\healthcare\pharmacy\repository\OrderRepository.class
 com\healthcare\common\repository\PatientRepository.class
 com\healthcare\blooddonation\entity\BloodDonationVolunteer.class
+com\healthcare\subscription\entity\SubscriptionPlan.class
 com\healthcare\pharmacy\controller\OrderController.class
 com\healthcare\consultation\entity\ConsultationType.class
-com\healthcare\PharmacyApplication.class
 com\healthcare\labtest\repository\LabTestSlotRepository.class
 com\healthcare\labtest\repository\LabTestBookingRepository.class
 com\healthcare\labtest\entity\LabTest.class

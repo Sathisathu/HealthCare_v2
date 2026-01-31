@@ -9,6 +9,8 @@ import { User } from '../../../models/user.model';
 import { AuthService } from '../../../common/services/auth.service';
 import { firstValueFrom } from 'rxjs';
 
+import { SubscriptionService } from '../../../subscription/services/subscription.service';
+
 @Component({
   selector: 'app-checkout',
   standalone: true,
@@ -17,7 +19,7 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit {
-  user: User | null = null;
+  user: any = null; // Changed type to any to support new fields w/o interface update yet
   totalPrice = 0;
   paymentType = 'COD';
   isProcessing = false;
@@ -26,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private pharmacy: PharmacyService,
     private authService: AuthService,
+    private subService: SubscriptionService,
     private cart: CartService,
     private router: Router
   ) { }
@@ -37,7 +40,14 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    this.user = await firstValueFrom(this.authService.currentUser$);
+    const authUser = await firstValueFrom(this.authService.currentUser$);
+    if (authUser && authUser.id) {
+      // Fetch fresh details for credits
+      this.subService.getUserSubscription(authUser.id).subscribe(data => {
+        this.user = data;
+        // Auto-select subscription if applicable? Maybe let user choose.
+      });
+    }
   }
 
   async placeOrder() {

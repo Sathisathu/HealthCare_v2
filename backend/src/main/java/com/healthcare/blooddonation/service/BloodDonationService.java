@@ -25,6 +25,13 @@ public class BloodDonationService {
         Patient user = patientRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
 
+        BloodDonationVolunteer pendingRequest = donationRepository
+                .findTopByPatientIdAndStatusOrderByDonationDateDesc(userId, "VOLUNTEERED");
+        if (pendingRequest != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "You already volunteered");
+        }
+
         BloodDonationVolunteer lastDonation = donationRepository
                 .findTopByPatientIdAndStatusOrderByDonationDateDesc(userId, "DONATED");
         if (lastDonation != null) {

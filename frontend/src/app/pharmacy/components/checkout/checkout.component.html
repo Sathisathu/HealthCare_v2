@@ -30,6 +30,22 @@
                         </div>
                     </div>
                 </label>
+
+                <!-- Subscription Option -->
+                <label class="payment-option" [class.selected]="paymentType === 'SUBSCRIPTION'"
+                    [class.disabled]="!user?.pharmacyCreditBalance || user.pharmacyCreditBalance < totalPrice">
+                    <input type="radio" [(ngModel)]="paymentType" value="SUBSCRIPTION"
+                        [disabled]="!user?.pharmacyCreditBalance || user.pharmacyCreditBalance < totalPrice">
+                    <div class="option-content">
+                        <span class="icon">💎</span>
+                        <div class="label-group">
+                            <span class="label">Use Subscription Credits</span>
+                            <span class="sub" *ngIf="user">Credits: ₹{{user.pharmacyCreditBalance || 0}}</span>
+                            <span class="error-text" *ngIf="user && user.pharmacyCreditBalance < totalPrice">
+                                (Insufficient)</span>
+                        </div>
+                    </div>
+                </label>
             </div>
         </div>
 
@@ -56,6 +72,9 @@
         <div class="wallet-conversion" *ngIf="paymentType === 'WALLET'">
             <p>This will deduct <strong>{{totalPrice}} coins</strong> from your wallet.</p>
             <small>(Rate: 1 Coin = Rs. 1)</small>
+        </div>
+        <div class="wallet-conversion" *ngIf="paymentType === 'SUBSCRIPTION'">
+            <p>This will deduct <strong>Rs. {{totalPrice}}</strong> from your subscription credits.</p>
         </div>
     </div>
 </div>

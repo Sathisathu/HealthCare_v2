@@ -6,7 +6,9 @@
 <div class="product-grid">
   <div *ngFor="let product of products" class="product-card card">
     <div class="product-image">
-      <img [src]="product.imageUrl" alt="{{product.name}}">
+      <img
+        [src]="product.image ? 'data:' + product.imageType + ';base64,' + product.image : 'https://via.placeholder.com/150'"
+        alt="{{product.name}}">
       <span *ngIf="product.isPrescriptionRequired" class="badge badge-danger">Rx Required</span>
     </div>
     <div class="product-info">

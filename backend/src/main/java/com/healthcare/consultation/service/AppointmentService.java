@@ -55,7 +55,22 @@ public class AppointmentService {
                 appointment.setSlotTime(slotTime);
                 appointment.setConsultationType(type);
                 appointment.setStatus(AppointmentStatus.CONFIRMED);
-                appointment.setPaymentStatus("PENDING");
+
+                // Subscription Check
+                if (!"NONE".equalsIgnoreCase(patient.getSubscriptionType()) &&
+                                patient.getSubscriptionExpiryDate() != null &&
+                                patient.getSubscriptionExpiryDate().isAfter(java.time.LocalDate.now()) &&
+                                patient.getRemainingConsultations() > 0) {
+
+                        patient.setRemainingConsultations(patient.getRemainingConsultations() - 1);
+                        patientRepository.save(patient);
+                        appointment.setPaymentStatus("PAID");
+                        System.out.println("DEBUG: Subscription used. Remaining consultations: "
+                                        + patient.getRemainingConsultations());
+                } else {
+                        appointment.setPaymentStatus("PENDING");
+                }
+
                 appointment.setReceiptUrl("APP-" + System.currentTimeMillis() + ".pdf");
 
                 System.out.println(

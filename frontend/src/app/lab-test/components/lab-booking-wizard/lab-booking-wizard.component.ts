@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LabTestService } from '../../services/lab-test.service';
 import { LabTestSlot } from '../../models/lab-test.models';
 import { AuthService } from '../../../common/services/auth.service';
+import { SubscriptionService } from '../../../subscription/services/subscription.service';
 
 @Component({
     selector: 'app-lab-booking-wizard',
@@ -20,18 +21,34 @@ export class LabBookingWizardComponent implements OnInit {
 
     selectedDate: string | null = null;
     selectedSlot: LabTestSlot | null = null;
-    paymentType: string = 'WALLET'; // Default to WALLET
+    paymentType: string = 'WALLET'; // Default 
+    hasSubscription = false;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private labService: LabTestService,
-        private authService: AuthService
+        private authService: AuthService,
+        private subService: SubscriptionService
     ) { }
 
     ngOnInit() {
         this.testName = this.route.snapshot.paramMap.get('testName');
         this.generateDates();
+        this.checkSubscription();
+    }
+
+    checkSubscription() {
+        const user = this.authService.currentUserValue;
+        if (user) {
+            this.subService.getUserSubscription(user.id).subscribe(data => {
+                if (data.subscriptionType !== 'NONE' &&
+                    new Date(data.subscriptionExpiryDate) > new Date()) {
+                    this.hasSubscription = true;
+                    this.paymentType = 'SUBSCRIPTION'; // Auto-select
+                }
+            });
+        }
     }
 
     generateDates() {

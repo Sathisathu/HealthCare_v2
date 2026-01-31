@@ -5,7 +5,8 @@ export interface Product {
     price: number;
     stockQuantity: number;
     category: string;
-    imageUrl: string;
+    image?: string;
+    imageType?: string;
     dosageForm: string;
     strength: string;
     packSize: string;

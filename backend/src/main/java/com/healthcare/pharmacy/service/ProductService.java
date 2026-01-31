@@ -31,7 +31,10 @@ public class ProductService {
         existing.setPrice(product.getPrice());
         existing.setStockQuantity(product.getStockQuantity());
         existing.setCategory(product.getCategory());
-        existing.setImageUrl(product.getImageUrl());
+        if (product.getImage() != null) {
+            existing.setImage(product.getImage());
+            existing.setImageType(product.getImageType());
+        }
         existing.setDosageForm(product.getDosageForm());
         existing.setStrength(product.getStrength());
         existing.setPackSize(product.getPackSize());

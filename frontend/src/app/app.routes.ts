@@ -22,6 +22,8 @@ import { LabAdminLayoutComponent } from './lab-test/layouts/lab-admin-layout/lab
 import { BloodVolunteerComponent } from './blood-donation/components/blood-volunteer/blood-volunteer.component';
 import { BloodbankAdminDashboardComponent } from './blood-donation/components/bloodbank-admin-dashboard/bloodbank-admin-dashboard.component';
 import { BloodbankAdminLayoutComponent } from './blood-donation/layouts/bloodbank-admin-layout/bloodbank-admin-layout.component';
+import { SubscriptionPlansComponent } from './subscription/components/subscription-plans/subscription-plans.component';
+import { SubscriptionDashboardComponent } from './subscription/components/subscription-dashboard/subscription-dashboard.component';
 import { LoginComponent } from './common/components/login/login.component';
 import { DoctorLoginComponent } from './common/components/doctor-login/doctor-login.component';
 import { AdminLoginComponent } from './common/components/admin-login/admin-login.component';
@@ -74,6 +76,10 @@ export const routes: Routes = [
 
             // Blood Donation
             { path: 'blood-donation', component: BloodVolunteerComponent },
+
+            // Subscriptions
+            { path: 'subscriptions/plans', component: SubscriptionPlansComponent },
+            { path: 'subscriptions/dashboard', component: SubscriptionDashboardComponent },
         ]
     },
     // 3. Doctor Portal

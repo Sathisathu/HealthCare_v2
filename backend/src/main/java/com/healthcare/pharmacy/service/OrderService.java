@@ -50,12 +50,27 @@ public class OrderService {
 
         if ("WALLET".equalsIgnoreCase(paymentType)) {
             // 1 coin = Rs. 1
-            // Coins needed = Amount
             double coinsNeeded = totalAmount;
             if (user.getWalletBalance() < coinsNeeded) {
                 throw new RuntimeException("Insufficient wallet balance. Needed: " + coinsNeeded + " coins");
             }
             user.setWalletBalance(user.getWalletBalance() - coinsNeeded);
+            patientRepository.save(user);
+        } else if ("SUBSCRIPTION".equalsIgnoreCase(paymentType)) {
+            // Check Subscription
+            if ("NONE".equalsIgnoreCase(user.getSubscriptionType()) ||
+                    user.getSubscriptionExpiryDate() == null ||
+                    user.getSubscriptionExpiryDate().isBefore(java.time.LocalDate.now())) {
+                throw new RuntimeException("No active subscription found.");
+            }
+
+            if (user.getPharmacyCreditBalance() < totalAmount) {
+                throw new RuntimeException(
+                        "Insufficient pharmacy credits. Available: " + user.getPharmacyCreditBalance());
+            }
+
+            // Deduct Credits
+            user.setPharmacyCreditBalance(user.getPharmacyCreditBalance() - totalAmount);
             patientRepository.save(user);
         }
 
@@ -65,7 +80,7 @@ public class OrderService {
         order.setTotalAmount(totalAmount);
         order.setPaymentType(paymentType);
         order.setStatus("CONFIRMED");
-        if ("WALLET".equalsIgnoreCase(paymentType)) {
+        if ("WALLET".equalsIgnoreCase(paymentType) || "SUBSCRIPTION".equalsIgnoreCase(paymentType)) {
             order.setPaymentStatus("PAID");
         } else {
             order.setPaymentStatus("PENDING");

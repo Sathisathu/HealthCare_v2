@@ -1,0 +1,77 @@
+.subs-dashboard {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.status-badge {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.status-badge.active {
+    background-color: #27ae60;
+}
+
+.status-badge.expired {
+    background-color: #e74c3c;
+}
+
+.plan-card {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.gold-border {
+    border-left: 5px solid #ffd700;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.info label {
+    display: block;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.info strong {
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+.no-plan {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
