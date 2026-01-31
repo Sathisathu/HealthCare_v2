@@ -7,7 +7,8 @@
     <div class="list" *ngIf="appointments.length > 0">
         <div *ngFor="let appt of appointments" class="appt-card">
             <div class="doctor-side">
-                <img [src]="appt.doctor.imageUrl" alt="Doctor" class="avatar">
+                <img [src]="'data:' + appt.doctor.imageType + ';base64,' + appt.doctor.image" alt="Doctor"
+                    class="avatar">
                 <div>
                     <h3>{{appt.doctor.name}}</h3>
                     <p>{{appt.doctor.specialization}}</p>

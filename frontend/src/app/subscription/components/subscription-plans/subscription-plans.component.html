@@ -4,14 +4,20 @@
         <div *ngFor="let plan of plans" class="plan-card" [class.gold]="plan.name === 'Golden'">
             <div class="plan-header">
                 <h3>{{plan.name}}</h3>
-                <div class="price">₹{{plan.price}}<span>/year</span></div>
+                <div class="price">₹{{plan.price}}<span>/ 2 months</span></div>
             </div>
             <ul class="benefits">
                 <li>💊 Pharmacy Credit: ₹{{plan.pharmacyCreditLimit}}</li>
-                <li>👨‍⚕️ Free Consultations: {{plan.consultationLimit}} / year</li>
+                <li>👨‍⚕️ Free Consultations: {{plan.consultationLimit}} / 2 months</li>
                 <li>🧪 Free Lab Tests: Unlimited</li>
             </ul>
-            <button class="btn-primary" (click)="buySubscription(plan)">Buy Subscription</button>
+            <button class="btn-primary" [disabled]="getActionType(plan) === 'CURRENT'" (click)="buySubscription(plan)">
+                <ng-container [ngSwitch]="getActionType(plan)">
+                    <span *ngSwitchCase="'CURRENT'">Current Plan</span>
+                    <span *ngSwitchCase="'UPGRADE'">Upgrade Plan</span>
+                    <span *ngSwitchDefault>Buy Subscription</span>
+                </ng-container>
+            </button>
         </div>
     </div>
 </div>

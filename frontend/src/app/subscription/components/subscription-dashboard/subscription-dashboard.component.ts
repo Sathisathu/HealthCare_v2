@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SubscriptionService } from '../../services/subscription.service';
 import { AuthService } from '../../../common/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-subscription-dashboard',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     templateUrl: './subscription-dashboard.component.html',
     styleUrl: './subscription-dashboard.component.css'
 })

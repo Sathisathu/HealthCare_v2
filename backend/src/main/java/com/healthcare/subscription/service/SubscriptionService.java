@@ -41,7 +41,14 @@ public class SubscriptionService {
         if (!"NONE".equalsIgnoreCase(user.getSubscriptionType()) &&
                 user.getSubscriptionExpiryDate() != null &&
                 user.getSubscriptionExpiryDate().isAfter(java.time.LocalDate.now())) {
-            throw new RuntimeException("User already has an active subscription");
+
+            // Check for Upgrade
+            SubscriptionPlan currentPlan = planRepository.findByName(user.getSubscriptionType());
+
+            if (currentPlan != null && plan.getPrice() <= currentPlan.getPrice()) {
+                throw new RuntimeException(
+                        "Downgrading or re-subscribing to the same plan is not allowed while active.");
+            }
         }
 
         // Mock Payment Check (Assume paymentType="ONLINE" is valid)
@@ -51,7 +58,7 @@ public class SubscriptionService {
         user.setSubscriptionType(plan.getName().toUpperCase());
         user.setPharmacyCreditBalance(plan.getPharmacyCreditLimit());
         user.setRemainingConsultations(plan.getConsultationLimit());
-        user.setSubscriptionExpiryDate(java.time.LocalDate.now().plusYears(1));
+        user.setSubscriptionExpiryDate(java.time.LocalDate.now().plusMonths(2));
         patientRepository.save(user);
 
         // Record Transaction
@@ -60,7 +67,7 @@ public class SubscriptionService {
         transaction.setPlanName(plan.getName());
         transaction.setAmount(plan.getPrice());
         transaction.setPurchaseDate(LocalDateTime.now());
-        transaction.setExpiryDate(LocalDateTime.now().plusYears(1));
+        transaction.setExpiryDate(LocalDateTime.now().plusMonths(2));
         transaction.setStatus("ACTIVE");
 
         return transactionRepository.save(transaction);

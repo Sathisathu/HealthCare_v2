@@ -4,7 +4,8 @@ export interface Doctor {
     specialization: string;
     experience: string;
     consultationFee: number;
-    imageUrl: string;
+    image: string;
+    imageType: string;
     businessPhoneNumber: string;
     floor: string;
     roomNumber: string;

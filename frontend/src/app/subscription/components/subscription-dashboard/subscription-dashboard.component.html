@@ -30,6 +30,10 @@
         </div>
     </div>
 
+    <div class="actions">
+        <button class="btn-secondary" routerLink="/subscriptions/plans">View All Plans</button>
+    </div>
+
     <div class="no-plan" *ngIf="userSubs.subscriptionType === 'NONE' || isExpired()">
         <p>You do not have an active subscription.</p>
         <button class="btn-primary" routerLink="/subscriptions/plans">View Plans</button>

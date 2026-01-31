@@ -15,7 +15,10 @@ public class Doctor {
     private String specialization;
     private String experience;
     private Double consultationFee;
-    private String imageUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
+    private String imageType;
 
     // Business Logic Fields
     private String businessPhoneNumber;
@@ -25,13 +28,15 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(String name, String specialization, String experience, Double consultationFee, String imageUrl,
+    public Doctor(String name, String specialization, String experience, Double consultationFee, byte[] image,
+            String imageType,
             String businessPhoneNumber, String floor, String roomNumber, String email, String password) {
         this.name = name;
         this.specialization = specialization;
         this.experience = experience;
         this.consultationFee = consultationFee;
-        this.imageUrl = imageUrl;
+        this.image = image;
+        this.imageType = imageType;
         this.businessPhoneNumber = businessPhoneNumber;
         this.floor = floor;
         this.roomNumber = roomNumber;
@@ -96,12 +101,20 @@ public class Doctor {
         this.consultationFee = consultationFee;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 
     public String getBusinessPhoneNumber() {

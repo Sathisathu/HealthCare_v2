@@ -9,7 +9,7 @@
 
     <div class="doctor-grid">
         <div *ngFor="let doctor of doctors" class="doctor-card">
-            <img [src]="doctor.imageUrl" alt="Doctor" class="avatar">
+            <img [src]="'data:' + doctor.imageType + ';base64,' + doctor.image" alt="Doctor" class="avatar">
             <div class="info">
                 <h3>{{doctor.name}}</h3>
                 <p class="spec">{{doctor.specialization}}</p>

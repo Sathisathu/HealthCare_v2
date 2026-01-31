@@ -22,70 +22,96 @@ public class ConsultationDataInitializer {
         return args -> {
             if (doctorRepository.count() == 0) {
                 String defaultPassword = passwordEncoder.encode("password");
-                // Seed Doctors
-                Doctor d1 = new Doctor("Dr. John Smith", "Cardiologist", "12 Years", 500.0,
-                        "https://via.placeholder.com/150", "+1 123 456 7890", "Basement", "Room B102",
-                        "doctor1@hc.com", defaultPassword);
-                Doctor d2 = new Doctor("Dr. Sarah Doe", "Dermatologist", "8 Years", 400.0,
-                        "https://via.placeholder.com/150", "+1 987 654 3210", "1st Floor", "Room 105",
-                        "doctor2@hc.com", defaultPassword);
-                Doctor d3 = new Doctor("Dr. Emily White", "Pediatrician", "5 Years", 300.0,
-                        "https://via.placeholder.com/150", "+1 555 123 4444", "2nd Floor", "Room 210",
-                        "doctor3@hc.com", defaultPassword);
 
-                List<Doctor> savedDoctors = doctorRepository.saveAll(Arrays.asList(d1, d2, d3));
-                System.out.println("Doctors Seeded Successfully!");
+                // Helper to read image bytes
+                try {
+                    // Seed Doctors
+                    List<Doctor> doctors = Arrays.asList(
+                            createDoctor("Dr. Ananya Mehta", "Cardiologist", "8 Years", 1200.0,
+                                    "static/images/doctors/Doctor_1.png", "+91 9876543101", "1st Floor", "Room 101",
+                                    "ananya.mehta@hc.com", defaultPassword),
+                            createDoctor("Dr. Priya Sharma", "Pediatrician", "5 Years", 900.0,
+                                    "static/images/doctors/Doctor_2.png", "+91 9876543102", "2nd Floor", "Room 203",
+                                    "priya.sharma@hc.com", defaultPassword),
+                            createDoctor("Dr. Neha Reddy", "Dermatologist", "6 Years", 750.0,
+                                    "static/images/doctors/Doctor_3.png", "+91 9876543103", "3rd Floor", "Room 305",
+                                    "neha.reddy@hc.com", defaultPassword),
+                            createDoctor("Dr. Kavya Iyer", "Gynecologist", "10 Years", 1500.0,
+                                    "static/images/doctors/Doctor_4.png", "+91 9876543104", "4th Floor", "Room 402",
+                                    "kavya.iyer@hc.com", defaultPassword),
+                            createDoctor("Dr. Ritu Kulkarni", "Psychiatrist", "7 Years", 1100.0,
+                                    "static/images/doctors/Doctor_5.png", "+91 9876543105", "5th Floor", "Room 504",
+                                    "ritu.kulkarni@hc.com", defaultPassword),
+                            createDoctor("Dr. Rajesh Gupta", "Orthopedic Surgeon", "12 Years", 1600.0,
+                                    "static/images/doctors/Doctor_6.png", "+91 9876543106", "1st Floor", "Room 103",
+                                    "rajesh.gupta@hc.com", defaultPassword),
+                            createDoctor("Dr. Amit Verma", "General Physician", "4 Years", 600.0,
+                                    "static/images/doctors/Doctor_7.png", "+91 9876543107", "2nd Floor", "Room 207",
+                                    "amit.verma@hc.com", defaultPassword),
+                            createDoctor("Dr. Suresh Menon", "Neurologist", "9 Years", 1700.0,
+                                    "static/images/doctors/Doctor_8.png", "+91 9876543108", "3rd Floor", "Room 309",
+                                    "suresh.menon@hc.com", defaultPassword),
+                            createDoctor("Dr. Vikram Singh", "Pulmonologist", "6 Years", 1300.0,
+                                    "static/images/doctors/Doctor_9.png", "+91 9876543109", "4th Floor", "Room 408",
+                                    "vikram.singh@hc.com", defaultPassword),
+                            createDoctor("Dr. Aditya Joshi", "Gastroenterologist", "11 Years", 1550.0,
+                                    "static/images/doctors/Doctor_10.png", "+91 9876543110", "5th Floor", "Room 506",
+                                    "aditya.joshi@hc.com", defaultPassword),
+                            createDoctor("Dr. Manish Patel", "Oncologist", "13 Years", 1900.0,
+                                    "static/images/doctors/Doctor_11.png", "+91 9876543111", "6th Floor", "Room 602",
+                                    "manish.patel@hc.com", defaultPassword));
 
-                // Seed Availability for next 7 days
-                String[] timeSlots = {
-                        "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
-                        "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM",
-                        "06:00 PM", "07:00 PM"
-                };
+                    List<Doctor> savedDoctors = doctorRepository.saveAll(doctors);
+                    System.out.println("Doctors Seeded Successfully!");
 
-                for (Doctor doc : savedDoctors) {
-                    for (int i = 0; i < 7; i++) {
-                        LocalDate date = LocalDate.now().plusDays(i);
-                        for (String slotTime : timeSlots) {
-                            DoctorAvailability av = new DoctorAvailability();
-                            av.setDoctorId(doc.getId());
-                            av.setDate(date);
-                            av.setSlotTime(slotTime);
-                            av.setAvailable(true);
-                            av.setBooked(false);
-                            availabilityRepository.save(av);
+                    // Seed Availability for next 7 days
+                    String[] timeSlots = {
+                            "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
+                            "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM",
+                            "06:00 PM", "07:00 PM"
+                    };
+
+                    for (Doctor doc : savedDoctors) {
+                        for (int i = 0; i < 7; i++) {
+                            LocalDate date = LocalDate.now().plusDays(i);
+                            for (String slotTime : timeSlots) {
+                                DoctorAvailability av = new DoctorAvailability();
+                                av.setDoctorId(doc.getId());
+                                av.setDate(date);
+                                av.setSlotTime(slotTime);
+                                av.setAvailable(true);
+                                av.setBooked(false);
+                                availabilityRepository.save(av);
+                            }
                         }
                     }
+                    System.out.println("Doctor Availability Seeded for 7 Days!");
+                } catch (Exception e) {
+                    System.err.println("Failed to seed doctors: " + e.getMessage());
+                    e.printStackTrace();
                 }
-                System.out.println("Doctor Availability (10 slots per day) Seeded for 7 Days!");
-            }
-
-            // Sync all doctors with hospital location info (Always run in Development)
-            List<Doctor> doctors = doctorRepository.findAll();
-            boolean updated = false;
-            for (Doctor doc : doctors) {
-                if (doc.getFloor() == null || doc.getRoomNumber() == null || doc.getFloor().equals("TBD")) {
-                    String name = doc.getName().toLowerCase();
-                    if (name.contains("john") || name.contains("smith")) {
-                        doc.setFloor("Basement");
-                        doc.setRoomNumber("Room B102");
-                    } else if (name.contains("sarah") || name.contains("doe")) {
-                        doc.setFloor("1st Floor");
-                        doc.setRoomNumber("Room 105");
-                    } else if (name.contains("emily") || name.contains("white")) {
-                        doc.setFloor("2nd Floor");
-                        doc.setRoomNumber("Room 210");
-                    } else {
-                        doc.setFloor("3rd Floor");
-                        doc.setRoomNumber("Ward 3A");
-                    }
-                    updated = true;
-                }
-            }
-            if (updated) {
-                doctorRepository.saveAll(doctors);
-                System.out.println("Doctor hospital locations synchronized!");
             }
         };
+    }
+
+    private Doctor createDoctor(String name, String specialization, String experience, Double fee, String imagePath,
+            String phone, String floor, String room, String email, String password) throws java.io.IOException {
+
+        byte[] imageBytes = null;
+        String imageType = "image/png"; // Assuming png based on file extensions
+        try {
+            org.springframework.core.io.Resource resource = new org.springframework.core.io.ClassPathResource(
+                    imagePath);
+            if (resource.exists()) {
+                imageBytes = resource.getContentAsByteArray();
+            } else {
+                System.out.println("Image not found: " + imagePath);
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading image: " + imagePath);
+        }
+
+        return new Doctor(name, specialization, experience, fee, imageBytes, imageType, phone, floor, room, email,
+                password);
     }
 }

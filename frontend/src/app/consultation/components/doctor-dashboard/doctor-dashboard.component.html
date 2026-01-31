@@ -1,6 +1,6 @@
 <div class="container">
     <div class="dash-header" *ngIf="doctor">
-        <h1>Welcome, Dr. {{doctor.name}} 🏥</h1>
+        <h1>Welcome {{doctor.name}} 🏥</h1>
         <p>Location: <strong>{{doctor.floor || 'Floor TBD'}}, {{doctor.roomNumber || 'Room TBD'}}</strong></p>
         <p>Manage your hospital availability and view upcoming appointments.</p>
     </div>
