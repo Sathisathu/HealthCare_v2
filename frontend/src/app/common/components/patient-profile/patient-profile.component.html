@@ -1,0 +1,153 @@
+<div class="profile-container" *ngIf="!loading; else loadingTemplate">
+    <div class="profile-header" *ngIf="patient">
+        <div class="profile-avatar">
+            {{ patient.name.charAt(0) }}
+        </div>
+        <div class="profile-title">
+            <h1>{{ patient.name }}</h1>
+            <p class="role-badge">{{ patient.role }}</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn-edit" (click)="toggleEdit()" *ngIf="!isEditing">Edit Profile</button>
+        </div>
+    </div>
+
+    <div class="profile-grid" *ngIf="patient && !error">
+        <!-- Profile Form (Visible during editing) -->
+        <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" *ngIf="isEditing" class="edit-form-container"
+            ngNativeValidate>
+            <div class="profile-card info-card">
+                <h3>Edit Basic Information</h3>
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" formControlName="name" class="form-control"
+                        [class.is-invalid]="profileForm.get('name')?.invalid && profileForm.get('name')?.touched"
+                        required>
+                    <div class="error-msg" *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+                        Name is required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" formControlName="email" class="form-control"
+                        [class.is-invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
+                        required>
+                    <div class="error-msg"
+                        *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+                        Please enter a valid email
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" formControlName="phoneNumber" class="form-control">
+                </div>
+            </div>
+
+            <div class="profile-card status-card">
+                <h3>Edit Details</h3>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select formControlName="gender" class="form-control">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" formControlName="dateOfBirth" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea formControlName="address" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Blood Group</label>
+                    <select formControlName="bloodGroup" class="form-control">
+                        <option value="">Select Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions-bar">
+                <button type="button" class="btn-secondary" (click)="cancelEdit()">Cancel</button>
+                <button type="submit" class="btn-primary">Save Changes</button>
+            </div>
+        </form>
+
+        <!-- Profile View (Visible when not editing) -->
+        <ng-container *ngIf="!isEditing">
+            <!-- Basic Info Card -->
+            <div class="profile-card info-card">
+                <h3>Basic Information</h3>
+                <div class="info-group">
+                    <label>Full Name</label>
+                    <p>{{ patient.name || 'Not provided' }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Email Address</label>
+                    <p>{{ patient.email || 'Not provided' }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Phone Number</label>
+                    <p>{{ patient.phoneNumber || 'Not provided' }}</p>
+                </div>
+            </div>
+
+            <!-- Health & Status Card -->
+            <div class="profile-card status-card">
+                <h3>Details</h3>
+                <div class="info-group">
+                    <label>Gender</label>
+                    <p>{{ patient.gender || 'Not provided' }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Blood Group</label>
+                    <p class="blood-group-badge" *ngIf="patient.bloodGroup">{{ patient.bloodGroup }}</p>
+                    <p *ngIf="!patient.bloodGroup">Not provided</p>
+                </div>
+                <div class="info-group">
+                    <label>Date of Birth</label>
+                    <p>{{ (patient.dateOfBirth | date) || 'Not provided' }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Address</label>
+                    <p>{{ patient.address || 'Not provided' }}</p>
+                </div>
+            </div>
+
+            <!-- Financial Card -->
+            <div class="profile-card wallet-card">
+                <h3>Wallet & Coins</h3>
+                <div class="wallet-balance">
+                    <label>Current Balance</label>
+                    <p class="amount">💰 {{ patient.walletBalance || 0 }} Coins</p>
+                </div>
+                <div class="wallet-actions">
+                    <button class="btn-topup" (click)="topUp()">Top Up Coins</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="error-container" *ngIf="error">
+        <p>{{ error }}</p>
+        <button (click)="error = null" class="btn-secondary btn-sm">Dismiss</button>
+    </div>
+</div>
+
+<ng-template #loadingTemplate>
+    <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+</ng-template>

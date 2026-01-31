@@ -30,11 +30,56 @@
             <div *ngIf="selectedTemplate === 'CBC'" class="test-form">
                 <h3>CBC Parameters</h3>
                 <div class="grid-2">
-                    <label>Hemoglobin (g/dL) <input [(ngModel)]="resultData.hemoglobin.value"></label>
-                    <label>RBC Count (mill/mm³) <input [(ngModel)]="resultData.rbc.value"></label>
-                    <label>WBC Count (10³/uL) <input [(ngModel)]="resultData.wbc.value"></label>
-                    <label>Platelet Count (10³/uL) <input [(ngModel)]="resultData.platelet.value"></label>
-                    <label>Hematocrit (%) <input [(ngModel)]="resultData.hematocrit.value"></label>
+                    <label>Hemoglobin (g/dL)
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.hemoglobin.value">
+                            <select [(ngModel)]="resultData.hemoglobin.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>RBC Count (mill/mm³)
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.rbc.value">
+                            <select [(ngModel)]="resultData.rbc.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>WBC Count (10³/uL)
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.wbc.value">
+                            <select [(ngModel)]="resultData.wbc.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Platelet Count (10³/uL)
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.platelet.value">
+                            <select [(ngModel)]="resultData.platelet.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Hematocrit (%)
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.hematocrit.value">
+                            <select [(ngModel)]="resultData.hematocrit.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
                 </div>
                 <h4>Differential Count (%)</h4>
                 <div class="grid-3">
@@ -101,12 +146,69 @@
             <div *ngIf="selectedTemplate === 'LFT'" class="test-form">
                 <h3>Liver Function Test</h3>
                 <div class="grid-2">
-                    <label>SGOT (AST) <input [(ngModel)]="resultData.sgot.value"></label>
-                    <label>SGPT (ALT) <input [(ngModel)]="resultData.sgpt.value"></label>
-                    <label>Alkaline Phosphatase <input [(ngModel)]="resultData.alkalinePhosphatase.value"></label>
-                    <label>Total Bilirubin <input [(ngModel)]="resultData.bilirubinTotal.value"></label>
-                    <label>Direct Bilirubin <input [(ngModel)]="resultData.bilirubinDirect.value"></label>
-                    <label>Albumin <input [(ngModel)]="resultData.albumin.value"></label>
+                    <label>SGOT (AST)
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.sgot.value">
+                            <select [(ngModel)]="resultData.sgot.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>SGPT (ALT)
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.sgpt.value">
+                            <select [(ngModel)]="resultData.sgpt.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Alkaline Phosphatase
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.alkalinePhosphatase.value">
+                            <select [(ngModel)]="resultData.alkalinePhosphatase.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Total Bilirubin
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.bilirubinTotal.value">
+                            <select [(ngModel)]="resultData.bilirubinTotal.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Direct Bilirubin
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.bilirubinDirect.value">
+                            <select [(ngModel)]="resultData.bilirubinDirect.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Albumin
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.albumin.value">
+                            <select [(ngModel)]="resultData.albumin.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Total Protein
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.totalProtein.value">
+                            <select [(ngModel)]="resultData.totalProtein.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
                 </div>
             </div>
 
@@ -114,12 +216,62 @@
             <div *ngIf="selectedTemplate === 'KFT'" class="test-form">
                 <h3>Kidney Function Test</h3>
                 <div class="grid-2">
-                    <label>Blood Urea <input [(ngModel)]="resultData.bloodUrea.value"></label>
-                    <label>Serum Creatinine <input [(ngModel)]="resultData.serumCreatinine.value"></label>
-                    <label>Uric Acid <input [(ngModel)]="resultData.uricAcid.value"></label>
-                    <label>Sodium <input [(ngModel)]="resultData.sodium.value"></label>
-                    <label>Potassium <input [(ngModel)]="resultData.potassium.value"></label>
-                    <label>eGFR <input [(ngModel)]="resultData.eGFR.value"></label>
+                    <label>Blood Urea
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.bloodUrea.value">
+                            <select [(ngModel)]="resultData.bloodUrea.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Serum Creatinine
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.serumCreatinine.value">
+                            <select [(ngModel)]="resultData.serumCreatinine.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Uric Acid
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.uricAcid.value">
+                            <select [(ngModel)]="resultData.uricAcid.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Sodium
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.sodium.value">
+                            <select [(ngModel)]="resultData.sodium.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>Potassium
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.potassium.value">
+                            <select [(ngModel)]="resultData.potassium.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
+                    <label>eGFR
+                        <div class="input-with-status">
+                            <input [(ngModel)]="resultData.eGFR.value">
+                            <select [(ngModel)]="resultData.eGFR.status" class="status-select">
+                                <option value="Normal">Normal</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </label>
                 </div>
             </div>
 

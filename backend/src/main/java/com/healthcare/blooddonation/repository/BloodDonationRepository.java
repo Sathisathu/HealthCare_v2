@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface BloodDonationRepository extends JpaRepository<BloodDonationVolunteer, Long> {
     List<BloodDonationVolunteer> findByPatientId(Long patientId);
+
+    BloodDonationVolunteer findTopByPatientIdAndStatusOrderByDonationDateDesc(Long patientId, String status);
 }

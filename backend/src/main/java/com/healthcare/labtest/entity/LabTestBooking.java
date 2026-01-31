@@ -22,6 +22,8 @@ public class LabTestBooking {
 
     @Column(columnDefinition = "TEXT")
     private String testResultData; // JSON string of results
+    private String paymentStatus; // PENDING, PAID
+    private String receiptUrl;
 
     public LabTestBooking() {
     }
@@ -64,5 +66,21 @@ public class LabTestBooking {
 
     public void setTestResultData(String testResultData) {
         this.testResultData = testResultData;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getReceiptUrl() {
+        return receiptUrl;
+    }
+
+    public void setReceiptUrl(String receiptUrl) {
+        this.receiptUrl = receiptUrl;
     }
 }

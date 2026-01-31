@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LabTestService } from '../../services/lab-test.service';
 import { LabTestSlot } from '../../models/lab-test.models';
@@ -8,7 +9,7 @@ import { AuthService } from '../../../common/services/auth.service';
 @Component({
     selector: 'app-lab-booking-wizard',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule],
     templateUrl: './lab-booking-wizard.component.html',
     styleUrl: './lab-booking-wizard.component.css'
 })
@@ -19,6 +20,7 @@ export class LabBookingWizardComponent implements OnInit {
 
     selectedDate: string | null = null;
     selectedSlot: LabTestSlot | null = null;
+    paymentType: string = 'WALLET'; // Default to WALLET
 
     constructor(
         private route: ActivatedRoute,
@@ -67,7 +69,7 @@ export class LabBookingWizardComponent implements OnInit {
                 this.router.navigate(['/login']);
                 return;
             }
-            this.labService.bookTestWithDetails(user.id, this.selectedSlot).subscribe({
+            this.labService.bookTestWithDetails(user.id, this.selectedSlot, this.paymentType).subscribe({
                 next: () => {
                     alert('Lab Test Booked Successfully!');
                     this.router.navigate(['/lab-test/my-bookings']);

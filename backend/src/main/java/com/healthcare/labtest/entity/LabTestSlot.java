@@ -14,6 +14,7 @@ public class LabTestSlot {
     private LocalDate date;
     private String time;
     private boolean isBooked;
+    private Double price;
 
     public LabTestSlot() {
     }
@@ -56,5 +57,13 @@ public class LabTestSlot {
 
     public void setBooked(boolean booked) {
         isBooked = booked;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

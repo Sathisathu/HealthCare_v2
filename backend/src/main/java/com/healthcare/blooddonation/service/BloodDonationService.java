@@ -7,6 +7,8 @@ import com.healthcare.common.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,6 +24,16 @@ public class BloodDonationService {
     public BloodDonationVolunteer volunteer(Long userId, LocalDate date) {
         Patient user = patientRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+        BloodDonationVolunteer lastDonation = donationRepository
+                .findTopByPatientIdAndStatusOrderByDonationDateDesc(userId, "DONATED");
+        if (lastDonation != null) {
+            LocalDate lastDate = lastDonation.getDonationDate();
+            if (date.isBefore(lastDate.plusMonths(6))) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "You cannot donate. Your last donation was on " + lastDate + ". You must wait 6 months.");
+            }
+        }
 
         BloodDonationVolunteer volunteer = new BloodDonationVolunteer();
         volunteer.setPatient(user);

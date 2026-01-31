@@ -7,7 +7,7 @@
                 <p class="specialty">{{doctor.specialization}}</p>
                 <div class="badges">
                     <span class="badge">{{doctor.experience}} Exp</span>
-                    <span class="badge">${{doctor.consultationFee}} Fee</span>
+                    <span class="badge">Rs. {{doctor.consultationFee}} Fee</span>
                 </div>
             </div>
         </div>
@@ -25,7 +25,8 @@
                     Consultations" page after successful booking.</p>
             </div>
             <div class="info-box" *ngIf="selectedType === 'OFFLINE'">
-                <p><strong>Visit the Clinic:</strong> The exact clinic address will be shared in your "My Consultations"
+                <p><strong>Hospital Visit:</strong> The exact Floor and Room number will be shared in your "My
+                    Consultations"
                     page once the booking is confirmed.</p>
             </div>
 
@@ -49,6 +50,49 @@
             <button class="book-btn" [disabled]="!selectedSlot" (click)="bookNow()">
                 Confirm Booking
             </button>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" *ngIf="showPaymentModal">
+        <div class="modal-content">
+            <div class="payment-header">
+                <div class="success-icon">✓</div>
+                <h2>Booking Confirmed!</h2>
+                <p>Complete your payment to finalize the appointment.</p>
+            </div>
+
+            <div class="payment-details" *ngIf="doctor">
+                <div class="payment-row">
+                    <span>Consultation with:</span>
+                    <strong>{{doctor.name}}</strong>
+                </div>
+                <div class="payment-row">
+                    <span>Date & Time:</span>
+                    <strong>{{selectedDate | date}} at {{selectedSlot?.slotTime}}</strong>
+                </div>
+                <div class="payment-row">
+                    <span>Consultation Type:</span>
+                    <strong>{{selectedType}}</strong>
+                </div>
+                <hr>
+                <div class="payment-row total">
+                    <span>Amount to Pay:</span>
+                    <strong class="price">Rs. {{doctor.consultationFee}}</strong>
+                </div>
+            </div>
+
+            <div class="payment-actions">
+                <button class="pay-btn" (click)="confirmPayment()" [disabled]="isProcessingPayment">
+                    <span *ngIf="!isProcessingPayment">Pay Now</span>
+                    <span *ngIf="isProcessingPayment" class="loader">Processing...</span>
+                </button>
+                <button class="cancel-btn" (click)="closePaymentModal()" [disabled]="isProcessingPayment">
+                    Pay Later
+                </button>
+            </div>
+
+            <p class="secure-text">🔒 Secure SSL Encrypted Payment</p>
         </div>
     </div>
 </div>

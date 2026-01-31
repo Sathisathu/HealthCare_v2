@@ -41,11 +41,14 @@ export class BloodVolunteerComponent implements OnInit {
         if (this.selectedDate && this.userId) {
             this.bloodService.volunteer(this.userId, this.selectedDate).subscribe({
                 next: () => {
-                    alert('Thank you for volunteering! 🩸');
+                    alert('Thank you for volunteering!');
                     this.selectedDate = '';
                     this.fetchMyDonations();
                 },
-                error: (err) => alert('Volunteering Failed: ' + err.message)
+                error: (err) => {
+                    const msg = err.error?.message || err.error || err.message || 'Unknown error';
+                    alert(msg);
+                }
             });
         }
     }

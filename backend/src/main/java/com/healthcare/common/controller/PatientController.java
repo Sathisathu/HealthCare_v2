@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/patients")
-@CrossOrigin(origins = "http://localhost:4200")
 public class PatientController {
 
     @Autowired
@@ -29,5 +28,25 @@ public class PatientController {
     @GetMapping("/{id}")
     public Patient getPatient(@PathVariable Long id) {
         return patientRepository.findById(id).orElseThrow(() -> new RuntimeException("Patient not found"));
+    }
+
+    @PutMapping("/{id}")
+    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patientDetails) {
+        System.out.println("Updating patient with ID: " + id);
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+        patient.setName(patientDetails.getName());
+        patient.setEmail(patientDetails.getEmail());
+        patient.setPhoneNumber(patientDetails.getPhoneNumber());
+        patient.setAddress(patientDetails.getAddress());
+        patient.setDateOfBirth(patientDetails.getDateOfBirth());
+        patient.setGender(patientDetails.getGender());
+        patient.setBloodGroup(patientDetails.getBloodGroup());
+        if (patientDetails.getWalletBalance() != null) {
+            patient.setWalletBalance(patientDetails.getWalletBalance());
+        }
+
+        return patientRepository.save(patient);
     }
 }

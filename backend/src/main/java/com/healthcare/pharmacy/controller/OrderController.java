@@ -50,4 +50,10 @@ public class OrderController {
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
+
+    @PutMapping("/{id}/payment")
+    public Order updatePaymentStatus(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        String status = request.get("status");
+        return orderService.updatePaymentStatus(id, status);
+    }
 }

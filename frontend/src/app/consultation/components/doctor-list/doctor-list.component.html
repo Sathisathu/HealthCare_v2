@@ -14,8 +14,9 @@
                 <h3>{{doctor.name}}</h3>
                 <p class="spec">{{doctor.specialization}}</p>
                 <p class="exp">{{doctor.experience}} Experience</p>
-                <p class="fee">Fee: <strong>${{doctor.consultationFee}}</strong></p>
-                <a [routerLink]="['/consultation/doctor', doctor.id]" class="view-btn">View Profile</a>
+                <p class="fee">Fee: <strong>₹{{doctor.consultationFee}}</strong></p>
+                <!-- <p class="location-brief">📍 {{doctor.floor || 'Floor TBD'}}, {{doctor.roomNumber || 'Room TBD'}}</p> -->
+                <a [routerLink]="['/consultation/doctor', doctor.id]" class="view-btn">Book Appointment</a>
             </div>
         </div>
     </div>

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LabTestRepository extends JpaRepository<LabTest, Long> {
+    java.util.Optional<LabTest> findByTestName(String testName);
 }

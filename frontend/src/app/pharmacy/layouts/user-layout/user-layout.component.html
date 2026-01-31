@@ -46,7 +46,7 @@
         </nav>
 
         <div class="user-profile" *ngIf="currentUser$ | async as user">
-            <span class="user-name">👤 {{user.name}}</span>
+            <span class="user-name" routerLink="/profile" style="cursor: pointer;">👤 {{user.name}}</span>
             <button class="logout-btn" (click)="logout()">Logout</button>
         </div>
     </div>

@@ -40,4 +40,8 @@ export class PharmacyService {
     getOrders(): Observable<any[]> {
         return this.http.get<any[]>(`${this.baseUrl}/orders`);
     }
+
+    updatePaymentStatus(orderId: number, status: string): Observable<any> {
+        return this.http.put<any>(`${this.baseUrl}/orders/${orderId}/payment`, { status });
+    }
 }

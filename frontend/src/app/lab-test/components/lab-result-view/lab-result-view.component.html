@@ -156,6 +156,7 @@
                             <th>Parameter</th>
                             <th>Value</th>
                             <th>Reference Range</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -163,36 +164,54 @@
                             <td>Total Bilirubin</td>
                             <td class="value">{{parsedResult.bilirubinTotal.value}} mg/dL</td>
                             <td>{{parsedResult.bilirubinTotal.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.bilirubinTotal.status">{{parsedResult.bilirubinTotal.status}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>Direct Bilirubin</td>
                             <td class="value">{{parsedResult.bilirubinDirect.value}} mg/dL</td>
                             <td>{{parsedResult.bilirubinDirect.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.bilirubinDirect.status">{{parsedResult.bilirubinDirect.status}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>SGOT (AST)</td>
                             <td class="value">{{parsedResult.sgot.value}} U/L</td>
                             <td>{{parsedResult.sgot.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.sgot.status">{{parsedResult.sgot.status}}</span></td>
                         </tr>
                         <tr>
                             <td>SGPT (ALT)</td>
                             <td class="value">{{parsedResult.sgpt.value}} U/L</td>
                             <td>{{parsedResult.sgpt.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.sgpt.status">{{parsedResult.sgpt.status}}</span></td>
                         </tr>
                         <tr>
                             <td>Alkaline Phosphatase</td>
                             <td class="value">{{parsedResult.alkalinePhosphatase.value}} U/L</td>
                             <td>{{parsedResult.alkalinePhosphatase.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.alkalinePhosphatase.status">{{parsedResult.alkalinePhosphatase.status}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>Total Protein</td>
                             <td class="value">{{parsedResult.totalProtein.value}} g/dL</td>
                             <td>{{parsedResult.totalProtein.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.totalProtein.status">{{parsedResult.totalProtein.status}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>Albumin</td>
                             <td class="value">{{parsedResult.albumin.value}} g/dL</td>
                             <td>{{parsedResult.albumin.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.albumin.status">{{parsedResult.albumin.status}}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -207,6 +226,7 @@
                             <th>Parameter</th>
                             <th>Value</th>
                             <th>Reference Range</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -214,31 +234,46 @@
                             <td>Blood Urea</td>
                             <td class="value">{{parsedResult.bloodUrea.value}} mg/dL</td>
                             <td>{{parsedResult.bloodUrea.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.bloodUrea.status">{{parsedResult.bloodUrea.status}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>Serum Creatinine</td>
                             <td class="value">{{parsedResult.serumCreatinine.value}} mg/dL</td>
                             <td>{{parsedResult.serumCreatinine.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.serumCreatinine.status">{{parsedResult.serumCreatinine.status}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>Uric Acid</td>
                             <td class="value">{{parsedResult.uricAcid.value}} mg/dL</td>
                             <td>{{parsedResult.uricAcid.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.uricAcid.status">{{parsedResult.uricAcid.status}}</span></td>
                         </tr>
                         <tr>
                             <td>Sodium</td>
                             <td class="value">{{parsedResult.sodium.value}} mEq/L</td>
                             <td>{{parsedResult.sodium.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.sodium.status">{{parsedResult.sodium.status}}</span></td>
                         </tr>
                         <tr>
                             <td>Potassium</td>
                             <td class="value">{{parsedResult.potassium.value}} mEq/L</td>
                             <td>{{parsedResult.potassium.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.potassium.status">{{parsedResult.potassium.status}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>eGFR</td>
                             <td class="value">{{parsedResult.eGFR.value}}</td>
                             <td>{{parsedResult.eGFR.range}}</td>
+                            <td><span class="status"
+                                    [class]="parsedResult.eGFR.status">{{parsedResult.eGFR.status}}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -268,14 +303,63 @@
                 </div>
             </div>
 
-            <!-- GLUCOSE / HBA1C VIEW -->
-            <div *ngIf="parsedResult.testType === 'GLUCOSE' || parsedResult.testType === 'HBA1C'"
-                class="test-view glucose-view">
+            <!-- THYROID VIEW -->
+            <div *ngSwitchCase="'THYROID'" class="test-view thyroid-view">
+                <h3>Thyroid Profile</h3>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Reference Range</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Triiodothyronine (T3)</td>
+                            <td class="value">{{parsedResult.t3.value}} ng/dL</td>
+                            <td>{{parsedResult.t3.range}}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Thyroxine (T4)</td>
+                            <td class="value">{{parsedResult.t4.value}} ug/dL</td>
+                            <td>{{parsedResult.t4.range}}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>TSH</td>
+                            <td class="value">{{parsedResult.tsh.value}} uIU/mL</td>
+                            <td>{{parsedResult.tsh.range}}</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="risk-badge" [class]="parsedResult.thyroidStatus">
+                    Status: <strong>{{parsedResult.thyroidStatus}}</strong>
+                </div>
+            </div>
+
+            <!-- GLUCOSE VIEW -->
+            <div *ngSwitchCase="'GLUCOSE'" class="test-view glucose-view">
                 <h3>{{parsedResult.label || 'Diabetes Profile'}}</h3>
                 <div class="result-banner" [class]="parsedResult.interpretation">
                     {{parsedResult.glucoseLevelOrHba1c.name}}:
-                    <strong>{{parsedResult.glucoseLevelOrHba1c.value}}</strong> {{parsedResult.testType === 'HBA1C' ?
-                    '%' : 'mg/dL'}}
+                    <strong>{{parsedResult.glucoseLevelOrHba1c.value}}</strong> mg/dL
+                </div>
+                <p><strong>Reference Range:</strong> {{parsedResult.glucoseLevelOrHba1c.range}}</p>
+                <div class="risk-badge" [class]="parsedResult.interpretation">
+                    Status: <strong>{{parsedResult.interpretation}}</strong>
+                </div>
+            </div>
+
+            <!-- HBA1C VIEW -->
+            <div *ngSwitchCase="'HBA1C'" class="test-view glucose-view">
+                <h3>HbA1c Test</h3>
+                <div class="result-banner" [class]="parsedResult.interpretation">
+                    {{parsedResult.glucoseLevelOrHba1c.name}}:
+                    <strong>{{parsedResult.glucoseLevelOrHba1c.value}}</strong> %
                 </div>
                 <p><strong>Reference Range:</strong> {{parsedResult.glucoseLevelOrHba1c.range}}</p>
                 <div class="risk-badge" [class]="parsedResult.interpretation">
@@ -391,10 +475,7 @@
 
         </div>
 
-        <div class="remarks-section">
-            <h3>Technician Remarks:</h3>
-            <p>{{parsedResult.remarks}}</p>
-        </div>
+
 
         <footer class="result-footer">
             <p>*** End of Report ***</p>

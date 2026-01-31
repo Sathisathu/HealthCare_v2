@@ -12,6 +12,7 @@ export interface LabTestSlot {
     date: string;
     time: string;
     booked: boolean;
+    price?: number;
 }
 
 export interface LabTestBooking {
@@ -20,6 +21,9 @@ export interface LabTestBooking {
     slot: LabTestSlot;
     status: 'BOOKED' | 'COMPLETED';
     testResultData?: string; // JSON string
+    paymentStatus?: string;
+    receiptUrl?: string;
+    isPaying?: boolean;
 }
 
 export interface LabResult {

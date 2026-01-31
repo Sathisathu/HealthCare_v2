@@ -39,4 +39,8 @@ export class ConsultationService {
     getDoctorAppointments(doctorId: number): Observable<Appointment[]> {
         return this.http.get<Appointment[]>(`${this.apiUrl}/appointments/doctor/${doctorId}`);
     }
+
+    updatePaymentStatus(apptId: number, status: string): Observable<Appointment> {
+        return this.http.put<Appointment>(`${this.apiUrl}/appointments/${apptId}/payment`, { status });
+    }
 }

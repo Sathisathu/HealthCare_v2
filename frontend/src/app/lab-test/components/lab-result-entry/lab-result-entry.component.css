@@ -151,3 +151,19 @@ textarea {
     background: #e2e8f0;
     color: #475569;
 }
+
+.input-with-status {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-with-status input {
+    flex: 2;
+}
+
+.input-with-status select.status-select {
+    flex: 1;
+    min-width: 100px;
+    background-color: #f8fafc;
+    font-size: 0.85rem;
+}

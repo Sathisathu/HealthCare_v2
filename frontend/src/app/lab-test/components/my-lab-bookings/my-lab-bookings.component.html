@@ -16,9 +16,81 @@
 
             <div class="status-box">
                 <span class="status-badge" [class]="booking.status">{{booking.status}}</span>
+                <span class="pay-badge" [class.PAID]="booking.paymentStatus === 'PAID'">{{booking.paymentStatus ||
+                    'PENDING'}}</span>
+
+                <button *ngIf="booking.paymentStatus !== 'PAID'" class="pay-btn-inline" (click)="payForBooking(booking)"
+                    [disabled]="booking.isPaying">
+                    {{booking.isPaying ? 'Processing...' : 'Pay Now'}}
+                </button>
+
+                <a *ngIf="booking.paymentStatus === 'PAID'" class="receipt-link" (click)="viewReceipt(booking)">
+                    View Receipt
+                </a>
+
                 <button *ngIf="booking.status === 'COMPLETED'" class="view-btn" (click)="viewResult(booking.id)">
                     View Result 📊
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="modal-overlay" *ngIf="showReceiptModal && selectedReceipt" (click)="closeReceipt()">
+        <div class="receipt-paper" id="receipt-content" (click)="$event.stopPropagation()">
+            <div class="receipt-header">
+                <div class="hospital-brand">
+                    <span class="cross">✚</span>
+                    <div>
+                        <h2>HealthCare Plus</h2>
+                        <p>Hospital & Research Center</p>
+                    </div>
+                </div>
+                <div class="receipt-meta">
+                    <p><strong>Receipt ID:</strong> {{selectedReceipt.receiptUrl}}</p>
+                    <p><strong>Date:</strong> {{selectedReceipt.slot.date | date}}</p>
+                </div>
+            </div>
+
+            <div class="receipt-divider"></div>
+
+            <div class="receipt-body">
+                <h3>LAB TEST RECEIPT</h3>
+                <div class="receipt-row">
+                    <span>Patient Name:</span>
+                    <strong>{{selectedReceipt.patient?.name || 'Valued Patient'}}</strong>
+                </div>
+                <div class="receipt-row">
+                    <span>Test Name:</span>
+                    <strong>{{selectedReceipt.slot.testName}}</strong>
+                </div>
+                <div class="receipt-row">
+                    <span>Scheduled Time:</span>
+                    <strong>{{selectedReceipt.slot.time}}</strong>
+                </div>
+            </div>
+
+            <div class="receipt-divider dashed"></div>
+
+            <div class="receipt-total">
+                <div class="receipt-row total">
+                    <span>Amount Paid:</span>
+                    <strong>Rs. {{selectedReceipt.slot.price || 50}}</strong>
+                </div>
+                <div class="payment-authorized">
+                    <p class="status-stamp" [class.paid]="selectedReceipt.paymentStatus === 'PAID'">
+                        {{selectedReceipt.paymentStatus}}
+                    </p>
+                    <p>Authorized Laboratory Signature</p>
+                </div>
+            </div>
+
+            <div class="receipt-footer">
+                <p>Thank you for choosing HealthCare Plus. Get well soon!</p>
+                <div class="modal-actions no-print">
+                    <button class="download-btn" (click)="downloadReceipt()">Download as PDF</button>
+                    <button class="close-btn" (click)="closeReceipt()">Close</button>
+                </div>
             </div>
         </div>
     </div>

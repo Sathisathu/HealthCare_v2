@@ -107,7 +107,7 @@
 }
 
 .benefits li::before {
-    content: 'Γ£ô';
+    content: '✔';
     color: #ef4444;
     font-weight: bold;
 }

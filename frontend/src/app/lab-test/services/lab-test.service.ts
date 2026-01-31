@@ -26,12 +26,13 @@ export class LabTestService {
         throw new Error("Use bookTestWithDetails");
     }
 
-    bookTestWithDetails(patientId: number, slot: LabTestSlot): Observable<LabTestBooking> {
+    bookTestWithDetails(patientId: number, slot: LabTestSlot, paymentType: string): Observable<LabTestBooking> {
         const payload = {
             patientId: patientId,
             testName: slot.testName,
             date: slot.date,
-            time: slot.time
+            time: slot.time,
+            paymentType: paymentType
         };
         return this.http.post<LabTestBooking>(`${this.apiUrl}/bookings/book`, payload);
     }
@@ -50,5 +51,9 @@ export class LabTestService {
 
     getBooking(bookingId: number): Observable<LabTestBooking> {
         return this.http.get<LabTestBooking>(`${this.apiUrl}/bookings/result/${bookingId}`);
+    }
+
+    updatePaymentStatus(bookingId: number, status: string): Observable<LabTestBooking> {
+        return this.http.put<LabTestBooking>(`${this.apiUrl}/bookings/${bookingId}/payment`, { status });
     }
 }

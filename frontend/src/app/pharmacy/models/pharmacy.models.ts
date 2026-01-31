@@ -26,4 +26,7 @@ export interface Order {
     paymentType: string;
     orderDate: string;
     orderItems: OrderItem[];
+    paymentStatus?: string;
+    receiptUrl?: string;
+    isPaying?: boolean;
 }

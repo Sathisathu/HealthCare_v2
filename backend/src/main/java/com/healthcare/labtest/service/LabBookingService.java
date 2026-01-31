@@ -62,11 +62,6 @@ public class LabBookingService {
         booking.setStatus("COMPLETED");
 
         // Release the slot so others can book this time again if needed
-        if (booking.getSlot() != null) {
-            LabTestSlot slot = booking.getSlot();
-            slot.setBooked(false);
-            slotRepository.save(slot);
-        }
 
         return bookingRepository.save(booking);
     }

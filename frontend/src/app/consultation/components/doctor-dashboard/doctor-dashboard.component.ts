@@ -18,6 +18,8 @@ export class DoctorDashboardComponent implements OnInit {
   selectedDate: string = '';
   slots: DoctorAvailability[] = [];
   appointments: Appointment[] = [];
+  selectedAppointment: Appointment | null = null;
+  showPatientModal: boolean = false;
 
   constructor(private consultationService: ConsultationService, private authService: AuthService) { }
 
@@ -65,5 +67,15 @@ export class DoctorDashboardComponent implements OnInit {
     this.consultationService.toggleSlotAvailability(slot.id, !slot.available).subscribe(res => {
       slot.available = res.available;
     });
+  }
+
+  viewPatientDetails(appt: Appointment) {
+    this.selectedAppointment = appt;
+    this.showPatientModal = true;
+  }
+
+  closeModal() {
+    this.showPatientModal = false;
+    this.selectedAppointment = null;
   }
 }

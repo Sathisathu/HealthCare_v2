@@ -19,16 +19,92 @@
             </div>
             <div class="type-side">
                 <span class="tag" [class]="appt.consultationType">{{appt.consultationType}}</span>
-                <div class="contact-info" *ngIf="appt.consultationType === 'ONLINE'">
-                    📞 Call: {{appt.doctor.businessPhoneNumber}}
-                </div>
-                <div class="contact-info" *ngIf="appt.consultationType === 'OFFLINE'">
-                    📍 Location: {{appt.doctor.clinicAddress}}
+                <div class="contact-info">
+                    <div *ngIf="appt.consultationType?.toUpperCase() === 'ONLINE'">
+                        Online Consultation: {{appt.doctor.businessPhoneNumber || 'No number'}}
+                    </div>
+                    <div *ngIf="appt.consultationType?.toUpperCase() === 'OFFLINE' || !appt.consultationType">
+                        <strong>Floor:</strong> {{appt.doctor.floor || 'TBD'}}, <strong>Room:</strong>
+                        {{appt.doctor.roomNumber || 'TBD'}}
+                    </div>
+                    <button *ngIf="appt.paymentStatus !== 'PAID'" class="pay-btn-inline"
+                        (click)="payForAppointment(appt)" [disabled]="appt.isPaying">
+                        {{ appt.isPaying ? 'Processing...' : '💳 Pay Now' }}
+                    </button>
                 </div>
             </div>
             <div class="status-side">
                 <span class="status-btn">{{appt.status}}</span>
-                <a *ngIf="appt.receiptUrl" href="#" class="receipt-link">View Receipt</a>
+                <span class="pay-badge" [class.PAID]="appt.paymentStatus === 'PAID'">{{appt.paymentStatus}}</span>
+                <a *ngIf="appt.receiptUrl" (click)="viewReceipt(appt)" class="receipt-link">View Receipt</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="modal-overlay" *ngIf="showReceiptModal && selectedReceipt" (click)="closeReceipt()">
+        <div class="receipt-paper" id="receipt-content" (click)="$event.stopPropagation()">
+            <div class="receipt-header">
+                <div class="hospital-brand">
+                    <span class="cross">✚</span>
+                    <div>
+                        <h2>HealthCare Plus</h2>
+                        <p>Hospital & Research Center</p>
+                    </div>
+                </div>
+                <div class="receipt-meta">
+                    <p><strong>Receipt ID:</strong> {{selectedReceipt.receiptUrl}}</p>
+                    <p><strong>Date:</strong> {{selectedReceipt.date | date}}</p>
+                </div>
+            </div>
+
+            <div class="receipt-divider"></div>
+
+            <div class="receipt-body">
+                <h3>PAYMENT RECEIPT</h3>
+                <div class="receipt-row">
+                    <span>Patient Name:</span>
+                    <strong>{{selectedReceipt.patient?.name || 'Valued Patient'}}</strong>
+                </div>
+                <div class="receipt-row">
+                    <span>Doctor Name:</span>
+                    <strong>{{selectedReceipt.doctor.name}}</strong>
+                </div>
+                <div class="receipt-row">
+                    <span>Specialization:</span>
+                    <strong>{{selectedReceipt.doctor.specialization}}</strong>
+                </div>
+                <div class="receipt-row">
+                    <span>Consultation Type:</span>
+                    <strong>{{selectedReceipt.consultationType}}</strong>
+                </div>
+                <div class="receipt-row">
+                    <span>Appointment Time:</span>
+                    <strong>{{selectedReceipt.slotTime}}</strong>
+                </div>
+            </div>
+
+            <div class="receipt-divider dashed"></div>
+
+            <div class="receipt-total">
+                <div class="receipt-row total">
+                    <span>Amount Paid:</span>
+                    <strong>Rs. {{selectedReceipt.doctor.consultationFee}}</strong>
+                </div>
+                <div class="payment-authorized">
+                    <p class="status-stamp" [class.paid]="selectedReceipt.paymentStatus === 'PAID'">
+                        {{selectedReceipt.paymentStatus}}
+                    </p>
+                    <p>Authorized Signature</p>
+                </div>
+            </div>
+
+            <div class="receipt-footer">
+                <p>Thank you for choosing HealthCare Plus hospital. Get well soon!</p>
+                <div class="modal-actions no-print">
+                    <button class="download-btn" (click)="downloadReceipt()">Download as PDF</button>
+                    <button class="close-btn" (click)="closeReceipt()">Close</button>
+                </div>
             </div>
         </div>
     </div>

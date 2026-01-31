@@ -38,4 +38,17 @@ public class AppointmentController {
     public List<Appointment> getDoctorAppointments(@PathVariable Long doctorId) {
         return appointmentService.getDoctorAppointments(doctorId);
     }
+
+    @PutMapping("/{id}/payment")
+    public org.springframework.http.ResponseEntity<?> updatePaymentStatus(@PathVariable Long id,
+            @RequestBody Map<String, String> request) {
+        try {
+            String status = request.get("status");
+            Appointment appointment = appointmentService.updatePaymentStatus(id, status);
+            return org.springframework.http.ResponseEntity.ok(appointment);
+        } catch (RuntimeException e) {
+            return org.springframework.http.ResponseEntity.badRequest()
+                    .body(java.util.Collections.singletonMap("message", e.getMessage()));
+        }
+    }
 }

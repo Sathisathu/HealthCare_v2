@@ -19,20 +19,22 @@ public class Doctor {
 
     // Business Logic Fields
     private String businessPhoneNumber;
-    private String clinicAddress;
+    private String floor;
+    private String roomNumber;
 
     public Doctor() {
     }
 
     public Doctor(String name, String specialization, String experience, Double consultationFee, String imageUrl,
-            String businessPhoneNumber, String clinicAddress, String email, String password) {
+            String businessPhoneNumber, String floor, String roomNumber, String email, String password) {
         this.name = name;
         this.specialization = specialization;
         this.experience = experience;
         this.consultationFee = consultationFee;
         this.imageUrl = imageUrl;
         this.businessPhoneNumber = businessPhoneNumber;
-        this.clinicAddress = clinicAddress;
+        this.floor = floor;
+        this.roomNumber = roomNumber;
         this.email = email;
         this.password = password;
     }
@@ -110,11 +112,19 @@ public class Doctor {
         this.businessPhoneNumber = businessPhoneNumber;
     }
 
-    public String getClinicAddress() {
-        return clinicAddress;
+    public String getFloor() {
+        return floor;
     }
 
-    public void setClinicAddress(String clinicAddress) {
-        this.clinicAddress = clinicAddress;
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
     }
 }

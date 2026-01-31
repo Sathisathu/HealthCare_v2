@@ -49,9 +49,9 @@ public class OrderService {
         }
 
         if ("WALLET".equalsIgnoreCase(paymentType)) {
-            // 10 coins = Rs. 5 => 1 coin = Rs. 0.5.
-            // Coins needed = Amount / 0.5 = Amount * 2
-            double coinsNeeded = totalAmount * 2;
+            // 1 coin = Rs. 1
+            // Coins needed = Amount
+            double coinsNeeded = totalAmount;
             if (user.getWalletBalance() < coinsNeeded) {
                 throw new RuntimeException("Insufficient wallet balance. Needed: " + coinsNeeded + " coins");
             }
@@ -65,6 +65,12 @@ public class OrderService {
         order.setTotalAmount(totalAmount);
         order.setPaymentType(paymentType);
         order.setStatus("CONFIRMED");
+        if ("WALLET".equalsIgnoreCase(paymentType)) {
+            order.setPaymentStatus("PAID");
+        } else {
+            order.setPaymentStatus("PENDING");
+        }
+        order.setReceiptUrl("ORD-" + System.currentTimeMillis());
 
         // Fix bidirectional relationship
         for (OrderItem item : items) {
@@ -77,5 +83,43 @@ public class OrderService {
 
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
+    }
+
+    @Transactional
+    public Order updatePaymentStatus(Long id, String status) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        System.out.println("DEBUG: updatePaymentStatus called for Order ID: " + id + " with status: " + status);
+
+        if ("PAID".equalsIgnoreCase(status) && !"PAID".equalsIgnoreCase(order.getPaymentStatus())) {
+            // Fetch fresh patient record
+            Patient customer = patientRepository.findById(order.getCustomer().getId())
+                    .orElseThrow(() -> new RuntimeException("Customer record not found"));
+
+            double amount = order.getTotalAmount();
+            double coinsNeeded = amount;
+
+            if (customer.getWalletBalance() == null) {
+                customer.setWalletBalance(0.0);
+            }
+
+            System.out.println("DEBUG: Payment for Order " + id + ". Customer: " + customer.getName()
+                    + ", Current Balance: " + customer.getWalletBalance() + ", Needed: " + coinsNeeded);
+
+            if (customer.getWalletBalance() < coinsNeeded) {
+                throw new RuntimeException("Insufficient wallet balance. Needed: " + coinsNeeded + " coins. You have: "
+                        + customer.getWalletBalance());
+            }
+
+            customer.setWalletBalance(customer.getWalletBalance() - coinsNeeded);
+            patientRepository.saveAndFlush(customer);
+
+            System.out.println("DEBUG: Wallet deducted successfully for Customer " + customer.getId()
+                    + ". New Balance: " + customer.getWalletBalance());
+        }
+
+        order.setPaymentStatus(status);
+        return orderRepository.save(order);
     }
 }

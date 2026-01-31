@@ -26,6 +26,7 @@ import { LoginComponent } from './common/components/login/login.component';
 import { DoctorLoginComponent } from './common/components/doctor-login/doctor-login.component';
 import { AdminLoginComponent } from './common/components/admin-login/admin-login.component';
 import { RegisterComponent } from './common/components/register/register.component';
+import { PatientProfileComponent } from './common/components/patient-profile/patient-profile.component';
 import { AuthGuard } from './common/guards/auth.guard';
 import { RoleGuard } from './common/guards/role.guard';
 
@@ -51,6 +52,9 @@ export const routes: Routes = [
         component: UserLayoutComponent,
         canActivate: [AuthGuard],
         children: [
+            // Profile
+            { path: 'profile', component: PatientProfileComponent },
+
             // Pharmacy
             { path: 'pharmacy', component: ProductListComponent },
             { path: 'cart', component: CartComponent },

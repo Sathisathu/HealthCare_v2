@@ -77,6 +77,13 @@
     font-size: 1.1rem;
 }
 
+.location-brief {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
 .view-btn {
     display: inline-block;
     width: 100%;

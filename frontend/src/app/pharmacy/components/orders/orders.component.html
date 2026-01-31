@@ -17,13 +17,24 @@
                 <span class="status-badge" [class]="'status-' + (order.status || 'pending').toLowerCase()">
                     {{order.status}}
                 </span>
+                <span class="pay-badge" [class.PAID]="order.paymentStatus === 'PAID'">{{order.paymentStatus ||
+                    'PENDING'}}</span>
+
+                <button *ngIf="order.paymentStatus !== 'PAID'" class="pay-btn-inline" (click)="payForOrder(order)"
+                    [disabled]="order.isPaying">
+                    {{order.isPaying ? 'Processing...' : 'Pay Now'}}
+                </button>
+
+                <a *ngIf="order.paymentStatus === 'PAID'" class="receipt-link" (click)="viewReceipt(order)">
+                    View Receipt
+                </a>
             </div>
 
             <div class="order-items">
                 <div *ngFor="let item of order.orderItems" class="order-item">
                     <span class="item-name">{{item.product?.name}}</span>
                     <span class="item-qty">x{{item.quantity}}</span>
-                    <span class="item-price">Rs. {{item.priceAtPurchase * item.quantity}}</span>
+                    <span class="item-price">Rs. {{(item.priceAtPurchase || 0) * item.quantity}}</span>
                 </div>
             </div>
 
@@ -34,6 +45,64 @@
                 <div class="order-total">
                     <span>Grand Total:</span>
                     <span class="total-amount">Rs. {{order.totalAmount}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="modal-overlay" *ngIf="showReceiptModal && selectedReceipt" (click)="closeReceipt()">
+        <div class="receipt-paper" id="receipt-content" (click)="$event.stopPropagation()">
+            <div class="receipt-header">
+                <div class="hospital-brand">
+                    <span class="cross">✚</span>
+                    <div>
+                        <h2>HealthCare Plus</h2>
+                        <p>Hospital & Research Center</p>
+                    </div>
+                </div>
+                <div class="receipt-meta">
+                    <p><strong>Receipt ID:</strong> {{selectedReceipt.receiptUrl}}</p>
+                    <p><strong>Date:</strong> {{selectedReceipt.orderDate | date}}</p>
+                </div>
+            </div>
+
+            <div class="receipt-divider"></div>
+
+            <div class="receipt-body">
+                <h3>PHARMACY PURCHASE RECEIPT</h3>
+                <div class="receipt-row">
+                    <span>Payment Mode:</span>
+                    <strong>{{selectedReceipt.paymentType}}</strong>
+                </div>
+                <div class="items-list">
+                    <div *ngFor="let item of selectedReceipt.orderItems" class="receipt-row item">
+                        <span>{{item.product?.name}} (x{{item.quantity}})</span>
+                        <span>Rs. {{(item.priceAtPurchase || 0) * item.quantity}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="receipt-divider dashed"></div>
+
+            <div class="receipt-total">
+                <div class="receipt-row total">
+                    <span>Total Amount Paid:</span>
+                    <strong>Rs. {{selectedReceipt.totalAmount}}</strong>
+                </div>
+                <div class="payment-authorized">
+                    <p class="status-stamp" [class.paid]="selectedReceipt.paymentStatus === 'PAID'">
+                        {{selectedReceipt.paymentStatus}}
+                    </p>
+                    <p>Authorized Pharmacist Signature</p>
+                </div>
+            </div>
+
+            <div class="receipt-footer">
+                <p>Thank you for choosing HealthCare Plus Pharmacy. Get well soon!</p>
+                <div class="modal-actions no-print">
+                    <button class="download-btn" (click)="downloadReceipt()">Download as PDF</button>
+                    <button class="close-btn" (click)="closeReceipt()">Close</button>
                 </div>
             </div>
         </div>

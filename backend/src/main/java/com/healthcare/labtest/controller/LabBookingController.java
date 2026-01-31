@@ -21,8 +21,11 @@ public class LabBookingController {
 
     @PostMapping("/book")
     public LabTestBooking bookTest(@RequestBody BookingRequest request) { // Use DTO
-        return labTestService.bookTest(request.getPatientId(), request.getTestName(),
-                java.time.LocalDate.parse(request.getDate()), request.getTime());
+        LabTestBooking booking = labTestService.bookTest(request.getPatientId(), request.getTestName(),
+                java.time.LocalDate.parse(request.getDate()), request.getTime(), request.getPaymentType());
+        System.out.println(
+                "DEBUG: Booking created. ID: " + booking.getId() + ", PaymentStatus: " + booking.getPaymentStatus());
+        return booking;
     }
 
     @GetMapping("/patient/{patientId}")
@@ -44,6 +47,12 @@ public class LabBookingController {
     public LabTestBooking getBookingResult(@PathVariable Long bookingId) {
         return labBookingService.getBooking(bookingId);
     }
+
+    @PutMapping("/{id}/payment")
+    public LabTestBooking updatePaymentStatus(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        String status = request.get("status");
+        return labTestService.updatePaymentStatus(id, status);
+    }
 }
 
 class BookingRequest {
@@ -51,6 +60,7 @@ class BookingRequest {
     private String testName;
     private String date;
     private String time;
+    private String paymentType;
 
     // Getters and Setters
     public Long getPatientId() {
@@ -83,5 +93,13 @@ class BookingRequest {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 }

@@ -6,7 +6,8 @@ export interface Doctor {
     consultationFee: number;
     imageUrl: string;
     businessPhoneNumber: string;
-    clinicAddress: string;
+    floor: string;
+    roomNumber: string;
 }
 
 export interface DoctorAvailability {
@@ -18,9 +19,11 @@ export interface DoctorAvailability {
     booked: boolean;
 }
 
+import { User } from '../../models/user.model';
+
 export interface Appointment {
     id: number;
-    patient?: any;
+    patient?: User;
     doctor: Doctor;
     date: string;
     slotTime: string;
@@ -28,4 +31,5 @@ export interface Appointment {
     status: 'PENDING' | 'CONFIRMED' | 'CANCELLED';
     paymentStatus: string;
     receiptUrl: string;
+    isPaying?: boolean;
 }

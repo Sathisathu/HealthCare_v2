@@ -32,6 +32,30 @@
                 <p class="hint">Please select a date first to view available slots.</p>
             </ng-template>
         </div>
+
+        <!-- Step 3: Payment Method -->
+        <div class="card payment-card" [class.disabled]="!selectedSlot">
+            <h3>3. Payment Method 💳</h3>
+            <div class="payment-options">
+                <label class="payment-option" [class.selected]="paymentType === 'WALLET'">
+                    <input type="radio" name="paymentType" value="WALLET" [(ngModel)]="paymentType">
+                    <span class="label-text">
+                        <strong>Wallet Balance</strong>
+                        <span class="sub-text">Pay immediately using coins</span>
+                    </span>
+                    <span class="icon">🪙</span>
+                </label>
+
+                <label class="payment-option" [class.selected]="paymentType === 'PAY_LATER'">
+                    <input type="radio" name="paymentType" value="PAY_LATER" [(ngModel)]="paymentType">
+                    <span class="label-text">
+                        <strong>Pay Later</strong>
+                        <span class="sub-text">Pay at the center/later</span>
+                    </span>
+                    <span class="icon">🕒</span>
+                </label>
+            </div>
+        </div>
     </div>
 
     <div class="confirm-bar" *ngIf="selectedSlot">

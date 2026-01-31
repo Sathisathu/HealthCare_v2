@@ -32,9 +32,9 @@
                     <label>Update Status:</label>
                     <select [(ngModel)]="statusForm.status">
                         <option value="VOLUNTEERED">Volunteer Only</option>
-                        <option value="DONATED">Mark as DONATED Γ£à</option>
-                        <option value="NOT_ELIGIBLE">Mark as NOT ELIGIBLE Γ¥î</option>
-                        <option value="NOT_VISITED">Mark as NOT VISITED Γ¥î</option>
+                        <option value="DONATED">Mark as DONATED</option>
+                        <option value="NOT_ELIGIBLE">Mark as NOT ELIGIBLE</option>
+                        <option value="NOT_VISITED">Mark as NOT VISITED</option>
                     </select>
                 </div>
 
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="reward-hint" *ngIf="statusForm.status === 'DONATED'">
-                    ΓÜá∩╕Å Marking as DONATED will automatically award <strong>3000 Coins</strong> to the user.
+                    ℹ️ Marking as DONATED will automatically award <strong>3000 Coins</strong> to the user.
                 </div>
 
                 <button class="save-btn" (click)="saveStatus()">Update Record</button>

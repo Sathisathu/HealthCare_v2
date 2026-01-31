@@ -127,25 +127,25 @@ export class LabResultEntryComponent implements OnInit {
                 this.resultData = {
                     ...basic,
                     testType: 'LFT',
-                    bilirubinTotal: { name: 'Total Bilirubin', value: '', range: '0.1-1.2 mg/dL' },
-                    bilirubinDirect: { name: 'Direct Bilirubin', value: '', range: '0.0-0.3 mg/dL' },
-                    sgot: { name: 'SGOT (AST)', value: '', range: '5-40 U/L' },
-                    sgpt: { name: 'SGPT (ALT)', value: '', range: '7-56 U/L' },
-                    alkalinePhosphatase: { name: 'Alkaline Phosphatase', value: '', range: '44-147 U/L' },
-                    totalProtein: { name: 'Total Protein', value: '', range: '6.0-8.3 g/dL' },
-                    albumin: { name: 'Albumin', value: '', range: '3.4-5.4 g/dL' }
+                    bilirubinTotal: { name: 'Total Bilirubin', value: '', range: '0.1-1.2 mg/dL', status: 'Normal' },
+                    bilirubinDirect: { name: 'Direct Bilirubin', value: '', range: '0.0-0.3 mg/dL', status: 'Normal' },
+                    sgot: { name: 'SGOT (AST)', value: '', range: '5-40 U/L', status: 'Normal' },
+                    sgpt: { name: 'SGPT (ALT)', value: '', range: '7-56 U/L', status: 'Normal' },
+                    alkalinePhosphatase: { name: 'Alkaline Phosphatase', value: '', range: '44-147 U/L', status: 'Normal' },
+                    totalProtein: { name: 'Total Protein', value: '', range: '6.0-8.3 g/dL', status: 'Normal' },
+                    albumin: { name: 'Albumin', value: '', range: '3.4-5.4 g/dL', status: 'Normal' }
                 };
                 break;
             case 'KFT':
                 this.resultData = {
                     ...basic,
                     testType: 'KFT',
-                    bloodUrea: { name: 'Blood Urea', value: '', range: '13-45 mg/dL' },
-                    serumCreatinine: { name: 'Serum Creatinine', value: '', range: '0.6-1.2 mg/dL' },
-                    uricAcid: { name: 'Uric Acid', value: '', range: '3.5-7.2 mg/dL' },
-                    sodium: { name: 'Sodium', value: '', range: '135-145 mEq/L' },
-                    potassium: { name: 'Potassium', value: '', range: '3.5-5.1 mEq/L' },
-                    eGFR: { name: 'eGFR', value: '', range: '> 90 mL/min/1.73m2' }
+                    bloodUrea: { name: 'Blood Urea', value: '', range: '13-45 mg/dL', status: 'Normal' },
+                    serumCreatinine: { name: 'Serum Creatinine', value: '', range: '0.6-1.2 mg/dL', status: 'Normal' },
+                    uricAcid: { name: 'Uric Acid', value: '', range: '3.5-7.2 mg/dL', status: 'Normal' },
+                    sodium: { name: 'Sodium', value: '', range: '135-145 mEq/L', status: 'Normal' },
+                    potassium: { name: 'Potassium', value: '', range: '3.5-5.1 mEq/L', status: 'Normal' },
+                    eGFR: { name: 'eGFR', value: '', range: '> 90 mL/min/1.73m2', status: 'Normal' }
                 };
                 break;
             case 'URINE':
