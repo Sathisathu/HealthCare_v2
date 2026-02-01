@@ -104,22 +104,19 @@ export class DoctorDetailsComponent implements OnInit {
     if (!this.bookedAppointmentId) return;
     this.isProcessingPayment = true;
 
-    // Simulate payment processing
-    setTimeout(() => {
-      this.consultationService.updatePaymentStatus(this.bookedAppointmentId!, 'PAID').subscribe({
-        next: () => {
-          this.isProcessingPayment = false;
-          this.showPaymentModal = false;
-          this.authService.checkSession();
-          this.router.navigate(['/consultation/my-appointments']);
-        },
-        error: (err) => {
-          this.isProcessingPayment = false;
-          alert('Payment update failed on server, but slot is booked. Please try paying from your appointments list.');
-          this.router.navigate(['/consultation/my-appointments']);
-        }
-      });
-    }, 2000);
+    this.consultationService.updatePaymentStatus(this.bookedAppointmentId!, 'PAID').subscribe({
+      next: () => {
+        this.isProcessingPayment = false;
+        this.showPaymentModal = false;
+        this.authService.checkSession();
+        this.router.navigate(['/consultation/my-appointments']);
+      },
+      error: (err) => {
+        this.isProcessingPayment = false;
+        alert('Payment update failed on server, but slot is booked. Please try paying from your appointments list.');
+        this.router.navigate(['/consultation/my-appointments']);
+      }
+    });
   }
 
   closePaymentModal() {

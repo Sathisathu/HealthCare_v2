@@ -79,6 +79,9 @@ export const routes: Routes = [
             // Subscriptions
             { path: 'subscriptions/plans', component: SubscriptionPlansComponent },
             { path: 'subscriptions/dashboard', component: SubscriptionDashboardComponent },
+
+            // Receipt
+            { path: 'receipt/:type/:id', loadComponent: () => import('./common/components/receipt-layout.component').then(m => m.ReceiptLayoutComponent) },
         ]
     },
     // 3. Doctor Portal

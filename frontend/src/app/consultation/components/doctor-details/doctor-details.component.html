@@ -1,5 +1,5 @@
 <div class="container" *ngIf="doctor">
-    <div class="profile-card">
+    <div class="profile-card" *ngIf="!showPaymentModal">
         <div class="header">
             <img [src]="'data:' + doctor.imageType + ';base64,' + doctor.image" alt="Doctor" class="profile-avatar">
             <div class="header-text">
@@ -53,45 +53,43 @@
         </div>
     </div>
 
-    <!-- Payment Modal -->
-    <div class="modal-overlay" *ngIf="showPaymentModal">
-        <div class="modal-content">
-            <div class="payment-header">
-                <h2>Booking Confirmed!</h2>
-                <p>Complete your payment to finalize the appointment.</p>
-            </div>
-
-            <div class="payment-details" *ngIf="doctor">
-                <div class="payment-row">
-                    <span>Consultation with:</span>
-                    <strong>{{doctor.name}}</strong>
-                </div>
-                <div class="payment-row">
-                    <span>Date & Time:</span>
-                    <strong>{{selectedDate | date}} at {{selectedSlot?.slotTime}}</strong>
-                </div>
-                <div class="payment-row">
-                    <span>Consultation Type:</span>
-                    <strong>{{selectedType}}</strong>
-                </div>
-                <hr>
-                <div class="payment-row total">
-                    <span>Amount to Pay:</span>
-                    <strong class="price">Rs. {{doctor.consultationFee}}</strong>
-                </div>
-            </div>
-
-            <div class="payment-actions">
-                <button class="pay-btn" (click)="confirmPayment()" [disabled]="isProcessingPayment">
-                    <span *ngIf="!isProcessingPayment">Pay Now</span>
-                    <span *ngIf="isProcessingPayment" class="loader">Processing...</span>
-                </button>
-                <button class="cancel-btn" (click)="closePaymentModal()" [disabled]="isProcessingPayment">
-                    Pay Later
-                </button>
-            </div>
-
-            <p class="secure-text">Secure SSL Encrypted Payment</p>
+    <!-- Payment Section (Inline) -->
+    <div class="profile-card payment-view" *ngIf="showPaymentModal">
+        <div class="payment-header">
+            <h2>Booking Confirmed!</h2>
+            <p>Complete your payment to finalize the appointment.</p>
         </div>
+
+        <div class="payment-details" *ngIf="doctor">
+            <div class="payment-row">
+                <span>Consultation with:</span>
+                <strong>{{doctor.name}}</strong>
+            </div>
+            <div class="payment-row">
+                <span>Date & Time:</span>
+                <strong>{{selectedDate | date}} at {{selectedSlot?.slotTime}}</strong>
+            </div>
+            <div class="payment-row">
+                <span>Consultation Type:</span>
+                <strong>{{selectedType}}</strong>
+            </div>
+            <hr>
+            <div class="payment-row total">
+                <span>Amount to Pay:</span>
+                <strong class="price">Rs. {{doctor.consultationFee}}</strong>
+            </div>
+        </div>
+
+        <div class="payment-actions">
+            <button class="pay-btn" (click)="confirmPayment()" [disabled]="isProcessingPayment">
+                <span *ngIf="!isProcessingPayment">Pay Now</span>
+                <span *ngIf="isProcessingPayment" class="loader">Processing...</span>
+            </button>
+            <button class="cancel-btn" (click)="closePaymentModal()" [disabled]="isProcessingPayment">
+                Pay Later
+            </button>
+        </div>
+
+        <p class="secure-text">Secure SSL Encrypted Payment</p>
     </div>
 </div>

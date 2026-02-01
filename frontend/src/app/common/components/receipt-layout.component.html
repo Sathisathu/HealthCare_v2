@@ -1,0 +1,126 @@
+<div class="receipt-page">
+    <div class="no-print header-nav">
+        <button (click)="goBack()" class="back-link">&larr; Back to List</button>
+    </div>
+
+    <div *ngIf="loading" class="loading">Loading receipt...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div *ngIf="!loading && !error && receiptData" class="receipt-container">
+        <!-- Common Header -->
+        <div class="receipt-header">
+            <div class="brand">
+                <h1>HealthCare Plus</h1>
+                <p>Hospital & Research Center</p>
+                <div class="subtitle">Official Payment Receipt</div>
+            </div>
+            <div class="meta">
+                <div class="row">
+                    <span>Receipt #:</span>
+                    <strong>{{ receiptData?.receiptUrl }}</strong>
+                </div>
+                <div class="row">
+                    <span>Date:</span>
+                    <strong>{{ (receiptData?.orderDate || receiptData?.date) | date:'mediumDate' }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Pharmacy Content -->
+        <div class="receipt-body" *ngIf="type === 'pharmacy'">
+            <div class="section-title">Pharmacy Order Details</div>
+            <div class="row">
+                <span>Payment Type:</span>
+                <strong>{{ receiptData?.paymentType }}</strong>
+            </div>
+
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of receiptData?.orderItems">
+                        <td>{{ item?.product?.name || item?.medicine?.name }}</td>
+                        <td>{{ item?.quantity }}</td>
+                        <td>Rs. {{ item?.price || item?.priceAtPurchase }}</td>
+                        <td>Rs. {{ (item?.price || item?.priceAtPurchase) * item?.quantity }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Consultation Content -->
+        <div class="receipt-body" *ngIf="type === 'consultation'">
+            <div class="section-title">Consultation Details</div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <label>Patient Name</label>
+                    <div class="value">{{ receiptData?.patient?.name || 'Valued Patient' }}</div>
+                </div>
+                <div class="detail-item">
+                    <label>Doctor</label>
+                    <div class="value">{{ receiptData?.doctor?.name }}<br><small>{{ receiptData?.doctor?.specialization
+                            }}</small></div>
+                </div>
+                <div class="detail-item">
+                    <label>Service Type</label>
+                    <div class="value">{{ receiptData?.consultationType }} Consultation</div>
+                </div>
+                <div class="detail-item">
+                    <label>Time Slot</label>
+                    <div class="value">{{ receiptData?.slotTime }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Test Content -->
+        <div class="receipt-body" *ngIf="type === 'labtest'">
+            <div class="section-title">Lab Test Details</div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <label>Patient Name</label>
+                    <div class="value">{{ receiptData?.patient?.name || 'Valued Patient' }}</div>
+                </div>
+                <div class="detail-item">
+                    <label>Test Name</label>
+                    <div class="value">{{ receiptData?.slot?.testName }}</div>
+                </div>
+                <div class="detail-item">
+                    <label>Scheduled Date</label>
+                    <div class="value">{{ receiptData?.slot?.date | date:'mediumDate' }}</div>
+                </div>
+                <div class="detail-item">
+                    <label>Scheduled Time</label>
+                    <div class="value">{{ receiptData?.slot?.time }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="receipt-footer">
+            <div class="amount-section">
+                <span>Total Amount Paid:</span>
+                <span class="amount">Rs. {{ receiptData?.totalAmount || receiptData?.doctor?.consultationFee ||
+                    receiptData?.slot?.price || 50 }}</span>
+            </div>
+
+            <div class="stamp-box">
+                <div class="signature">Authorized Signature</div>
+            </div>
+        </div>
+
+        <div class="actions no-print">
+            <button class="print-btn" (click)="print()">🖨️ Print Receipt</button>
+        </div>
+    </div>
+</div>

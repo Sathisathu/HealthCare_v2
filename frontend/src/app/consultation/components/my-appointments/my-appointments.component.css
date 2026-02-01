@@ -162,199 +162,102 @@
     cursor: pointer;
 }
 
-/* Receipt Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    padding: 1rem;
+/* Inline Receipt Styles */
+.receipt-details {
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 1.5rem;
+    animation: fadeIn 0.3s ease;
 }
 
-.receipt-paper {
+.receipt-content {
+    max-width: 600px;
+    margin: 0 auto;
     background: white;
-    width: 100%;
-    max-width: 500px;
-    padding: 3rem;
-    border-radius: 4px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    position: relative;
-    font-family: 'Courier New', Courier, monospace;
-    color: #2c3e50;
-    border: 1px solid #ddd;
+    border: 1px solid #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 8px;
 }
 
-.receipt-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
+.receipt-content h3 {
+    margin-top: 0;
+    color: #334155;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
 }
 
-.hospital-brand {
-    display: flex;
-    gap: 0.8rem;
-    align-items: center;
-}
-
-.hospital-brand .cross {
-    color: #dc2626;
-    font-size: 2rem;
-}
-
-.hospital-brand h2 {
-    margin: 0;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-}
-
-.hospital-brand p {
-    margin: 0;
-    font-size: 0.7rem;
-    color: #666;
-}
-
-.receipt-meta {
-    text-align: right;
-    font-size: 0.8rem;
-}
-
-.receipt-meta p {
-    margin: 0.2rem 0;
-}
-
-.receipt-divider {
-    height: 2px;
-    background: #444;
-    margin: 1.5rem 0;
-}
-
-.receipt-divider.dashed {
-    background: none;
-    border-top: 2px dashed #999;
-}
-
-.receipt-body h3 {
-    text-align: center;
-    text-decoration: underline;
-    margin-bottom: 1.5rem;
-    letter-spacing: 2px;
-}
-
-.receipt-row {
+.receipt-grid .row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.8rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
-.receipt-row span {
-    color: #555;
+.receipt-grid .row span {
+    color: #64748b;
 }
 
-.receipt-total {
-    margin-top: 1.5rem;
+.receipt-grid .divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 1rem 0;
 }
 
-.receipt-row.total {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #000;
+.receipt-grid .total {
+    font-size: 1.1rem;
+    color: #0f172a;
 }
 
-.payment-authorized {
-    margin-top: 2rem;
+.authorized {
     text-align: right;
-    position: relative;
+    margin-top: 1rem;
 }
 
-.payment-authorized p {
-    margin: 0;
-    font-size: 0.8rem;
-}
-
-.status-stamp {
-    position: absolute;
-    top: -50px;
-    right: 50%;
-    transform: rotate(-15deg) translateX(50%);
-    border: 3px solid #ccc;
-    padding: 0.5rem 1.5rem;
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #ccc;
+.stamp {
+    font-weight: bold;
+    color: #16a34a;
+    border: 2px solid #16a34a;
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px;
     text-transform: uppercase;
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-.status-stamp.paid {
-    color: #059669;
-    border-color: #059669;
-}
-
-.receipt-footer {
-    margin-top: 3rem;
-    text-align: center;
     font-size: 0.8rem;
-    color: #777;
+    display: inline-block;
 }
 
-.modal-actions {
-    margin-top: 2rem;
+.actions {
+    margin-top: 1.5rem;
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
-.download-btn,
-.close-btn {
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: sans-serif;
-}
-
-.download-btn {
-    background: #000;
+.print-btn {
+    background: #334155;
     color: white;
     border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .close-btn {
-    background: #f1f5f9;
-    border: 1px solid #ddd;
-    color: #333;
+    background: white;
+    border: 1px solid #cbd5e1;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
-@media print {
-    .no-print {
-        display: none !important;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 
-    body * {
-        visibility: hidden;
-    }
-
-    .receipt-paper,
-    .receipt-paper * {
-        visibility: visible;
-    }
-
-    .receipt-paper {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        box-shadow: none;
-        border: none;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

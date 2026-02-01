@@ -4,8 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { LabTestService } from '../../services/lab-test.service';
 import { LabTestBooking } from '../../models/lab-test.models';
 import { AuthService } from '../../../common/services/auth.service';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 
 @Component({
     selector: 'app-my-lab-bookings',
@@ -17,8 +16,7 @@ import html2canvas from 'html2canvas';
 export class MyLabBookingsComponent implements OnInit {
     bookings: LabTestBooking[] = [];
     userId: number | null = null;
-    showReceiptModal: boolean = false;
-    selectedReceipt: LabTestBooking | null = null;
+
 
     constructor(private labService: LabTestService, private router: Router, private authService: AuthService) { }
 
@@ -66,35 +64,8 @@ export class MyLabBookingsComponent implements OnInit {
     }
 
     viewReceipt(booking: LabTestBooking) {
-        this.selectedReceipt = booking;
-        this.showReceiptModal = true;
+        this.router.navigate(['/receipt/labtest', booking.id]);
     }
 
-    closeReceipt() {
-        this.showReceiptModal = false;
-        this.selectedReceipt = null;
-    }
 
-    downloadReceipt() {
-        const element = document.getElementById('receipt-content');
-        if (!element || !this.selectedReceipt) return;
-
-        html2canvas(element, {
-            scale: 2,
-            logging: false,
-            useCORS: true,
-            onclone: (clonedDoc) => {
-                const actions = clonedDoc.querySelector('.modal-actions') as HTMLElement;
-                if (actions) actions.style.display = 'none';
-            }
-        }).then(canvas => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const imgProps = pdf.getImageProperties(imgData);
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save(`Lab_Receipt_${this.selectedReceipt?.receiptUrl}.pdf`);
-        });
-    }
 }
