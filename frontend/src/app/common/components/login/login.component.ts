@@ -25,13 +25,8 @@ export class LoginComponent {
                 } else if (user.role === 'DOCTOR') {
                     this.router.navigate(['/doctor/dashboard']);
                 } else if (['ADMIN', 'LAB_ADMIN', 'BLOOD_BANK_ADMIN', 'SUPER_ADMIN'].includes(user.role)) {
-                    // Redirect admins to the unified admin login which handles their routing
-                    // Or directly to their dashboard if preferred. 
-                    // Let's be helpful and redirect them to their dashboard via the admin login logic
-                    // Actually, since we are already logged in, we can direct them.
-                    if (user.role === 'ADMIN' || user.role === 'SUPER_ADMIN') this.router.navigate(['/admin']);
-                    else if (user.role === 'LAB_ADMIN') this.router.navigate(['/lab-admin/dashboard']);
-                    else if (user.role === 'BLOOD_BANK_ADMIN') this.router.navigate(['/bloodbank-admin/dashboard']);
+                    // Unified Admin Portal
+                    this.router.navigate(['/admin']);
                 } else {
                     this.router.navigate(['/']);
                 }

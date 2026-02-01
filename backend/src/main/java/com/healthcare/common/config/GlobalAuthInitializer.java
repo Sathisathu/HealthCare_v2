@@ -28,21 +28,7 @@ public class GlobalAuthInitializer {
                 patient.setWalletBalance(1000.0);
                 patientRepository.save(patient);
 
-                // Default Lab Admin
-                Admin labAdmin = new Admin();
-                labAdmin.setName("Lab Technician");
-                labAdmin.setEmail("lab@hc.com");
-                labAdmin.setPassword(commonPassword);
-                labAdmin.setRole("LAB_ADMIN");
-                adminRepository.save(labAdmin);
-
-                // Default Blood Bank Admin
-                Admin bloodAdmin = new Admin();
-                bloodAdmin.setName("Blood Bank Manager");
-                bloodAdmin.setEmail("blood@hc.com");
-                bloodAdmin.setPassword(commonPassword);
-                bloodAdmin.setRole("BLOOD_BANK_ADMIN");
-                adminRepository.save(bloodAdmin);
+                // (Lab and Blood Admins are now consolidated into Super Admin)
 
                 // Default Super Admin
                 Admin admin = new Admin();

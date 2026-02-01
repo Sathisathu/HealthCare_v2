@@ -25,8 +25,7 @@ import { BloodbankAdminLayoutComponent } from './blood-donation/layouts/bloodban
 import { SubscriptionPlansComponent } from './subscription/components/subscription-plans/subscription-plans.component';
 import { SubscriptionDashboardComponent } from './subscription/components/subscription-dashboard/subscription-dashboard.component';
 import { LoginComponent } from './common/components/login/login.component';
-import { DoctorLoginComponent } from './common/components/doctor-login/doctor-login.component';
-import { AdminLoginComponent } from './common/components/admin-login/admin-login.component';
+// Imports removed
 import { RegisterComponent } from './common/components/register/register.component';
 import { PatientProfileComponent } from './common/components/patient-profile/patient-profile.component';
 import { AuthGuard } from './common/guards/auth.guard';
@@ -34,8 +33,8 @@ import { RoleGuard } from './common/guards/role.guard';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: 'doctor-login', component: DoctorLoginComponent },
-    { path: 'admin-login', component: AdminLoginComponent },
+    // { path: 'doctor-login', component: DoctorLoginComponent }, // Removed
+    // { path: 'admin-login', component: AdminLoginComponent },   // Removed
     { path: 'register', component: RegisterComponent },
 
     // 1. Main Dashboard (Exact Root Match)
@@ -101,25 +100,10 @@ export const routes: Routes = [
         children: [
             { path: '', component: AdminDashboardComponent },
             { path: 'subscriptions', loadComponent: () => import('./admin/components/admin-subscription/admin-subscription.component').then(m => m.AdminSubscriptionComponent) },
+            { path: 'lab', component: LabAdminDashboardComponent },
+            { path: 'blood-bank', component: BloodbankAdminDashboardComponent },
         ]
     },
-    {
-        path: 'lab-admin',
-        component: LabAdminLayoutComponent,
-        canActivate: [RoleGuard],
-        data: { role: 'LAB_ADMIN' },
-        children: [
-            { path: 'dashboard', component: LabAdminDashboardComponent },
-        ]
-    },
-    {
-        path: 'bloodbank-admin',
-        component: BloodbankAdminLayoutComponent,
-        canActivate: [RoleGuard],
-        data: { role: 'BLOOD_BANK_ADMIN' },
-        children: [
-            { path: 'dashboard', component: BloodbankAdminDashboardComponent },
-        ]
-    },
+    // Old routes removed
     { path: '**', redirectTo: '' }
 ];
