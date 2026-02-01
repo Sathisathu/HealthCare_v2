@@ -1,0 +1,71 @@
+<div class="container">
+    <button class="back-link" (click)="goBack()">← Back to Dashboard</button>
+
+    <div class="loading-state" *ngIf="loading">
+        Loading details...
+    </div>
+
+    <div class="error-state" *ngIf="error">
+        {{error}}
+    </div>
+
+    <div class="summary-card" *ngIf="appointment && !loading">
+        <div class="header">
+            <h1>Patient Clinical Summary</h1>
+        </div>
+
+        <div class="patient-profile-brief" *ngIf="appointment.patient">
+            <div class="patient-avatar">
+                {{ appointment.patient.name.charAt(0) || 'P' }}
+            </div>
+            <div class="patient-main-info">
+                <h3>{{ appointment.patient.name }}</h3>
+                <p class="patient-email">{{ appointment.patient.email }}</p>
+            </div>
+        </div>
+
+        <div class="details-grid" *ngIf="appointment.patient">
+            <div class="detail-item">
+                <label>Blood Group</label>
+                <span class="blood-badge" [class.no-data]="!appointment.patient.bloodGroup">
+                    {{ appointment.patient.bloodGroup || 'Not provided' }}
+                </span>
+            </div>
+            <div class="detail-item">
+                <label>Gender</label>
+                <span>{{ appointment.patient.gender || 'Not provided' }}</span>
+            </div>
+            <div class="detail-item">
+                <label>Date of Birth</label>
+                <span>{{ (appointment.patient.dateOfBirth | date) || 'Not provided' }}</span>
+            </div>
+            <div class="detail-item">
+                <label>Phone Number</label>
+                <span>{{ appointment.patient.phoneNumber || 'Not provided' }}</span>
+            </div>
+            <div class="detail-item full-width">
+                <label>Address</label>
+                <span>{{ appointment.patient.address || 'Not provided' }}</span>
+            </div>
+        </div>
+
+        <div class="appointment-context">
+            <h4>Appointment Details</h4>
+            <div class="appt-grid">
+                <div class="appt-row">
+                    <span>Type:</span> <strong>{{appointment.consultationType}}</strong>
+                </div>
+                <div class="appt-row">
+                    <span>Location:</span> <strong>{{appointment.doctor.floor || 'Floor TBD'}},
+                        {{appointment.doctor.roomNumber || 'Room TBD'}}</strong>
+                </div>
+                <div class="appt-row">
+                    <span>Schedule:</span> <strong>{{appointment.date}} at {{appointment.slotTime}}</strong>
+                </div>
+                <div class="appt-row">
+                    <span>Status:</span> <span class="status-badge">{{appointment.status}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

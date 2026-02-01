@@ -25,16 +25,14 @@ import { BloodbankAdminLayoutComponent } from './blood-donation/layouts/bloodban
 import { SubscriptionPlansComponent } from './subscription/components/subscription-plans/subscription-plans.component';
 import { SubscriptionDashboardComponent } from './subscription/components/subscription-dashboard/subscription-dashboard.component';
 import { LoginComponent } from './common/components/login/login.component';
-// Imports removed
 import { RegisterComponent } from './common/components/register/register.component';
 import { PatientProfileComponent } from './common/components/patient-profile/patient-profile.component';
 import { AuthGuard } from './common/guards/auth.guard';
 import { RoleGuard } from './common/guards/role.guard';
+import { PatientSummaryComponent } from './consultation/components/patient-summary/patient-summary.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    // { path: 'doctor-login', component: DoctorLoginComponent }, // Removed
-    // { path: 'admin-login', component: AdminLoginComponent },   // Removed
     { path: 'register', component: RegisterComponent },
 
     // 1. Main Dashboard (Exact Root Match)
@@ -93,6 +91,7 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: DoctorDashboardComponent },
             { path: 'dashboard/:id', component: DoctorDashboardComponent },
+            { path: 'patient-summary/:id', component: PatientSummaryComponent },
         ]
     },
     {
@@ -107,6 +106,5 @@ export const routes: Routes = [
             { path: 'blood-bank', component: BloodbankAdminDashboardComponent },
         ]
     },
-    // Old routes removed
     { path: '**', redirectTo: '' }
 ];

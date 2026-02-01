@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConsultationService } from '../../services/consultation.service';
 import { DoctorAvailability, Appointment, Doctor } from '../../models/consultation.models';
 import { AuthService } from '../../../common/services/auth.service';
@@ -19,9 +20,12 @@ export class DoctorDashboardComponent implements OnInit {
   slots: DoctorAvailability[] = [];
   appointments: Appointment[] = [];
   selectedAppointment: Appointment | null = null;
-  showPatientModal: boolean = false;
 
-  constructor(private consultationService: ConsultationService, private authService: AuthService) { }
+  constructor(
+    private consultationService: ConsultationService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.generateDates();
@@ -70,12 +74,6 @@ export class DoctorDashboardComponent implements OnInit {
   }
 
   viewPatientDetails(appt: Appointment) {
-    this.selectedAppointment = appt;
-    this.showPatientModal = true;
-  }
-
-  closeModal() {
-    this.showPatientModal = false;
-    this.selectedAppointment = null;
+    this.router.navigate(['/doctor/patient-summary', appt.id]);
   }
 }

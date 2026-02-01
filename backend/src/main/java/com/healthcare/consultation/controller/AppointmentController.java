@@ -39,6 +39,11 @@ public class AppointmentController {
         return appointmentService.getDoctorAppointments(doctorId);
     }
 
+    @GetMapping("/{id}")
+    public Appointment getAppointmentById(@PathVariable Long id) {
+        return appointmentService.getAppointmentById(id);
+    }
+
     @PutMapping("/{id}/payment")
     public org.springframework.http.ResponseEntity<?> updatePaymentStatus(@PathVariable Long id,
             @RequestBody Map<String, String> request) {

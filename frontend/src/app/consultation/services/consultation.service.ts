@@ -40,6 +40,10 @@ export class ConsultationService {
         return this.http.get<Appointment[]>(`${this.apiUrl}/appointments/doctor/${doctorId}`);
     }
 
+    getAppointmentById(id: number): Observable<Appointment> {
+        return this.http.get<Appointment>(`${this.apiUrl}/appointments/${id}`);
+    }
+
     updatePaymentStatus(apptId: number, status: string): Observable<Appointment> {
         return this.http.put<Appointment>(`${this.apiUrl}/appointments/${apptId}/payment`, { status });
     }

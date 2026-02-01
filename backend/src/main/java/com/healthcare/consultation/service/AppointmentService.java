@@ -134,4 +134,9 @@ public class AppointmentService {
         public List<Appointment> getDoctorAppointments(Long doctorId) {
                 return appointmentRepository.findByDoctorId(doctorId);
         }
+
+        public Appointment getAppointmentById(Long id) {
+                return appointmentRepository.findById(id)
+                                .orElseThrow(() -> new RuntimeException("Appointment not found with ID: " + id));
+        }
 }
