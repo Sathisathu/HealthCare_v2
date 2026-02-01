@@ -34,4 +34,14 @@ public class SubscriptionController {
     public com.healthcare.common.entity.Patient getUserSubscription(@PathVariable Long userId) {
         return subscriptionService.getPatientDetails(userId);
     }
+
+    @GetMapping("/pending")
+    public List<SubscriptionTransaction> getPendingSubscriptions() {
+        return subscriptionService.getPendingSubscriptions();
+    }
+
+    @PostMapping("/approve/{transactionId}")
+    public SubscriptionTransaction approveSubscription(@PathVariable Long transactionId) {
+        return subscriptionService.approveSubscription(transactionId);
+    }
 }

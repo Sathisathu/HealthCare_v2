@@ -13,6 +13,7 @@ export interface SubscriptionTransaction {
     purchaseDate: string;
     expiryDate: string;
     status: string;
+    user: { id: number; name: string; email: string };
 }
 
 // Update User interface to include subscription details if needed,

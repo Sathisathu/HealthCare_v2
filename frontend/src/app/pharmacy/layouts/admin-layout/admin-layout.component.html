@@ -7,6 +7,9 @@
             <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <span class="icon">📊</span> Inventory
             </a>
+            <a routerLink="/admin/subscriptions" routerLinkActive="active">
+                <span class="icon">✅</span> Approvals
+            </a>
 
             <!-- Add more admin links here as we build them -->
             <a (click)="onLogout()" class="exit-link" style="cursor: pointer;">

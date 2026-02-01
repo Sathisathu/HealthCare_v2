@@ -69,8 +69,8 @@ export class SubscriptionPlansComponent implements OnInit {
             // paymentType="ONLINE" (Simulated)
             this.subService.purchaseSubscription(userId, plan.id, 'ONLINE').subscribe({
                 next: (res) => {
-                    alert('Subscription Activated Successfully!');
-                    this.router.navigate(['/patient-dashboard']); // Or subscription dashboard
+                    alert('Subscription Request Sent! Please wait for Admin Approval.');
+                    this.router.navigate(['/profile']); // Navigate to profile to see current status
                 },
                 error: (err) => alert('Purchase Failed: ' + (err.error?.message || err.message))
             });

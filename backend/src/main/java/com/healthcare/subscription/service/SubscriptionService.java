@@ -54,23 +54,51 @@ public class SubscriptionService {
         // Mock Payment Check (Assume paymentType="ONLINE" is valid)
         // In real app, integrate payment gateway here.
 
-        // Update User
-        user.setSubscriptionType(plan.getName().toUpperCase());
-        user.setPharmacyCreditBalance(plan.getPharmacyCreditLimit());
-        user.setRemainingConsultations(plan.getConsultationLimit());
-        user.setSubscriptionExpiryDate(java.time.LocalDate.now().plusMonths(2));
-        patientRepository.save(user);
-
         // Record Transaction
         SubscriptionTransaction transaction = new SubscriptionTransaction();
         transaction.setUser(user);
         transaction.setPlanName(plan.getName());
         transaction.setAmount(plan.getPrice());
         transaction.setPurchaseDate(LocalDateTime.now());
-        transaction.setExpiryDate(LocalDateTime.now().plusMonths(2));
-        transaction.setStatus("ACTIVE");
+        // Expiry date is set only upon approval
+        transaction.setExpiryDate(null);
+        transaction.setStatus("PENDING");
 
         return transactionRepository.save(transaction);
+    }
+
+    @Transactional
+    public SubscriptionTransaction approveSubscription(Long transactionId) {
+        SubscriptionTransaction transaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new RuntimeException("Transaction not found"));
+
+        if (!"PENDING".equalsIgnoreCase(transaction.getStatus())) {
+            throw new RuntimeException("Transaction is not in PENDING state");
+        }
+
+        Patient user = transaction.getUser();
+        SubscriptionPlan plan = planRepository.findByName(transaction.getPlanName());
+
+        if (plan == null) {
+            throw new RuntimeException("Plan details not found");
+        }
+
+        // Activate Subscription for User
+        user.setSubscriptionType(plan.getName().toUpperCase());
+        user.setPharmacyCreditBalance(plan.getPharmacyCreditLimit());
+        user.setRemainingConsultations(plan.getConsultationLimit());
+        user.setSubscriptionExpiryDate(java.time.LocalDate.now().plusMonths(2));
+        patientRepository.save(user);
+
+        // Update Transaction
+        transaction.setStatus("ACTIVE");
+        transaction.setExpiryDate(LocalDateTime.now().plusMonths(2));
+
+        return transactionRepository.save(transaction);
+    }
+
+    public List<SubscriptionTransaction> getPendingSubscriptions() {
+        return transactionRepository.findByStatus("PENDING");
     }
 
     // Helper to get transaction details (optional)

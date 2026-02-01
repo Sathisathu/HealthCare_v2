@@ -100,6 +100,7 @@ export const routes: Routes = [
         data: { role: 'ADMIN' },
         children: [
             { path: '', component: AdminDashboardComponent },
+            { path: 'subscriptions', loadComponent: () => import('./admin/components/admin-subscription/admin-subscription.component').then(m => m.AdminSubscriptionComponent) },
         ]
     },
     {

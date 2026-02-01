@@ -110,20 +110,35 @@ export class PatientProfileComponent implements OnInit {
     }
     topUp(): void {
         if (this.patient && this.patient.id) {
-            const currentBalance = this.patient.walletBalance || 0;
-            const updatedUser = { ...this.patient, walletBalance: currentBalance + 500 };
+            // Call new Wallet API
+            const amount = 500;
+            const url = 'http://localhost:8080/api/wallet/topup';
 
-            this.userService.updateUser(this.patient.id, updatedUser).subscribe({
-                next: (data: User) => {
-                    this.patient = data;
-                    this.authService.checkSession();
-                    alert('Wallet topped up with 500 coins!');
-                },
-                error: (err: any) => {
-                    console.error('Top up failed:', err);
-                    alert('Failed to top up wallet');
-                }
-            });
+            // Using fetch since I don't want to inject HttpClient just for this quick fix, 
+            // or I can add HttpClient to constructor if needed. 
+            // Better to use a service, but for speed in this component:
+
+            // Actually, let's use the userService which already has http client injected? 
+            // No, userService is specific. I should ideally create WalletService but for now I will add to PatientProfile.
+
+            // Wait, I should add HttpClient to constructor if not present.
+            // It uses UserService. let's add the call in UserService or directly here.
+
+            // Let's add standard fetch for now to avoid large refactor of dependencies
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: this.patient.id, amount: amount }),
+                credentials: 'include'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Top-up Request Sent! Waiting for Admin Approval.');
+                    } else {
+                        alert('Failed to request top-up.');
+                    }
+                })
+                .catch(err => console.error(err));
         }
     }
 }

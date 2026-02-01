@@ -6,13 +6,17 @@ C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\co
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\config\SecurityConfig.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\controller\AuthController.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\controller\PatientController.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\controller\WalletController.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\dto\LoginRequest.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\dto\RegisterRequest.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\entity\Admin.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\entity\Patient.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\entity\WalletTransaction.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\repository\AdminRepository.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\repository\PatientRepository.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\repository\WalletTransactionRepository.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\service\CustomUserDetailsService.java
+C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\common\service\WalletService.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\consultation\config\ConsultationDataInitializer.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\consultation\controller\AppointmentController.java
 C:\Users\sathi\Desktop\TCS ILP\HealthCare\HealthCare_v2\backend\src\main\java\com\healthcare\consultation\controller\DoctorController.java

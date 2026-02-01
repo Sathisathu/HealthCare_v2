@@ -22,4 +22,12 @@ export class SubscriptionService {
     getUserSubscription(userId: number): Observable<any> {
         return this.http.get<any>(`${this.baseUrl}/user/${userId}`);
     }
+
+    getPendingSubscriptions(): Observable<SubscriptionTransaction[]> {
+        return this.http.get<SubscriptionTransaction[]>(`${this.baseUrl}/pending`);
+    }
+
+    approveSubscription(transactionId: number): Observable<SubscriptionTransaction> {
+        return this.http.post<SubscriptionTransaction>(`${this.baseUrl}/approve/${transactionId}`, {});
+    }
 }

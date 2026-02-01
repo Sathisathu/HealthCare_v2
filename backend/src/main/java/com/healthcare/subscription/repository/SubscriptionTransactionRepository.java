@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface SubscriptionTransactionRepository extends JpaRepository<SubscriptionTransaction, Long> {
     List<SubscriptionTransaction> findByUserId(Long userId);
+
+    List<SubscriptionTransaction> findByStatus(String status);
 }

@@ -1,7 +1,10 @@
 <div class="admin-wrapper card">
     <div class="admin-header">
         <h2>Inventory Management</h2>
-        <button class="btn-primary" (click)="cancelEdit()" *ngIf="editingProduct">Add New Instead</button>
+        <div class="header-actions">
+            <a routerLink="/admin/subscriptions" class="btn-secondary">Manage Subscriptions</a>
+            <button class="btn-primary" (click)="cancelEdit()" *ngIf="editingProduct">Add New Instead</button>
+        </div>
     </div>
 
     <div class="admin-content">

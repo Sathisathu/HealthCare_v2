@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/error").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/lab/tests", "/api/consultation/doctors", "/api/patients/**").permitAll()
+                        .requestMatchers("/api/wallet/**", "/api/subscriptions/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint((request, response, authException) -> {
