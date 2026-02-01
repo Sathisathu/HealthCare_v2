@@ -1,9 +1,17 @@
 # IDEs and Editors
 .vscode/
 .idea/
+.project
+.classpath
+.settings/
 *.swp
 *.swo
+*.launch
+*.sublime-workspace
+.history/
 .DS_Store
+Thumbs.db
+desktop.ini
 
 # Backend (Maven)
 backend/target/
@@ -13,14 +21,16 @@ backend/*.war
 # Frontend (Node/Angular)
 frontend/node_modules/
 frontend/dist/
+frontend/tmp/
+frontend/out-tsc/
+frontend/bazel-out/
 frontend/.angular/
-frontend/.editorconfig
-frontend/build_error.log
+frontend/.sass-cache/
+frontend/coverage/
+frontend/typings/
+frontend/*.log
+frontend/connect.lock
 
 # Environment variables
 .env
 .env.*
-
-# OS files
-Thumbs.db
-desktop.ini
