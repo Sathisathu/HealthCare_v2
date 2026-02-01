@@ -53,53 +53,53 @@ public class LabBookingController {
         String status = request.get("status");
         return labTestService.updatePaymentStatus(id, status);
     }
-}
 
-class BookingRequest {
-    private Long patientId;
-    private String testName;
-    private String date;
-    private String time;
-    private String paymentType;
+    public static class BookingRequest {
+        private Long patientId;
+        private String testName;
+        private String date;
+        private String time;
+        private String paymentType;
 
-    // Getters and Setters
-    public Long getPatientId() {
-        return patientId;
-    }
+        // Getters and Setters
+        public Long getPatientId() {
+            return patientId;
+        }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
-    }
+        public void setPatientId(Long patientId) {
+            this.patientId = patientId;
+        }
 
-    public String getTestName() {
-        return testName;
-    }
+        public String getTestName() {
+            return testName;
+        }
 
-    public void setTestName(String testName) {
-        this.testName = testName;
-    }
+        public void setTestName(String testName) {
+            this.testName = testName;
+        }
 
-    public String getDate() {
-        return date;
-    }
+        public String getDate() {
+            return date;
+        }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+        public void setDate(String date) {
+            this.date = date;
+        }
 
-    public String getTime() {
-        return time;
-    }
+        public String getTime() {
+            return time;
+        }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
+        public void setTime(String time) {
+            this.time = time;
+        }
 
-    public String getPaymentType() {
-        return paymentType;
-    }
+        public String getPaymentType() {
+            return paymentType;
+        }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
+        public void setPaymentType(String paymentType) {
+            this.paymentType = paymentType;
+        }
     }
 }

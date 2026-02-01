@@ -106,3 +106,29 @@ button {
     background: #ffe0e3;
     color: var(--danger);
 }
+
+@media print {
+
+    .main-header,
+    .main-footer,
+    .lab-header,
+    .lab-footer,
+    .doctor-header,
+    .doctor-footer,
+    .no-print {
+        display: none !important;
+    }
+
+    .receipt-page {
+        padding: 0;
+        background: white;
+    }
+
+    .receipt-container {
+        box-shadow: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+}

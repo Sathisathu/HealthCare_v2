@@ -56,7 +56,8 @@ export class MyLabBookingsComponent implements OnInit {
                     },
                     error: (err) => {
                         booking.isPaying = false;
-                        alert('Payment failed: ' + err.message);
+                        const msg = err.error?.message || err.error || err.message || 'Unknown Error';
+                        alert('Payment failed: ' + msg);
                     }
                 });
             }, 1500);

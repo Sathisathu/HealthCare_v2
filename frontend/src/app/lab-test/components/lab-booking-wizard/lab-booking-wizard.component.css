@@ -150,37 +150,28 @@
     pointer-events: none;
 }
 
-.confirm-bar {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1e293b;
-    color: white;
-    padding: 1.2rem 2.5rem;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-}
-
-.confirm-btn {
-    background: #10b981;
+.confirm-btn-full {
+    width: 100%;
+    background: #2563eb;
     color: white;
     border: none;
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
-    font-weight: bold;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 600;
     cursor: pointer;
     font-size: 1rem;
     transition: 0.2s;
+    margin-top: 0.5rem;
 }
 
-.confirm-btn:hover {
-    background: #059669;
-    transform: scale(1.05);
+.confirm-btn-full:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+}
+
+.summary-text strong {
+    color: #0f172a;
 }
 
 .payment-options {

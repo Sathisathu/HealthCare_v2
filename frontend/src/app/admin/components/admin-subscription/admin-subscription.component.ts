@@ -16,7 +16,7 @@ import { SubscriptionTransaction } from '../../../subscription/models/subscripti
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>User ID</th>
+                        <th>User Name</th>
                         <th>Plan</th>
                         <th>Amount</th>
                         <th>Date</th>
@@ -26,7 +26,7 @@ import { SubscriptionTransaction } from '../../../subscription/models/subscripti
                 <tbody>
                     <tr *ngFor="let tx of pendingTransactions">
                         <td>{{ tx.id }}</td>
-                        <td>{{ tx.user.id }}</td>
+                        <td>{{ tx.user.name }}</td>
                         <td>{{ tx.planName }}</td>
                         <td>{{ tx.amount | currency:'INR'}}</td>
                         <td>{{ tx.purchaseDate | date:'short' }}</td>
@@ -52,7 +52,7 @@ import { SubscriptionTransaction } from '../../../subscription/models/subscripti
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>User ID</th>
+                        <th>User Name</th>
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Action</th>
@@ -61,7 +61,7 @@ import { SubscriptionTransaction } from '../../../subscription/models/subscripti
                 <tbody>
                     <tr *ngFor="let tx of pendingWalletTx">
                         <td>{{ tx.id }}</td>
-                        <td>{{ tx.user.id }}</td>
+                        <td>{{ tx.user.name }}</td>
                         <td>{{ tx.amount | currency:'INR' }}</td>
                         <td>{{ tx.transactionDate | date:'short' }}</td>
                         <td>

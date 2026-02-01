@@ -91,7 +91,10 @@ export class LabBookingWizardComponent implements OnInit {
                     alert('Lab Test Booked Successfully!');
                     this.router.navigate(['/lab-test/my-bookings']);
                 },
-                error: (err) => alert('Booking Failed: ' + err.message)
+                error: (err) => {
+                    const msg = err.error?.message || err.error || err.message || 'Unknown Error';
+                    alert('Booking Failed: ' + msg);
+                }
             });
         }
     }

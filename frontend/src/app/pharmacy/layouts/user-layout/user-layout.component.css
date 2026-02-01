@@ -2,8 +2,8 @@
     background: var(--white);
     box-shadow: var(--shadow);
     padding: 1rem 0;
-    position: sticky;
-    top: 0;
+    /* position: sticky; */
+    /* top: 0; */
     z-index: 1000;
     margin-bottom: 2rem;
 }
@@ -68,9 +68,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    padding-left: 1.5rem;
-    border-left: 1px solid #e2e8f0;
-    margin-left: 1.5rem;
+    margin-left: auto;
 }
 
 .user-name {
@@ -83,11 +81,12 @@
     background: #fef2f2;
     color: #ef4444;
     border: 1px solid #fee2e2;
-    padding: 6px 16px;
+    padding: 10px 24px;
     border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s;
+    font-size: 1rem;
 }
 
 .logout-btn:hover {

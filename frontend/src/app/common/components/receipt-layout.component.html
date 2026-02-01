@@ -10,7 +10,7 @@
         <!-- Common Header -->
         <div class="receipt-header">
             <div class="brand">
-                <h1>HealthCare Plus</h1>
+                <h1>MedConnect</h1>
                 <p>Hospital & Research Center</p>
                 <div class="subtitle">Official Payment Receipt</div>
             </div>
@@ -21,7 +21,8 @@
                 </div>
                 <div class="row">
                     <span>Date:</span>
-                    <strong>{{ (receiptData?.orderDate || receiptData?.date) | date:'mediumDate' }}</strong>
+                    <strong>{{ (receiptData?.orderDate || receiptData?.date || receiptData?.slot?.date) |
+                        date:'mediumDate' }}</strong>
                 </div>
             </div>
         </div>
@@ -113,14 +114,10 @@
                 <span class="amount">Rs. {{ receiptData?.totalAmount || receiptData?.doctor?.consultationFee ||
                     receiptData?.slot?.price || 50 }}</span>
             </div>
-
-            <div class="stamp-box">
-                <div class="signature">Authorized Signature</div>
-            </div>
         </div>
 
         <div class="actions no-print">
-            <button class="print-btn" (click)="print()">🖨️ Print Receipt</button>
+            <button class="print-btn" (click)="print()">Print Receipt</button>
         </div>
     </div>
 </div>

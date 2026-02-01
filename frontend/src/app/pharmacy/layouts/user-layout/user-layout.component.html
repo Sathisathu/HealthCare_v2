@@ -17,7 +17,8 @@
 
             <!-- Consultation Specific Links -->
             <ng-container *ngIf="isConsultation()">
-                <a routerLink="/consultation" routerLinkActive="active" title="Doctor List">
+                <a routerLink="/consultation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                    title="Doctor List">
                     Doctors
                 </a>
                 <a routerLink="/consultation/my-appointments" routerLinkActive="active" title="My Consultations">
@@ -38,15 +39,12 @@
 
             <!-- Blood Donation Specific Links -->
             <ng-container *ngIf="isBloodDonation()">
-                <a routerLink="/blood-donation" routerLinkActive="active" title="Volunteer">
-                    Donate
-                </a>
+                <!-- Single page module, no tabs needed -->
             </ng-container>
 
         </nav>
 
         <div class="user-profile" *ngIf="currentUser$ | async as user">
-            <span class="user-name" routerLink="/profile" style="cursor: pointer;">{{user.name}}</span>
             <button class="logout-btn" (click)="logout()">Logout</button>
         </div>
     </div>
@@ -58,6 +56,6 @@
 
 <footer class="main-footer">
     <div class="container">
-        <p>&copy; 2026 MedConnect HealthCare - Your Holistic Health Partner</p>
+        <p>&copy; 2026 MedConnect - Your Holistic Health Partner</p>
     </div>
 </footer>

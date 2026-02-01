@@ -53,6 +53,8 @@
     position: relative;
     display: flex;
     align-items: center;
+    border: none;
+    padding: 0;
 }
 
 .input-field .icon {
@@ -64,9 +66,10 @@
 .input-field input,
 .input-field select {
     width: 100%;
-    padding: 0.8rem 1rem 0.8rem 3rem;
+    padding: 0.8rem 1rem;
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    border: none;
+    background: #f8fafc;
     font-size: 1rem;
     transition: all 0.2s;
     font-family: inherit;
@@ -75,8 +78,7 @@
 .input-field input:focus,
 .input-field select:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    background: #f1f5f9;
 }
 
 .auth-btn {
@@ -137,4 +139,15 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.field-error {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.field-error small {
+    color: #dc2626;
+    font-size: 0.85rem;
+    display: block;
 }

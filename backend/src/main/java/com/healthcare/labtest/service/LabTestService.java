@@ -11,6 +11,8 @@ import java.util.List;
 import com.healthcare.common.entity.Patient;
 import com.healthcare.labtest.entity.LabTestBooking;
 import com.healthcare.labtest.repository.LabTestBookingRepository;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 @Service
 public class LabTestService {
@@ -60,10 +62,11 @@ public class LabTestService {
     public LabTestBooking bookTest(Long patientId, String testName, LocalDate date, String time, String paymentType) {
         // 1. Atomic Check if slot is already booked to prevent double booking
         if (slotRepository.existsByTestNameAndDateAndTime(testName, date, time)) {
-            throw new RuntimeException("This slot is already booked. Please choose another time.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "This slot is already booked. Please choose another time.");
         }
 
-        // 2. Create and Save Slot (Persist the booking record)
+        // ... existing slot creation ...
         LabTestSlot slot = new LabTestSlot();
         slot.setTestName(testName);
         slot.setDate(date);
@@ -81,23 +84,20 @@ public class LabTestService {
         // 3. Create and Save Booking
         LabTestBooking booking = new LabTestBooking();
         Patient patient = patientRepository.findById(patientId)
-                .orElseThrow(() -> new RuntimeException("Patient not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Patient not found"));
 
         booking.setPatient(patient);
         booking.setSlot(savedSlot);
         booking.setStatus("BOOKED");
 
         // Handle Payment Type
-        // Handle Payment Type
         if ("SUBSCRIPTION".equalsIgnoreCase(paymentType)) {
             if (!"NONE".equalsIgnoreCase(patient.getSubscriptionType()) &&
                     patient.getSubscriptionExpiryDate() != null &&
                     patient.getSubscriptionExpiryDate().isAfter(java.time.LocalDate.now())) {
-
-                // Subscription covers Lab Tests (Unlimited as per req)
                 booking.setPaymentStatus("PAID");
             } else {
-                throw new RuntimeException("No active subscription for free lab tests.");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No active subscription for free lab tests.");
             }
         } else if ("WALLET".equalsIgnoreCase(paymentType)) {
             double amount = price;
@@ -108,37 +108,36 @@ public class LabTestService {
             }
 
             if (patient.getWalletBalance() < coinsNeeded) {
-                throw new RuntimeException("Insufficient wallet balance. Needed: " + coinsNeeded + " coins. You have: "
-                        + patient.getWalletBalance());
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Insufficient wallet balance. Needed: " + coinsNeeded + " coins. You have: "
+                                + patient.getWalletBalance());
             }
 
             patient.setWalletBalance(patient.getWalletBalance() - coinsNeeded);
             patientRepository.save(patient);
-
             booking.setPaymentStatus("PAID");
         } else {
             booking.setPaymentStatus("PENDING");
         }
 
         booking.setReceiptUrl("LAB-" + System.currentTimeMillis());
-
         return bookingRepository.save(booking);
     }
 
     @org.springframework.transaction.annotation.Transactional
     public LabTestBooking updatePaymentStatus(Long id, String status) {
         LabTestBooking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Booking not found"));
 
         System.out.println("DEBUG: updatePaymentStatus called for Lab ID: " + id + " with status: " + status);
 
         if ("PAID".equalsIgnoreCase(status) && !"PAID".equalsIgnoreCase(booking.getPaymentStatus())) {
-            // Fetch fresh patient to avoid proxy/stale balance issues
             if (booking.getPatient() == null || booking.getPatient().getId() == null) {
-                throw new RuntimeException("Booking has no associated patient for wallet deduction");
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                        "Booking has no associated patient for wallet deduction");
             }
             Patient patient = patientRepository.findById(booking.getPatient().getId())
-                    .orElseThrow(() -> new RuntimeException("Patient record not found"));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Patient record not found"));
 
             double amount = (booking.getSlot().getPrice() != null) ? booking.getSlot().getPrice() : 50.0;
             double coinsNeeded = amount;
@@ -147,19 +146,20 @@ public class LabTestService {
                 patient.setWalletBalance(0.0);
             }
 
-            System.out.println("DEBUG: Payment for Lab Booking " + id + ". Patient: " + patient.getName()
-                    + ", Current Balance: " + patient.getWalletBalance() + ", Needed: " + coinsNeeded);
-
             if (patient.getWalletBalance() < coinsNeeded) {
-                throw new RuntimeException("Insufficient wallet balance. Needed: " + coinsNeeded + " coins. You have: "
-                        + patient.getWalletBalance());
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Insufficient wallet balance. Needed: " + coinsNeeded + " coins. You have: "
+                                + patient.getWalletBalance());
             }
 
             patient.setWalletBalance(patient.getWalletBalance() - coinsNeeded);
             patientRepository.saveAndFlush(patient);
+            booking.setPaymentStatus(status);
 
             System.out.println("DEBUG: Wallet deducted successfully for Lab Booking Patient " + patient.getId()
                     + ". New Balance: " + patient.getWalletBalance());
+
+            return bookingRepository.save(booking);
         }
 
         booking.setPaymentStatus(status);

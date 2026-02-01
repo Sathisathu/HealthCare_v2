@@ -5,7 +5,6 @@
             <!-- Pure Dashboard Layout - No Module specific links here -->
         </nav>
         <div class="user-profile" *ngIf="currentUser$ | async as user">
-            <span class="user-name">👤 {{user.name}}</span>
             <button class="logout-btn" (click)="logout()">Logout</button>
         </div>
     </div>
@@ -17,6 +16,6 @@
 
 <footer class="main-footer">
     <div class="container">
-        <p>&copy; 2026 HealthCare Services - Your Health, Our Priority</p>
+        <p>&copy; 2026 MedConnect - Your Health, Our Priority</p>
     </div>
 </footer>

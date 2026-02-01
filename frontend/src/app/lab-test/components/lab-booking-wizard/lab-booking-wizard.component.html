@@ -60,14 +60,14 @@
                         <span class="sub-text">Pay at the center/later</span>
                     </span>
                 </label>
+                <div class="confirm-section-inline" *ngIf="selectedSlot">
+                    <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #f1f5f9;">
+                    <div class="summary-text" style="margin-bottom: 1rem; color: #64748b; font-size: 0.9rem;">
+                        Booking for <strong>{{selectedDate | date:'mediumDate'}}</strong> at
+                        <strong>{{selectedSlot.time}}</strong>
+                    </div>
+                    <button (click)="confirmBooking()" class="confirm-btn-full">Confirm Booking</button>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="confirm-bar" *ngIf="selectedSlot">
-        <div class="summary">
-            <strong>Confirmed Selection:</strong> {{selectedDate | date:'fullDate'}} at {{selectedSlot.time}}
-        </div>
-        <button (click)="confirmBooking()" class="confirm-btn">Confirm & Book Now</button>
-    </div>
-</div>
