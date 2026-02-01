@@ -1,6 +1,6 @@
 <div class="container">
     <div class="dash-header" *ngIf="doctor">
-        <h1>Welcome {{doctor.name}} 🏥</h1>
+        <h1>Welcome {{doctor.name}}</h1>
         <p>Location: <strong>{{doctor.floor || 'Floor TBD'}}, {{doctor.roomNumber || 'Room TBD'}}</strong></p>
         <p>Manage your hospital availability and view upcoming appointments.</p>
     </div>
@@ -9,7 +9,7 @@
         <!-- Availability Management -->
         <div class="card availability-card" [class.loading]="!doctor">
             <div class="card-header">
-                <h2>My Slots 📅</h2>
+                <h2>My Slots</h2>
                 <div class="controls">
                     <select [(ngModel)]="selectedDate" (change)="onDateChange()" class="date-select">
                         <option *ngFor="let date of dates" [value]="date">{{date | date:'EEE, MMM d'}}</option>
@@ -35,7 +35,7 @@
 
         <!-- Appointment List -->
         <div class="card appointments-card">
-            <h2>Upcoming Consultations 🤝</h2>
+            <h2>Upcoming Consultations</h2>
             <div class="appointment-list">
                 <div *ngFor="let appt of appointments" class="appt-item" (click)="viewPatientDetails(appt)">
                     <div class="appt-info">
@@ -43,7 +43,7 @@
                             {{appt.patient?.id}})</strong>
                         <p>{{appt.date}} at {{appt.slotTime}}</p>
                         <p class="appt-location" *ngIf="appt.consultationType === 'OFFLINE'">
-                            📍 {{appt.doctor.floor || 'Floor TBD'}}, {{appt.doctor.roomNumber || 'Room TBD'}}
+                            {{appt.doctor.floor || 'Floor TBD'}}, {{appt.doctor.roomNumber || 'Room TBD'}}
                         </p>
                         <div class="tags">
                             <span class="type-tag" [class]="appt.consultationType">{{appt.consultationType}}</span>

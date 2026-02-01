@@ -2,7 +2,7 @@
     <section class="hero-section" *ngIf="currentUser$ | async as user">
         <h1>Welcome, <span class="highlight">{{user.name}}</span></h1>
         <div class="user-stats">
-            <span class="coin-badge">💰 {{user.walletBalance || 0}} Coins</span>
+            <span class="coin-badge">{{user.walletBalance || 0}} Coins</span>
         </div>
         <p>Your holistic healthcare companion. What would you like to do today?</p>
     </section>
@@ -10,9 +10,7 @@
     <div class="services-grid">
         <!-- Profile Module -->
         <a routerLink="/profile" class="service-card profile-card">
-            <div class="icon-wrapper">
-                👤
-            </div>
+
             <h2>My Profile</h2>
             <p>View and manage your personal health information and wallet.</p>
             <span class="action-text">Manage Profile &rarr;</span>
@@ -20,9 +18,7 @@
 
         <!-- Pharmacy Module -->
         <a routerLink="/pharmacy" class="service-card pharmacy-card">
-            <div class="icon-wrapper">
-                💊
-            </div>
+
             <h2>Pharmacy</h2>
             <p>Order medicines & essentials delivered to your doorstep.</p>
             <span class="action-text">Shop Now &rarr;</span>
@@ -30,9 +26,7 @@
 
         <!-- Consultation Module -->
         <a routerLink="/consultation" class="service-card consultation-card">
-            <div class="icon-wrapper">
-                👨‍⚕️
-            </div>
+
             <h2>Consultation</h2>
             <p>Book appointments with top doctors.</p>
             <span class="action-text">Book Now &rarr;</span>
@@ -40,9 +34,7 @@
 
         <!-- Lab Tests Module -->
         <a routerLink="/lab-test" class="service-card lab-card">
-            <div class="icon-wrapper">
-                🔬
-            </div>
+
             <h2>Lab Tests</h2>
             <p>Book medical tests and view structured results online.</p>
             <span class="action-text">Explore Tests &rarr;</span>
@@ -50,9 +42,7 @@
 
         <!-- Blood Donation Module -->
         <a routerLink="/blood-donation" class="service-card blood-card">
-            <div class="icon-wrapper">
-                ❤️
-            </div>
+
             <h2>Blood Donation</h2>
             <p>Save lives by volunteering and earn 3000 MedConnect Coins.</p>
             <span class="action-text">Volunteer Now &rarr;</span>
@@ -60,9 +50,7 @@
         <!-- Subscription Module -->
         <!-- Subscription Module -->
         <a routerLink="/subscriptions/plans" class="service-card subscription-card">
-            <div class="icon-wrapper">
-                ✨
-            </div>
+
             <h2>Explore Plans</h2>
             <p>Unlock exclusive benefits with premium plans.</p>
             <span class="action-text">View Plans &rarr;</span>

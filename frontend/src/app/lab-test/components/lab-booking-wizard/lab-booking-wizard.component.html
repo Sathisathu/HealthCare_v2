@@ -7,7 +7,7 @@
     <div class="grid">
         <!-- Step 1: Date Selection -->
         <div class="card date-card">
-            <h3>1. Select Date 📅</h3>
+            <h3>1. Select Date</h3>
             <div class="date-list">
                 <div *ngFor="let date of dates" class="date-item" [class.active]="selectedDate === date"
                     (click)="onDateSelect(date)">
@@ -20,7 +20,7 @@
 
         <!-- Step 2: Slot Selection -->
         <div class="card slot-card" [class.disabled]="!selectedDate">
-            <h3>2. Choose Time Slot ⏰</h3>
+            <h3>2. Choose Time Slot</h3>
             <div class="slots-grid" *ngIf="selectedDate; else dateHint">
                 <div *ngFor="let slot of slots" class="slot-item" [class.booked]="slot.booked"
                     [class.selected]="selectedSlot?.id === slot.id" (click)="!slot.booked && selectSlot(slot)">
@@ -35,7 +35,7 @@
 
         <!-- Step 3: Payment Method -->
         <div class="card payment-card" [class.disabled]="!selectedSlot">
-            <h3>3. Payment Method 💳</h3>
+            <h3>3. Payment Method</h3>
             <div class="payment-options">
                 <label class="payment-option" [class.selected]="paymentType === 'SUBSCRIPTION'" *ngIf="hasSubscription">
                     <input type="radio" name="paymentType" value="SUBSCRIPTION" [(ngModel)]="paymentType">
@@ -43,7 +43,6 @@
                         <strong>Subscription Benefit</strong>
                         <span class="sub-text">Free Lab Test Included!</span>
                     </span>
-                    <span class="icon">💎</span>
                 </label>
 
                 <label class="payment-option" [class.selected]="paymentType === 'WALLET'" *ngIf="!hasSubscription">
@@ -52,7 +51,6 @@
                         <strong>Wallet Balance</strong>
                         <span class="sub-text">Pay immediately using coins</span>
                     </span>
-                    <span class="icon">🪙</span>
                 </label>
 
                 <label class="payment-option" [class.selected]="paymentType === 'PAY_LATER'" *ngIf="!hasSubscription">
@@ -61,7 +59,6 @@
                         <strong>Pay Later</strong>
                         <span class="sub-text">Pay at the center/later</span>
                     </span>
-                    <span class="icon">🕒</span>
                 </label>
             </div>
         </div>

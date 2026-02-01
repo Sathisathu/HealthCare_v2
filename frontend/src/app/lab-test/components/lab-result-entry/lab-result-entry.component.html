@@ -6,24 +6,7 @@
             <p><strong>Test:</strong> {{ booking.slot.testName }}</p>
         </div>
 
-        <div class="template-selector">
-            <label>Select Result Template:</label>
-            <select [(ngModel)]="selectedTemplate" (change)="initForm()">
-                <option value="CBC">Complete Blood Count (CBC)</option>
-                <option value="LIPID">Lipid Profile</option>
-                <option value="THYROID">Thyroid Profile</option>
-                <option value="GLUCOSE_FBS">Glucose (FBS)</option>
-                <option value="GLUCOSE_PPBS">Glucose (PPBS)</option>
-                <option value="HBA1C">HbA1c</option>
-                <option value="LFT">Liver Function Test (LFT)</option>
-                <option value="KFT">Kidney Function Test (KFT)</option>
-                <option value="URINE">Urine Routine</option>
-                <option value="COVID">COVID-19</option>
-                <option value="VITAMIN_D">Vitamin D</option>
-                <option value="VITAMIN_B12">Vitamin B12</option>
-                <option value="GENERIC">Generic / Other</option>
-            </select>
-        </div>
+
 
         <div class="form-container" *ngIf="resultData">
             <!-- CBC FORM -->

@@ -5,23 +5,23 @@
             <!-- Pharmacy Specific Links -->
             <ng-container *ngIf="isPharmacy()">
                 <a routerLink="/pharmacy" routerLinkActive="active" title="Pharmacy Store">
-                    <span class="nav-icon">💊</span> Pharmacy
+                    Pharmacy
                 </a>
                 <a routerLink="/cart" routerLinkActive="active" title="Cart">
-                    <span class="nav-icon">🛒</span> Cart
+                    Cart
                 </a>
                 <a routerLink="/orders" routerLinkActive="active" title="My Orders">
-                    <span class="nav-icon">📦</span> Orders
+                    Orders
                 </a>
             </ng-container>
 
             <!-- Consultation Specific Links -->
             <ng-container *ngIf="isConsultation()">
                 <a routerLink="/consultation" routerLinkActive="active" title="Doctor List">
-                    <span class="nav-icon">👨‍⚕️</span> Doctors
+                    Doctors
                 </a>
                 <a routerLink="/consultation/my-appointments" routerLinkActive="active" title="My Consultations">
-                    <span class="nav-icon">🗓️</span> Appointments
+                    Appointments
                 </a>
             </ng-container>
 
@@ -29,24 +29,24 @@
             <ng-container *ngIf="isLabTest()">
                 <a routerLink="/lab-test" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                     title="Test List">
-                    <span class="nav-icon">🔬</span> Tests
+                    Tests
                 </a>
                 <a routerLink="/lab-test/my-bookings" routerLinkActive="active" title="My Lab Tests">
-                    <span class="nav-icon">📋</span> My Bookings
+                    My Bookings
                 </a>
             </ng-container>
 
             <!-- Blood Donation Specific Links -->
             <ng-container *ngIf="isBloodDonation()">
                 <a routerLink="/blood-donation" routerLinkActive="active" title="Volunteer">
-                    <span class="nav-icon">❤️</span> Donate
+                    Donate
                 </a>
             </ng-container>
 
         </nav>
 
         <div class="user-profile" *ngIf="currentUser$ | async as user">
-            <span class="user-name" routerLink="/profile" style="cursor: pointer;">👤 {{user.name}}</span>
+            <span class="user-name" routerLink="/profile" style="cursor: pointer;">{{user.name}}</span>
             <button class="logout-btn" (click)="logout()">Logout</button>
         </div>
     </div>

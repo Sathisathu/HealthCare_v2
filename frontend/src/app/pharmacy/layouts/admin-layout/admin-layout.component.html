@@ -5,28 +5,28 @@
         </div>
         <nav class="sidebar-nav">
             <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <span class="icon">📊</span> Inventory
+                Inventory
             </a>
             <a routerLink="/admin/subscriptions" routerLinkActive="active">
-                <span class="icon">✅</span> Approvals
+                Approvals
             </a>
             <a routerLink="/admin/lab" routerLinkActive="active">
-                <span class="icon">🧪</span> Lab Mgmt
+                Lab Mgmt
             </a>
             <a routerLink="/admin/blood-bank" routerLinkActive="active">
-                <span class="icon">🩸</span> Blood Bank
+                Blood Bank
             </a>
 
             <!-- Add more admin links here as we build them -->
             <a (click)="onLogout()" class="exit-link" style="cursor: pointer;">
-                <span class="icon">🚪</span> Logout
+                Logout
             </a>
         </nav>
     </aside>
 
     <main class="admin-main">
         <header class="admin-topbar">
-            <h2>MedConnect Pharmacy Management</h2>
+            <h2>MedConnect Admin Portal</h2>
             <div class="admin-user">
                 <span>Administrator</span>
             </div>

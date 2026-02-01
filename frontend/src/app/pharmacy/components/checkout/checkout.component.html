@@ -16,14 +16,12 @@
                 <label class="payment-option" [class.selected]="paymentType === 'COD'">
                     <input type="radio" [(ngModel)]="paymentType" value="COD">
                     <div class="option-content">
-                        <span class="icon">🏠</span>
                         <span class="label">Cash on Delivery</span>
                     </div>
                 </label>
                 <label class="payment-option" [class.selected]="paymentType === 'WALLET'">
                     <input type="radio" [(ngModel)]="paymentType" value="WALLET">
                     <div class="option-content">
-                        <span class="icon">💰</span>
                         <div class="label-group">
                             <span class="label">Pay with Wallet</span>
                             <span class="sub" *ngIf="user">Balance: {{user.walletBalance}} coins</span>
@@ -37,7 +35,6 @@
                     <input type="radio" [(ngModel)]="paymentType" value="SUBSCRIPTION"
                         [disabled]="!user?.pharmacyCreditBalance || user.pharmacyCreditBalance < totalPrice">
                     <div class="option-content">
-                        <span class="icon">💎</span>
                         <div class="label-group">
                             <span class="label">Use Subscription Credits</span>
                             <span class="sub" *ngIf="user">Credits: ₹{{user.pharmacyCreditBalance || 0}}</span>
