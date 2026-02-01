@@ -1,0 +1,26 @@
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Backend (Maven)
+backend/target/
+backend/*.jar
+backend/*.war
+
+# Frontend (Node/Angular)
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.editorconfig
+frontend/build_error.log
+
+# Environment variables
+.env
+.env.*
+
+# OS files
+Thumbs.db
+desktop.ini
