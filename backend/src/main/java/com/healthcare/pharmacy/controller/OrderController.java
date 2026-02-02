@@ -7,6 +7,7 @@ import com.healthcare.pharmacy.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class OrderController {
         }
 
         List<?> itemsList = (List<?>) itemsObj;
-        java.util.ArrayList<OrderItem> items = new java.util.ArrayList<>();
+        ArrayList<OrderItem> items = new ArrayList<>();
 
         for (Object obj : itemsList) {
             if (obj instanceof Map) {
