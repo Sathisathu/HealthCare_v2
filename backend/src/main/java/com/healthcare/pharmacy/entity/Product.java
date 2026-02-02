@@ -16,6 +16,10 @@ public class Product {
     private Integer stockQuantity;
     private String category;
 
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
+    private String imageType;
     private String dosageForm;
     private String strength;
     private String packSize;
@@ -72,11 +76,6 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
-
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] image;
-    private String imageType;
 
     public byte[] getImage() {
         return image;

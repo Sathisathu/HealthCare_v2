@@ -37,7 +37,7 @@
             <div class="status-side">
                 <span class="status-btn">{{appt.status}}</span>
                 <span class="pay-badge" [class.PAID]="appt.paymentStatus === 'PAID'">{{appt.paymentStatus}}</span>
-                <a *ngIf="appt.receiptUrl" class="receipt-link" (click)="viewReceipt(appt)">
+                <a *ngIf="appt.paymentStatus === 'PAID'" class="receipt-link" (click)="viewReceipt(appt)">
                     View Receipt
                 </a>
             </div>
