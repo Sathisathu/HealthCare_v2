@@ -5,8 +5,8 @@ import { CheckoutComponent } from './pharmacy/components/checkout/checkout.compo
 import { AdminDashboardComponent } from './pharmacy/components/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './common/components/user-dashboard/user-dashboard.component';
 import { OrdersComponent } from './pharmacy/components/orders/orders.component';
-import { UserLayoutComponent } from './pharmacy/layouts/user-layout/user-layout.component';
-import { AdminLayoutComponent } from './pharmacy/layouts/admin-layout/admin-layout.component';
+import { UserLayoutComponent } from './common/layouts/user-layout/user-layout.component';
+import { AdminLayoutComponent } from './common/layouts/admin-layout/admin-layout.component';
 import { MainLayoutComponent } from './common/layouts/main-layout/main-layout.component';
 import { DoctorListComponent } from './consultation/components/doctor-list/doctor-list.component';
 import { DoctorDetailsComponent } from './consultation/components/doctor-details/doctor-details.component';
